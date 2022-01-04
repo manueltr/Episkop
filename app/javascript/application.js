@@ -2,11 +2,9 @@
 //import "@hotwired/turbo-rails"
 //import "controllers"
 
+//= require theme/jquery
 //= require theme/bootstrap.min
 //= require theme/custom
-//= require theme/jquery
 //= require theme/jquery.singlePageNav.min
 //= require theme/typed
 //= require theme/wow.min
-//= require turbolinks
-//= require_tree .
