@@ -70,3 +70,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem 'bootstrap-sass'
+gem 'font-awesome-rails'
+gem 'popper_js', '~> 2.9', '>= 2.9.3'
