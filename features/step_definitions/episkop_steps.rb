@@ -1,3 +1,3 @@
-#Given /^user clicks the Google button$/ do 
-    #call google Oauth
-#end  
+Given /^user clicks the Google button$/ do 
+    google()
+end  
