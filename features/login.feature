@@ -6,14 +6,16 @@ Feature: logging into account
 
 Scenario: login is successful
 
-    Given user clicks the Google button
-    When Google authentication is successful
-    Then login should be successful
-    And user is navigated to Account page
+    Given I am on the home page
+    When I press the Google button
+    And the Google authentication is successful
+    Then I should see "Successful login"
+    And I am navigated to Account page
 
 Scenario: login fails
 
-    Given user clicks the Google button
-    When Google authentication fails
-    Then login should be a failure
-    And user is notified that login failed
+    Given I am on the home page
+    When I press the Google button
+    And the Google authentication fails
+    Then I should see "Invalid login"
+    And I am navigated to Account page
