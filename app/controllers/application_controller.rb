@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
     public
 
     def welcome
+        if session[:user_id]
+            redirect_to logged_in_path
+        else
+            render "welcome"
+        end
     end
 
     def account
