@@ -14,6 +14,6 @@
  *= require_self
  *= require theme/animate.min
  *= require theme/bootstrap.min
- *= require theme/font-awesome.min
+ *= require font-awesome
  *= require theme/templatemo-style
  */
