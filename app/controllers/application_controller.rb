@@ -21,6 +21,9 @@ class ApplicationController < ActionController::Base
     end
 
     def account
+      user = User.find(session[:user_id])
+      @profile_picture = user.photo
+      @name = user.username
     end
 
 end

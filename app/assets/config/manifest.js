@@ -6,3 +6,4 @@
 //= link theme/bootstrap.min.css
 //= link theme/font-awesome.min.css
 //= link theme/templatemo-style.css
+//= link theme/custom.css
