@@ -11,14 +11,16 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Settings</a></li>
+            
                 <li><a href="/logout">Logout</a></li>
+                <li><a href="#">Settings</a></li>
                 <li><a href="#">
-                        <img class="img-circle" src=>
+                        <span>
+                            <%=@name%>
+                        </span>
+                        <img class="nav-image" src=<%=@profile_picture%>>
                     </a>
                 </li>
-                <%# <li><a href="#portfolio">PORTFOLIO</a></li> %>
-                <%# <li><a href="#contact">CONTACT</a></li> %>
             </ul>
         </div>
     </div>
