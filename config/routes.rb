@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :polls
   
   #Authentication
   get '/login', to: 'application#account', as: 'logged_in'
@@ -7,7 +8,6 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
 
-  resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'application#welcome'
   # Defines the root path route ("/")

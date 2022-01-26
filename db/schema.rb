@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_162523) do
+ActiveRecord::Schema.define(version: 2022_01_26_014516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "polls", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "title"
+    t.text "summary"
+    t.boolean "opened"
+    t.datetime "ends_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "publish"
+    t.index ["user_id"], name: "index_polls_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"

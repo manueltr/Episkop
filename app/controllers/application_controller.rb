@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :require_login, except: [:welcome]
+    
 
     private
     def require_login
@@ -24,6 +25,8 @@ class ApplicationController < ActionController::Base
       user = User.find(session[:user_id])
       @profile_picture = user.photo
       @name = user.username
+
+      render layout: "poll"
     end
 
 end
