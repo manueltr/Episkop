@@ -1,0 +1,2 @@
+class PollQuestion < ApplicationRecord
+end

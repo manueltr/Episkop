@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :poll_questions
   resources :polls
   
   #Authentication
