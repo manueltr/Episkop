@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    puts "hello"
     session.delete :user_id
     user = nil
     redirect_to root_path

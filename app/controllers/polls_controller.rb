@@ -24,11 +24,12 @@ class PollsController < ApplicationController
 
   # POST /polls or /polls.json
   def create
-    @poll = Poll.new(poll_params)
+    @poll = @user.polls.new(poll_params)
 
     respond_to do |format|
       if @poll.save
-        format.html { redirect_to poll_url(@poll), notice: "Poll was successfully created." }
+        flash[:notice] = "Poll was successfully created."
+        format.html { redirect_to "/homepage" }
         format.json { render :show, status: :created, location: @poll }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -55,7 +56,7 @@ class PollsController < ApplicationController
     @poll.destroy
 
     respond_to do |format|
-      format.html { redirect_to polls_url, notice: "Poll was successfully destroyed." }
+      format.html { redirect_to "/homepage", notice: "Poll was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -67,9 +68,9 @@ class PollsController < ApplicationController
     end
 
     def set_user
-      user = User.find(session[:user_id])
-      @profile_picture = user.photo
-      @name = user.username
+      @user = User.find(session[:user_id])
+      @profile_picture = @user.photo
+      @name = @user.username
     end
 
     # Only allow a list of trusted parameters through.

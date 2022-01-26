@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :polls
   
   #Authentication
-  get '/login', to: 'application#account', as: 'logged_in'
+  get '/homepage', to: 'application#account', as: 'logged_in'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#omniauth'

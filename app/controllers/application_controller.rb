@@ -22,10 +22,12 @@ class ApplicationController < ActionController::Base
     end
 
     def account
-      user = User.find(session[:user_id])
-      @profile_picture = user.photo
-      @name = user.username
+      @user = User.find(session[:user_id])
+      @profile_picture = @user.photo
+      @name = @user.username
 
+      #set user polls
+      @polls = @user.polls
       render layout: "poll"
     end
 
