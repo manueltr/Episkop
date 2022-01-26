@@ -4,7 +4,7 @@
 
 <div>
   <%= link_to "Edit this poll", edit_poll_path(@poll) %> |
-  <%= link_to "Back to polls", polls_path %>
+  <%= link_to "Back to polls", logged_in_path %>
 
   <%= button_to "Destroy this poll", @poll, method: :delete %>
 </div>
