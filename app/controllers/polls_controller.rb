@@ -1,7 +1,7 @@
 class PollsController < ApplicationController
   before_action :set_user
   before_action :set_poll, only: %i[ show edit update destroy ]
-  before_action :check_user
+  before_action :check_user, only: %i[ show edit update destroy ]
 
   layout "poll"
 
@@ -82,7 +82,7 @@ class PollsController < ApplicationController
         flash[:warning] = "That poll doesn't belong to you!"
         redirect_to "/homepage"
       end
-      
+
     end
 
 

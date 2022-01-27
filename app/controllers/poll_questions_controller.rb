@@ -1,7 +1,7 @@
 class PollQuestionsController < ApplicationController
   before_action :set_poll_question, only: %i[ show edit update destroy ]
   before_action :set_poll
-  before_action :check_user
+  before_action :check_user, only: %i[ show edit update destroy ]
 
   layout "poll"
 
@@ -56,7 +56,7 @@ class PollQuestionsController < ApplicationController
     @poll_question.destroy
 
     respond_to do |format|
-      format.html { redirect_to  poll_poll_questions_path(@poll), notice: "Poll question was successfully destroyed." }
+      format.html { redirect_to  poll_path(@poll), notice: "Poll question was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -77,7 +77,7 @@ class PollQuestionsController < ApplicationController
         flash[:warning] = "That poll doesn't belong to you!"
         redirect_to "/homepage"
       end
-      
+
     end
 
     # Use callbacks to share common setup or constraints between actions.
