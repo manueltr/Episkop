@@ -1,6 +1,7 @@
-<p style="color: green"><%= notice %></p>
 
 <div class="container">
+
+  <p style="color: green"><%= notice %></p>
   <%= link_to "Edit this poll", edit_poll_path(@poll) %> |
   <%= link_to "Back to polls", logged_in_path %>
 
@@ -8,4 +9,16 @@
 </div>
 <div class="container">
   <%= render @poll %>
+</div>
+<div class="container">
+  
+  <div id="poll_questions">
+    <% @poll_questions.each do |poll_question| %>
+    <%= render poll_question %>
+    <p>
+      <%= link_to "Show this poll question", poll_question_path(poll_question) %>
+    </p>
+    <% end %>
+    <%= button_to "Add a question", new_poll_poll_question_path(@poll), method: :get%>
+  </div>
 </div>

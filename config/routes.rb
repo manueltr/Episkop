@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :poll_questions
-  resources :polls
+  
+  resources :polls, shallow: true do
+    resources :poll_questions
+  end
   
   #Authentication
   get '/homepage', to: 'application#account', as: 'logged_in'

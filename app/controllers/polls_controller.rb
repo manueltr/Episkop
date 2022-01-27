@@ -1,6 +1,7 @@
 class PollsController < ApplicationController
   before_action :set_user
   before_action :set_poll, only: %i[ show edit update destroy ]
+  before_action :check_user
 
   layout "poll"
 
@@ -11,6 +12,7 @@ class PollsController < ApplicationController
 
   # GET /polls/1 or /polls/1.json
   def show
+    @poll_questions = @poll.poll_questions
   end
 
   # GET /polls/new
@@ -72,6 +74,17 @@ class PollsController < ApplicationController
       @profile_picture = @user.photo
       @name = @user.username
     end
+
+    def check_user
+
+      # !change, temporary later on the owner of a poll can allow access to modify a poll
+      if @poll.user_id != session[:user_id]
+        flash[:warning] = "That poll doesn't belong to you!"
+        redirect_to "/homepage"
+      end
+      
+    end
+
 
     # Only allow a list of trusted parameters through.
     def poll_params
