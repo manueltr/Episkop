@@ -1,7 +1,24 @@
-<!-- Logged in navigation bar -->
-<%= render "logged_navigation"%>
-
 <!-- User create polls--->
 <div class="container">
-    <h1> My Polls </h1>	
+    <p style="color: red"><%= flash[:warning] %></p>
+    <div>
+        <h1> My Polls </h1>
+        <%= link_to "New poll", new_poll_path %>
+    </div>
+
+    <!-- Show user polls -->
+    <p style="color: green"><%= notice %></p>
+    <div id="polls">
+    <% @polls.each do |poll| %>
+        <%= render "polls/poll", :poll => poll %>
+        <p>
+        <%= link_to "Show this poll", poll %>
+        </p>
+    <% end %>
+    </div>
+
+    <div>
+        <h1>Participated Polls </h1>
+    </div>
+
 </div>

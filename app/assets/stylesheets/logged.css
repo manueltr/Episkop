@@ -11,9 +11,8 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_self
- *= require theme/animate.min
+ *= require custom/user
+ *= require theme/custom
  *= require theme/bootstrap.min
  *= require font-awesome
- *= require theme/templatemo-style
- *= require theme/custom
  */
