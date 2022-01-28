@@ -1,14 +1,14 @@
 class PollAnswersController < ApplicationController
-  before_action :set_poll_answer, only: %i[ show edit update destroy ]
+  before_action :set_poll_answer, only: %i[ edit update destroy ]
 
   # GET /poll_answers or /poll_answers.json
-  def index
-    @poll_answers = PollAnswer.all
-  end
+  # def index
+  #   @poll_answers = PollAnswer.all
+  # end
 
   # GET /poll_answers/1 or /poll_answers/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /poll_answers/new
   def new

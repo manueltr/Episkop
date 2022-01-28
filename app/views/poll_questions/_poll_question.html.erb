@@ -9,4 +9,10 @@
     <%= poll_question.content %>
   </p>
 
+  <div id="poll_answers" class="container">
+        <% poll_question.poll_answers.each do |poll_answer| %>
+          <%= render poll_answer %>
+        <% end %>
+  </div>
+
 </div>

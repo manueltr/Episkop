@@ -15,6 +15,7 @@
   <div id="poll_questions">
     <% @poll_questions.each do |poll_question| %>
     <%= render poll_question %>
+
     <p>
       <%= link_to "Show this poll question", poll_question_path(poll_question) %>
     </p>
