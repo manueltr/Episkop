@@ -1,7 +1,7 @@
 <div class="form-group">
     <%if poll_question.question_type == "Input"%>
 
-        <label for="question_<%=poll_question.id%>"><%=poll_question.content %></label>
+        <legend for="question_<%=poll_question.id%>"><%=poll_question.content %></legend>
         <input type="text" class="form-control" id="question_<%=poll_question.id%>" name="question_<%=poll_question.id%>">
 
     <%else%>
