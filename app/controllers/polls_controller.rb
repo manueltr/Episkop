@@ -5,6 +5,19 @@ class PollsController < ApplicationController
 
   layout "poll"
 
+  # GET /polls/:invite_token/form
+  def form
+    @poll = Poll.find_by(invite_token: params[:invite_token])
+    @poll_questions = @poll.poll_questions
+  end
+
+  # POST /polls/:invite_token/form?form_params
+  def submit
+    puts params[:invite_token]
+
+    #handle the creation for vote_answers here!
+  end
+
   # GET /polls or /polls.json
   def index
     @polls = Poll.all
@@ -88,6 +101,6 @@ class PollsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def poll_params
-      params.require(:poll).permit(:title, :summary, :opened, :ends_at)
+      params.require(:poll).permit(:title, :summary, :opened, :publish, :ends_at)
     end
 end
