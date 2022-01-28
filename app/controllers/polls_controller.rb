@@ -88,6 +88,6 @@ class PollsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def poll_params
-      params.require(:poll).permit(:title, :summary, :opened, :ends_at)
+      params.require(:poll).permit(:title, :summary, :opened, :publish, :ends_at)
     end
 end
