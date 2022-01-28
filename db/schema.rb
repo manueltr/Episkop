@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_001852) do
+ActiveRecord::Schema.define(version: 2022_01_28_065953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,10 +39,12 @@ ActiveRecord::Schema.define(version: 2022_01_28_001852) do
     t.string "title"
     t.text "summary"
     t.boolean "opened"
-    t.datetime "ends_at"
+    t.datetime "ends_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "publish"
+    t.string "invite_token"
+    t.index ["invite_token"], name: "index_polls_on_invite_token", unique: true
     t.index ["user_id"], name: "index_polls_on_user_id"
   end
 
@@ -57,7 +59,5 @@ ActiveRecord::Schema.define(version: 2022_01_28_001852) do
     t.string "photo"
   end
 
-  add_foreign_key "poll_answers", "poll_questions"
-  add_foreign_key "poll_answers", "polls"
   add_foreign_key "poll_questions", "polls"
 end
