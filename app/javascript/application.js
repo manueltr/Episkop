@@ -6,3 +6,4 @@
 //= require theme/custom
 //= require theme/typed
 //= require theme/wow.min
+//= require theme/bootstrap.min

@@ -5,6 +5,11 @@ class PollsController < ApplicationController
 
   layout "poll"
 
+  # GET /polls/:invite_token/form
+  def form
+    @poll = Poll.find_by(invite_token: params[:invite_token])
+  end
+
   # GET /polls or /polls.json
   def index
     @polls = Poll.all

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
+  #FormVoting
+  get '/polls/:invite_token/form', to: 'polls#form', as: 'form'
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'application#welcome'
