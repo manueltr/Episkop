@@ -25,7 +25,7 @@ class PollAnswersController < ApplicationController
   def create
     @poll_answer = @poll_question.poll_answers.new(poll_answer_params)
     @poll_answer.poll_id = params[:poll_id]
-    
+
     @poll = Poll.find(@poll_answer.poll_id)
 
     respond_to do |format|
@@ -54,10 +54,11 @@ class PollAnswersController < ApplicationController
 
   # DELETE /poll_answers/1 or /poll_answers/1.json
   def destroy
+    @poll = Poll.find(@poll_answer.poll_id)
     @poll_answer.destroy
 
     respond_to do |format|
-      format.html { redirect_to poll_answers_url, notice: "Poll answer was successfully destroyed." }
+      format.html { redirect_to poll_path(@poll), notice: "Poll answer was successfully destroyed." }
       format.json { head :no_content }
     end
   end

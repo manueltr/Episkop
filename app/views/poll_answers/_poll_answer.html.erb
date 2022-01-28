@@ -1,7 +1,10 @@
 <div id="<%= dom_id poll_answer %>">
   <p>
     <strong>Answer choice:</strong>
-    <%= poll_answer.content %>
+    <%= poll_answer.content %> 
+    <%if poll_answer.poll_question.question_type == "Multiple Choice"%>
+      <%= button_to "delete", poll_answer, :method => "delete", :class => "btn btn-primary btn-sm" %> 
+    <%end%>
   </p>
 
 </div>

@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @poll_answer %>
+<%= render "poll_answer", :poll_answer => @poll_answer %>
 
 <div>
   <%= link_to "Edit this poll answer", edit_poll_answer_path(@poll_answer) %> |

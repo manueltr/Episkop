@@ -3,7 +3,7 @@ class Poll < ApplicationRecord
 
     #destroy all poll question if a poll is destroyed
     has_many :poll_questions, dependent: :destroy
-    has_many :polls, dependent: :destroy
+    has_many :poll_answers, dependent: :destroy
 
     validates :title, :summary, presence: true
     validates :ends_at, presence: true, if: :publish?
