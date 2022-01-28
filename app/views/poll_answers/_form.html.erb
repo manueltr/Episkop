@@ -17,6 +17,8 @@
   </div>
 
   <div>
+    <%= hidden_field_tag(:question, poll_question.id) %>
+    <%= hidden_field_tag(:poll_id, poll_question.poll_id) %>
     <%= form.submit %>
   </div>
 <% end %>
