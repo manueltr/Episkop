@@ -1,11 +1,6 @@
 
 <div class="container">
-
   <p style="color: green"><%= notice %></p>
-  <%= link_to "Edit this poll", edit_poll_path(@poll) %> |
-  <%= link_to "Back to polls", logged_in_path %>
-
-  <%= button_to "Destroy this poll", @poll, method: :delete %>
 </div>
 <div class="container">
   <%= render @poll %>
@@ -22,4 +17,9 @@
     <% end %>
     <%= button_to "Add a question", new_poll_poll_question_path(@poll), method: :get%>
   </div>
+</div>
+<div class="container">
+  <%= link_to "Edit this poll", edit_poll_path(@poll) %> |
+  <%= link_to "Back to polls", logged_in_path %>
+  <%= button_to "Destroy this poll", @poll, method: :delete %>
 </div>
