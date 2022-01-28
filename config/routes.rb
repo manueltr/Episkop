@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   #FormVoting
   get '/polls/:invite_token/form', to: 'polls#form', as: 'form'
+  post '/polls/:invite_token/form', to: 'polls#submit'
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

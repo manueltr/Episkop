@@ -1,0 +1,26 @@
+<div class="container">
+  <p style="color: green"><%= notice %></p>
+</div>
+
+<div class="container">
+  <h1 class="display-4"><%=@poll.title%></h1>
+  <p class="lead"><%=@poll.summary%></p>
+</div>
+
+<div class="container">
+    <form>
+
+        <div id="poll_questions">
+
+            <% @poll_questions.each do |poll_question| %>
+                <%= render "poll_questions/poll_question_form", :poll_question => poll_question %>
+            <% end %>
+
+        </div>
+
+        <div class="form-group">
+            <%= button_to "submit", form_url(@poll.invite_token), method: :post%>
+        </div>
+
+    </form>
+</div>

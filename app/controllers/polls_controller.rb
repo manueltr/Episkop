@@ -8,6 +8,7 @@ class PollsController < ApplicationController
   # GET /polls/:invite_token/form
   def form
     @poll = Poll.find_by(invite_token: params[:invite_token])
+    @poll_questions = @poll.poll_questions
   end
 
   # GET /polls or /polls.json

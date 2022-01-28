@@ -1,0 +1,21 @@
+<div class="form-group">
+    <%if poll_question.question_type == "Input"%>
+
+        <label for="question_<%=poll_question.id%>"><%=poll_question.content %></label>
+        <input type="text" class="form-control" id="question_<%=poll_question.id%>" name="question_<%=poll_question.id%>">
+
+    <%else%>
+
+        <legend class="form-label"><%=poll_question.content%></legend>
+
+        <!-- This can be modified where if poll_answers > 4 it creates a dropdown instead -->
+        <% poll_question.poll_answers.each do |poll_answer| %>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="poll_question<%=poll_question.id%>" id="poll_answer<%=poll_answer.id%>" value="poll_answer<%=poll_answer.id%>">
+                <label class="form-check-label" for="poll_answer<%=poll_answer.id%>"><%=poll_answer.content%></label>
+            </div>
+        <% end %>    
+    
+    <%end%>
+
+</div>
