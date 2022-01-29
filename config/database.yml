@@ -60,7 +60,6 @@ development:
 # Do not set this db to the same as development or production.
 test: &test
   <<: *default
-  
   database: test
   host: localhost
   username: postgres

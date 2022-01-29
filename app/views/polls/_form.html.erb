@@ -1,7 +1,6 @@
 <%= form_with(model: poll) do |form| %>
   <% if poll.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(poll.errors.count, "error") %> prohibited this poll from being saved:</h2>
 
       <ul>
         <% poll.errors.each do |error| %>
@@ -19,11 +18,6 @@
   <div>
     <%= form.label :summary, style: "display: block" %>
     <%= form.text_area :summary %>
-  </div>
-
-  <div>
-    <%= form.label :opened, style: "display: block" %>
-    <%= form.check_box :opened %>
   </div>
 
   <div>

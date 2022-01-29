@@ -1,8 +1,6 @@
 <%= form_with(url: poll_poll_questions_path(poll_id: @poll, id: poll_question.id), model: poll_question) do |form| %>
   <% if poll_question.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(poll_question.errors.count, "error") %> prohibited this poll_question from being saved:</h2>
-
       <ul>
         <% poll_question.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -13,11 +11,12 @@
 
   <div>
     <%= form.label :question_type, style: "display: block" %>
-    <%= form.text_field :question_type %>
+    <%= form.select(:question_type, options_for_select(["Multiple Choice", "Yes No", "Input"])) %>
+
   </div>
 
   <div>
-    <%= form.label :content, style: "display: block" %>
+    <%= form.label :content, "Question Content", style: "display: block" %>
     <%= form.text_area :content %>
   </div>
 

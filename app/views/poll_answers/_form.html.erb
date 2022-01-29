@@ -1,0 +1,22 @@
+<%= form_with(model: poll_answer) do |form| %>
+  <% if poll_answer.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% poll_answer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :content, style: "display: block" %>
+    <%= form.text_field :content %>
+  </div>
+
+  <div>
+    <%= hidden_field_tag(:question, poll_question.id) %>
+    <%= hidden_field_tag(:poll_id, poll_question.poll_id) %>
+    <%= form.submit %>
+  </div>
+<% end %>
