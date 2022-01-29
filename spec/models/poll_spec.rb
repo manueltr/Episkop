@@ -4,8 +4,8 @@ RSpec.describe Poll, type: :model do
 
   subject {
     described_class.new(
-      id: 0,
-      user_id: 0,
+      id: 1,
+      user_id: 1,
       title:"test subject poll",
       summary:"this poll is for test cases",
       opened:false,
@@ -16,7 +16,7 @@ RSpec.describe Poll, type: :model do
     )
   }
 
-  it "is not valid without a title" do 
+  it "is not valid without a title" do
     subject.title = nil
     expect(subject).to_not be_valid
   end
@@ -31,19 +31,20 @@ RSpec.describe Poll, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "is valid without an opened" do
+  it "is not valid without an opened" do
     subject.opened = nil
-    expect(subject).to be_valid
+    expect(subject).to_not be_valid
   end
 
-  it "is valid without a published" do
+  it "is not valid without a published" do
     subject.publish = nil
-    expect(subject).to be_valid
+    expect(subject).to_not be_valid
   end
 
-  it "is valid without an end datetime" do
-    subject.ends_at = nil
-    expect(subject).to be_valid
-  end
+  # it "is valid without an ends_at if published false" do
+  #   subject.publish = false
+  #   subject.ends_at = nil
+  #   expect(subject).to be_valid
+  # end
   
 end
