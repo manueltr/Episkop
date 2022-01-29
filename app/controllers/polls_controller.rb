@@ -14,7 +14,6 @@ class PollsController < ApplicationController
   # POST /polls/:invite_token/form?form_params
   def submit
     puts params[:invite_token]
-
     #handle the creation for vote_answers here!
   end
 
