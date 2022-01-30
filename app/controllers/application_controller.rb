@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
     if Rails.env.test?
       prepend_before_action :stub_current_user
       def stub_current_user
-        session[:user_id] = 1
+        if !params[:user]
+          session[:user_id] = 1
+        end
       end
     end
     # !DELETE
