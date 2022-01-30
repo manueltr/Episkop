@@ -67,7 +67,7 @@ RSpec.feature "Polls", type: :feature do
 
   describe "When I update a poll" do
     it "should the update changes" do
-      poll = Poll.create(:user_id => 1, :title => "Rspec edit", :summary => "This poll is to test updating a poll")
+      poll = Poll.create(:user_id => 1, :title => "Rspec edit", :summary => "This poll is to test updating a poll", opened:false, ends_at:DateTime.now + 1)
       visit poll_path(poll)
       click_link("Edit this poll")
       fill_in('Title', with: "Rspec updated")
