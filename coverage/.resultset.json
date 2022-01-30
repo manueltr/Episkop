@@ -130,24 +130,24 @@
           null,
           null,
           1,
-          1,
-          1,
-          1,
+          2,
+          2,
+          2,
           null,
           null,
           1,
-          1,
-          1,
+          2,
+          2,
           0,
           0,
           0,
           0,
           null,
           null,
-          1,
+          2,
           null,
-          1,
-          1,
+          2,
+          2,
           null,
           0,
           null,
@@ -164,8 +164,8 @@
           1,
           1,
           1,
-          43,
-          42,
+          45,
+          44,
           null,
           null,
           null,
@@ -512,9 +512,22 @@
         ],
         "branches": {
         }
+      },
+      "/home/manuel/Episkop/app/controllers/users_controller.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1643578229
+    "timestamp": 1643581078
   },
   "Cucumber Features": {
     "coverage": {
