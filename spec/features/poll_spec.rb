@@ -48,4 +48,33 @@ RSpec.feature "Polls", type: :feature do
     end
   end
 
+  describe "When I go to a poll that is not mine" do
+    it "should redirect me to the homepage" do
+
+      poll = Poll.create(:user_id => 2, :title => "Rspec poll authentication", 
+        :summary => "This is a poll to test poll authentication")
+      visit poll_path(poll)
+      expect(page).to have_current_path(logged_in_path)
+    end
+
+    it "should show me a warning that the poll doesn't belong to me" do
+
+      poll = Poll.create(:user_id => 3, :title => "Rspec wrong user poll", :summary => "This poll is to test authentication")
+      visit poll_path(poll)
+      expect(page).to have_content("That poll doesn't belong to you!")
+    end 
+  end
+
+  describe "When I update a poll" do
+    it "should the update changes" do
+      poll = Poll.create(:user_id => 1, :title => "Rspec edit", :summary => "This poll is to test updating a poll")
+      visit poll_path(poll)
+      click_link("Edit this poll")
+      fill_in('Title', with: "Rspec updated")
+      click_button("Update Poll")
+      expect(page).to have_content("Rspec updated")
+      expect(page).to have_content("Poll was successfully updated.")
+    end
+  end
+
 end
