@@ -27,8 +27,4 @@ RSpec.feature "Polls", type: :feature do
     end
   end
 
-  describe "When I click show this poll link" do
-    it "should take me to the sho"
-  end
-
 end
