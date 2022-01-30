@@ -9,6 +9,9 @@ gem 'simplecov', :require => false
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
 
+# added this line for testing
+gem 'rails-controller-testing'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -84,6 +87,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem 'cucumber-rails', require: false
+  gem 'rack_session_access'
   gem 'database_cleaner'
 end
 

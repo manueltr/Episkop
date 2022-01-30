@@ -31,14 +31,14 @@ RSpec.describe Poll, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "is not valid without an opened" do
+  it "is valid without an opened" do
     subject.opened = nil
-    expect(subject).to_not be_valid
+    expect(subject).to be_valid
   end
 
-  it "is not valid without a published" do
+  it "is valid without a published" do
     subject.publish = nil
-    expect(subject).to_not be_valid
+    expect(subject).to be_valid
   end
 
   # it "is valid without an ends_at if published false" do

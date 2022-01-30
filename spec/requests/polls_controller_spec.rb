@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "PollsControllers", type: :request do
-  describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
-  end
+
+    describe "index" do
+        it "all polls in database" do
+          
+          get '/polls'
+          expect(response).to render_template "index"
+
+        end
+      end
 end

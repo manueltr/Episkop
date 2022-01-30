@@ -232,6 +232,9 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    rack_session_access (0.2.0)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (7.0.0)
       actioncable (= 7.0.0)
       actionmailbox (= 7.0.0)
@@ -246,6 +249,10 @@ GEM
       activesupport (= 7.0.0)
       bundler (>= 1.15.0)
       railties (= 7.0.0)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -349,7 +356,9 @@ DEPENDENCIES
   popper_js (~> 2.9, >= 2.9.3)
   pry
   puma (~> 5.0)
+  rack_session_access
   rails (~> 7.0.0)
+  rails-controller-testing
   rspec-rails (>= 3.9.0)
   selenium-webdriver
   simplecov
