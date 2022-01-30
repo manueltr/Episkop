@@ -27,4 +27,25 @@ RSpec.feature "Polls", type: :feature do
     end
   end
 
+  describe "When I click show this poll link" do
+    it "should take me to the show page" do
+      Poll.create(:user_id => 1, :title => "Rspec poll", 
+        :summary => "This is a poll to test show")
+      visit logged_in_path
+      click_link("Show this poll")
+      expect(page).to have_current_path(poll_path(Poll.find_by(:title => "Rspec poll")))
+    end
+  end
+
+  describe "When I am on the show page" do
+    it "I should be able to delete the poll and be redirected to the homepage" do
+      Poll.create(:user_id => 1, :title => "Rspec poll deletion", 
+        :summary => "This is a poll to test show")
+      visit poll_path(Poll.find_by(:title => "Rspec poll deletion"))
+      click_button("Destroy this poll")
+      expect(Poll.find_by(:title => "Rspec poll deletion")).to eq(nil)
+      expect(page).to have_current_path(logged_in_path)
+    end
+  end
+
 end
