@@ -19,6 +19,6 @@ RSpec.describe "SessionsControllers", type: :controller do
         get :omniauth, params: {:provider => 'google'}
         expect(session[:user_id]).to eq(User.find_by(:username => "testUser4").id)
         expect(response).to redirect_to(logged_in_path)
-        delete :destroy, params: {:id => User.find_by(:username => "testUser4").id}
+        User.destroy(User.find_by(:username => "testUser4").id)
     end
 end
