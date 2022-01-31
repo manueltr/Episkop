@@ -9,8 +9,8 @@ class PollAnswersController < ApplicationController
   # end
 
   #GET /poll_answers/1 or /poll_answers/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /poll_answers/new
   def new
@@ -18,8 +18,8 @@ class PollAnswersController < ApplicationController
   end
 
   # GET /poll_answers/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /poll_answers or /poll_answers.json
   def create
@@ -40,17 +40,17 @@ class PollAnswersController < ApplicationController
   end
 
   # PATCH/PUT /poll_answers/1 or /poll_answers/1.json
-  def update
-    respond_to do |format|
-      if @poll_answer.update(poll_answer_params)
-        format.html { redirect_to poll_answer_url(@poll_answer), notice: "Poll answer was successfully updated." }
-        format.json { render :show, status: :ok, location: @poll_answer }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @poll_answer.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @poll_answer.update(poll_answer_params)
+  #       format.html { redirect_to poll_answer_url(@poll_answer), notice: "Poll answer was successfully updated." }
+  #       format.json { render :show, status: :ok, location: @poll_answer }
+  #     else
+  #       format.html { render :edit, status: :unprocessable_entity }
+  #       format.json { render json: @poll_answer.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /poll_answers/1 or /poll_answers/1.json
   def destroy

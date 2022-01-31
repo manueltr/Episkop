@@ -1,21 +1,19 @@
 class SessionsController < ApplicationController
   skip_before_action :require_login
   
-  def new
-  end
+  # def new
+  # end
 
-  def create 
-  end
+  # def create 
+  # end
 
   def destroy
-    puts "hello"
     session.delete :user_id
     user = nil
     redirect_to root_path
   end
 
   def omniauth
-    
     data = request.env['omniauth.auth']
     user = User.find_or_create_by(uid: data[:uid], provider: data[:provider]) do |u|
       u.username = data[:info][:name]

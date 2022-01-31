@@ -5,5 +5,5 @@
 <br>
 
 <div>
-  <%= link_to "Back to poll answers", poll_answers_path %>
+  <%= link_to "Back to poll", poll_path(Poll.find(@poll_answer.poll_id)) %>
 </div>

@@ -1,4 +1,16 @@
 class ApplicationController < ActionController::Base
+
+    # set session value for request/controller testing
+    if Rails.env.test?
+      prepend_before_action :stub_current_user
+      def stub_current_user
+        if !params[:user]
+          session[:user_id] = 1
+        end
+      end
+    end
+    # !DELETE
+
     before_action :require_login, except: [:welcome]
     
 
