@@ -1,7 +1,7 @@
 <div class="form-group">
 
     <!-- Change to helper function! -->
-    <%@poll_vote = poll_question.poll_votes.where(user_id: poll_question.user.id).first %>
+    <%@poll_vote = poll_question.poll_votes.where(user_id: session[:user_id]).first %>
 
     <%if poll_question.question_type == "Input"%>
 
@@ -17,7 +17,7 @@
         <% poll_question.poll_answers.each do |poll_answer| %>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="question_<%=poll_question.id%>" id="poll_answer_<%=poll_answer.id%>" value="poll_answer_<%=poll_answer.id%>"
-                <%= @poll_vote.poll_answer_id == poll_answer.id ? "checked" : nil %> required>
+                <%= @poll_vote && @poll_vote.poll_answer_id == poll_answer.id ? "checked" : nil %> required>
 
                 <label class="form-check-label" for="poll_answer_<%=poll_answer.id%>"><%=poll_answer.content%></label>
             </div>

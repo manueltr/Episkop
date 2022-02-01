@@ -5,14 +5,13 @@ class PollVotesController < ApplicationController
     
     #handle the creation for vote_answers here!
     @poll = Poll.find_by(:invite_token => params[:invite_token])
-
     params.each do |question, answer|
 
       if question.match('question_')
         question_id = question.scan(/\d+/)[0]
         @poll_question = PollQuestion.find(question_id)
 
-        @poll_vote = PollVote.find_or_create_by(:user_id => @poll.user_id, :poll_id => @poll.id, :poll_question_id => @poll_question.id)
+        @poll_vote = PollVote.find_or_create_by(:user_id => session[:user_id], :poll_id => @poll.id, :poll_question_id => @poll_question.id)
 
         # can only go from false to true for future implementation
         @poll_vote.submitted = true
