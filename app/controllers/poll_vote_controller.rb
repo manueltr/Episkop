@@ -1,0 +1,2 @@
+class PollVoteController < ApplicationController
+end
