@@ -8,7 +8,7 @@
 </div>
 
 <div class="container">
-    <form method="post">
+    <form method="post" action="<%=poll_submit_path(@poll.invite_token)%>">
 
         <div id="poll_questions">
 
@@ -18,7 +18,8 @@
         </div>
 
         <div class="form-group">
-            <%= button_to "submit", form_url(@poll.invite_token), method: :post%>
+            <%= puts poll_submit_path(@poll.invite_token)%>
+            <%= button_to "submit", poll_submit_path(@poll.invite_token), method: :post%>
         </div>
 
     </form>
