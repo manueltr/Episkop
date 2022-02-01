@@ -19,6 +19,12 @@
           null
         ]
       },
+      "/home/manuel/Episkop/app/helpers/poll_vote_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
       "/home/manuel/Episkop/app/helpers/polls_helper.rb": {
         "lines": [
           1,
@@ -225,7 +231,7 @@
           1,
           0,
           null,
-          null,
+          0,
           null,
           null,
           null,
@@ -510,9 +516,25 @@
           null,
           null
         ]
+      },
+      "/home/manuel/Episkop/app/controllers/poll_vote_controller.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/manuel/Episkop/app/models/poll_vote.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1643602692
+    "timestamp": 1643682079
   },
   "Cucumber Features": {
     "coverage": {

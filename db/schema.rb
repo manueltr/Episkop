@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_065953) do
+ActiveRecord::Schema.define(version: 2022_02_01_021257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 2022_01_28_065953) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["poll_id"], name: "index_poll_questions_on_poll_id"
+  end
+
+  create_table "poll_votes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "poll_id"
+    t.bigint "poll_question_id"
+    t.bigint "poll_answer_id"
+    t.index ["poll_answer_id"], name: "index_poll_votes_on_poll_answer_id"
+    t.index ["poll_id"], name: "index_poll_votes_on_poll_id"
+    t.index ["poll_question_id"], name: "index_poll_votes_on_poll_question_id"
+    t.index ["user_id"], name: "index_poll_votes_on_user_id"
   end
 
   create_table "polls", force: :cascade do |t|
@@ -60,4 +71,8 @@ ActiveRecord::Schema.define(version: 2022_01_28_065953) do
   end
 
   add_foreign_key "poll_questions", "polls"
+  add_foreign_key "poll_votes", "poll_answers"
+  add_foreign_key "poll_votes", "poll_questions"
+  add_foreign_key "poll_votes", "polls"
+  add_foreign_key "poll_votes", "users"
 end
