@@ -6,9 +6,9 @@ class PollQuestionsController < ApplicationController
   layout "poll"
 
   # GET /poll_questions or /poll_questions.json
-  def index
-    @poll_questions = @poll.poll_questions
-  end
+  # def index
+  #   @poll_questions = @poll.poll_questions
+  # end
 
   # GET /poll_questions/1 or /poll_questions/1.json
   def show
