@@ -64,6 +64,7 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           1,
@@ -95,6 +96,7 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           1,
@@ -119,6 +121,7 @@
       },
       "/home/manuel/Episkop/app/models/user.rb": {
         "lines": [
+          1,
           1,
           1,
           null
@@ -212,6 +215,19 @@
           null
         ]
       },
+      "/home/manuel/Episkop/app/models/poll_vote.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/home/manuel/Episkop/app/controllers/polls_controller.rb": {
         "lines": [
           1,
@@ -224,13 +240,6 @@
           null,
           1,
           0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
           0,
           null,
           null,
@@ -324,6 +333,7 @@
       },
       "/home/manuel/Episkop/app/models/poll_answer.rb": {
         "lines": [
+          1,
           1,
           1,
           1,
@@ -517,16 +527,62 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/poll_vote_controller.rb": {
+      "/home/manuel/Episkop/app/controllers/poll_votes_controller.rb": {
         "lines": [
           0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/manuel/Episkop/app/models/poll_vote.rb": {
-        "lines": [
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
           0,
           0
         ],
@@ -534,7 +590,7 @@
         }
       }
     },
-    "timestamp": 1643682444
+    "timestamp": 1643776783
   },
   "Cucumber Features": {
     "coverage": {
