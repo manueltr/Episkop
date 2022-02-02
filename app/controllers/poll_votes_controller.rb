@@ -1,4 +1,7 @@
+require "rqrcode"
+
 class PollVotesController < ApplicationController
+  layout "poll"
 
   # POST /polls/:invite_token/submit?form_params
   def submit
@@ -36,4 +39,18 @@ class PollVotesController < ApplicationController
     redirect_to logged_in_path
   end
 
+  #GET /polls/:invite_token/qr_code
+  def qr
+    qrcode = RQRCode::QRCode.new(form_url(params[:invite_token]))
+
+    # NOTE: showing with default options specified explicitly
+    @svg = qrcode.as_svg(
+      color: "000",
+      shape_rendering: "crispEdges",
+      module_size: 11,
+      standalone: true,
+      use_path: true
+    )
+    
+  end
 end
