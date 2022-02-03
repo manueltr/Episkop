@@ -5,6 +5,7 @@ RSpec.feature "PollAnswers", type: :feature do
         @poll = Poll.create(:user_id => 1, :title => "Rspec answer testing", :summary => "This is a poll to test answers")
         @pollq = PollQuestion.create(:poll_id => @poll.id, :question_type => "Multiple Choice", :content => "test")
     end
+    
     describe "When I go to a poll page" do
         it "should be able to create an answer choice" do
           visit poll_path(@poll)

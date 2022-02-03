@@ -19,6 +19,12 @@
           null
         ]
       },
+      "/home/manuel/Episkop/app/helpers/poll_vote_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
       "/home/manuel/Episkop/app/helpers/polls_helper.rb": {
         "lines": [
           1,
@@ -58,6 +64,7 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           1,
@@ -89,6 +96,7 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           1,
@@ -113,6 +121,7 @@
       },
       "/home/manuel/Episkop/app/models/user.rb": {
         "lines": [
+          1,
           1,
           1,
           null
@@ -206,6 +215,19 @@
           null
         ]
       },
+      "/home/manuel/Episkop/app/models/poll_vote.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/home/manuel/Episkop/app/controllers/polls_controller.rb": {
         "lines": [
           1,
@@ -219,13 +241,6 @@
           1,
           0,
           0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
           null,
           null,
           null,
@@ -318,6 +333,7 @@
       },
       "/home/manuel/Episkop/app/models/poll_answer.rb": {
         "lines": [
+          1,
           1,
           1,
           1,
@@ -510,9 +526,71 @@
           null,
           null
         ]
+      },
+      "/home/manuel/Episkop/app/controllers/poll_votes_controller.rb": {
+        "lines": [
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1643602692
+    "timestamp": 1643776783
   },
   "Cucumber Features": {
     "coverage": {

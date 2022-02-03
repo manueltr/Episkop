@@ -17,8 +17,22 @@
     <% end %>
     </div>
 
-    <div>
-        <h1>Participated Polls </h1>
+    <h1>Participated Polls </h1>
+    <div id="polls">
+    <% @user.poll_votes.select(:poll_id).distinct(:poll_id).each do |poll_vote| %>
+        
+        <p>
+            <strong>Title:</strong>
+            <%= poll_vote.poll.title %>
+        </p>
+
+        <p>
+            <strong>Summary:</strong>
+            <%= poll_vote.poll.summary %>
+        </p>
+        <%= link_to "Go to poll form", form_url(poll_vote.poll.invite_token) %>
+        </p>
+    <% end %>
     </div>
 
 </div>

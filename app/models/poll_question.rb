@@ -2,8 +2,9 @@ class PollQuestion < ApplicationRecord
 
     #associations
     belongs_to :poll
-    has_one :user, through: :polls
+    has_one :user, through: :poll
     has_many :poll_answers, dependent: :destroy
+    has_many :poll_votes, dependent: :destroy
 
     #validations
     validates :question_type, :content, presence: true
