@@ -1,56 +1,56 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/manuel/Episkop/app/helpers/application_helper.rb": {
+      "/home/cole/Episkop/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/poll_answers_helper.rb": {
+      "/home/cole/Episkop/app/helpers/poll_answers_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/poll_questions_helper.rb": {
+      "/home/cole/Episkop/app/helpers/poll_questions_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/polls_helper.rb": {
+      "/home/cole/Episkop/app/helpers/polls_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/sessions_helper.rb": {
+      "/home/cole/Episkop/app/helpers/sessions_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/users_helper.rb": {
+      "/home/cole/Episkop/app/helpers/users_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/welcome_helper.rb": {
+      "/home/cole/Episkop/app/helpers/welcome_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/application_record.rb": {
+      "/home/cole/Episkop/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/poll_question.rb": {
+      "/home/cole/Episkop/app/models/poll_question.rb": {
         "lines": [
           1,
           null,
@@ -80,7 +80,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/poll.rb": {
+      "/home/cole/Episkop/app/models/poll.rb": {
         "lines": [
           1,
           null,
@@ -111,14 +111,14 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/user.rb": {
+      "/home/cole/Episkop/app/models/user.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/sessions_controller.rb": {
+      "/home/cole/Episkop/app/controllers/sessions_controller.rb": {
         "lines": [
           1,
           1,
@@ -156,7 +156,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/application_controller.rb": {
+      "/home/cole/Episkop/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null,
@@ -206,7 +206,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/polls_controller.rb": {
+      "/home/cole/Episkop/app/controllers/polls_controller.rb": {
         "lines": [
           1,
           1,
@@ -316,7 +316,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/poll_answer.rb": {
+      "/home/cole/Episkop/app/models/poll_answer.rb": {
         "lines": [
           1,
           1,
@@ -327,7 +327,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/poll_answers_controller.rb": {
+      "/home/cole/Episkop/app/controllers/poll_answers_controller.rb": {
         "lines": [
           1,
           1,
@@ -411,7 +411,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/poll_questions_controller.rb": {
+      "/home/cole/Episkop/app/controllers/poll_questions_controller.rb": {
         "lines": [
           1,
           1,
@@ -512,11 +512,11 @@
         ]
       }
     },
-    "timestamp": 1643602692
+    "timestamp": 1643774747
   },
   "Cucumber Features": {
     "coverage": {
-      "/home/nic/Episkop/app/controllers/application_controller.rb": {
+      "/home/cole/Episkop/app/controllers/application_controller.rb": {
         "lines": [
           0,
           null,
@@ -568,7 +568,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/controllers/poll_answers_controller.rb": {
+      "/home/cole/Episkop/app/controllers/poll_answers_controller.rb": {
         "lines": [
           0,
           0,
@@ -581,8 +581,8 @@
           null,
           null,
           null,
-          0,
-          0,
+          null,
+          null,
           null,
           null,
           0,
@@ -590,8 +590,8 @@
           0,
           null,
           null,
-          0,
-          0,
+          null,
+          null,
           null,
           null,
           0,
@@ -599,18 +599,6 @@
           0,
           null,
           0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
           null,
           0,
           0,
@@ -622,7 +610,19 @@
           0,
           0,
           0,
-          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           0,
@@ -654,7 +654,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/controllers/poll_questions_controller.rb": {
+      "/home/cole/Episkop/app/controllers/poll_questions_controller.rb": {
         "lines": [
           0,
           0,
@@ -756,7 +756,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/controllers/polls_controller.rb": {
+      "/home/cole/Episkop/app/controllers/polls_controller.rb": {
         "lines": [
           0,
           0,
@@ -868,7 +868,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/controllers/sessions_controller.rb": {
+      "/home/cole/Episkop/app/controllers/sessions_controller.rb": {
         "lines": [
           0,
           0,
@@ -908,7 +908,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/helpers/application_helper.rb": {
+      "/home/cole/Episkop/app/helpers/application_helper.rb": {
         "lines": [
           0,
           0
@@ -916,7 +916,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/helpers/poll_answers_helper.rb": {
+      "/home/cole/Episkop/app/helpers/poll_answers_helper.rb": {
         "lines": [
           0,
           0
@@ -924,7 +924,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/helpers/poll_questions_helper.rb": {
+      "/home/cole/Episkop/app/helpers/poll_questions_helper.rb": {
         "lines": [
           0,
           0
@@ -932,7 +932,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/helpers/polls_helper.rb": {
+      "/home/cole/Episkop/app/helpers/polls_helper.rb": {
         "lines": [
           0,
           0
@@ -940,7 +940,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/helpers/sessions_helper.rb": {
+      "/home/cole/Episkop/app/helpers/sessions_helper.rb": {
         "lines": [
           0,
           0
@@ -948,7 +948,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/helpers/users_helper.rb": {
+      "/home/cole/Episkop/app/helpers/users_helper.rb": {
         "lines": [
           0,
           0
@@ -956,7 +956,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/helpers/welcome_helper.rb": {
+      "/home/cole/Episkop/app/helpers/welcome_helper.rb": {
         "lines": [
           0,
           0
@@ -964,7 +964,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/models/application_record.rb": {
+      "/home/cole/Episkop/app/models/application_record.rb": {
         "lines": [
           0,
           0,
@@ -973,7 +973,7 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/models/poll.rb": {
+      "/home/cole/Episkop/app/models/poll.rb": {
         "lines": [
           0,
           null,
@@ -995,51 +995,6 @@
           0,
           0,
           null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/models/poll_answer.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/models/poll_question.rb": {
-        "lines": [
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
           0,
           0,
           0,
@@ -1051,7 +1006,52 @@
         "branches": {
         }
       },
-      "/home/nic/Episkop/app/models/user.rb": {
+      "/home/cole/Episkop/app/models/poll_answer.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/cole/Episkop/app/models/poll_question.rb": {
+        "lines": [
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/cole/Episkop/app/models/user.rb": {
         "lines": [
           0,
           0,
@@ -1061,6 +1061,6 @@
         }
       }
     },
-    "timestamp": 1643600758
+    "timestamp": 1643774757
   }
 }
