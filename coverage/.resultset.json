@@ -58,6 +58,7 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           1,
@@ -89,6 +90,7 @@
           1,
           1,
           1,
+          1,
           null,
           null,
           1,
@@ -113,6 +115,7 @@
       },
       "/home/cole/Episkop/app/models/user.rb": {
         "lines": [
+          1,
           1,
           1,
           null
@@ -209,6 +212,19 @@
       "/home/cole/Episkop/app/controllers/polls_controller.rb": {
         "lines": [
           1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/manuel/Episkop/app/controllers/polls_controller.rb": {
+        "lines": [
+          1,
           1,
           1,
           1,
@@ -219,13 +235,6 @@
           1,
           0,
           0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
           null,
           null,
           null,
@@ -318,6 +327,7 @@
       },
       "/home/cole/Episkop/app/models/poll_answer.rb": {
         "lines": [
+          1,
           1,
           1,
           1,
@@ -510,6 +520,68 @@
           null,
           null
         ]
+      },
+      "/home/manuel/Episkop/app/controllers/poll_votes_controller.rb": {
+        "lines": [
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
     "timestamp": 1643774747

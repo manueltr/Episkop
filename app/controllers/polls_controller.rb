@@ -11,13 +11,6 @@ class PollsController < ApplicationController
     @poll_questions = @poll.poll_questions
   end
 
-  # POST /polls/:invite_token/form?form_params
-  def submit
-    puts params[:invite_token]
-
-    #handle the creation for vote_answers here!
-  end
-
   # GET /polls or /polls.json
   def index
     @polls = Poll.all

@@ -92,6 +92,7 @@ group :test do
   gem 'database_cleaner'
 end
 
+gem "rqrcode", "~> 2.0"
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'popper_js', '~> 2.9', '>= 2.9.3'
