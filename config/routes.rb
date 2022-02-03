@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     resources :poll_questions
   end
   
+  # email invitations
+  get '/pollsinvite/sendinvite', to: 'polls#send_email_invite', as: 'send_email_invite'
+
   #Authentication
   get '/homepage', to: 'application#account', as: 'logged_in'
   post '/login', to: 'sessions#create'

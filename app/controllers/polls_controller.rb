@@ -5,6 +5,13 @@ class PollsController < ApplicationController
 
   layout "poll"
 
+  # invitation method
+  def send_email_invite
+    UserMailer.welcome_email.deliver_now
+    flash[:notice] = "Email invite successfully sent."
+    redirect_to logged_in_path
+  end
+
   # GET /polls/:invite_token/form
   def form
     @poll = Poll.find_by(invite_token: params[:invite_token])
