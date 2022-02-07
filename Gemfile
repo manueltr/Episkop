@@ -98,4 +98,3 @@ gem 'pry'
 gem "rqrcode", "~> 2.0"
 
 # Fonts
-gem "font-awesome-rails"
