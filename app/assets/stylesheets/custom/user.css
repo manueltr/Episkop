@@ -56,3 +56,12 @@ body
 #poll_questions {
 	background: rgb(236, 236, 236);
 }
+
+
+/* qr code */
+
+.qr > svg  {
+
+	margin-top: 50px;
+
+}
