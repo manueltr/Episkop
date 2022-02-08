@@ -12,13 +12,7 @@ body
 		overflow-x: hidden; /* prevent horizontal scrollbar from appearing */
 	}
 	
-a {
-	color: #47C6F8;
-}
-	
-a:hover {
-	color: #0FF;
-}
+
 
 /* start h2 */
 h2
@@ -185,21 +179,20 @@ header .social-icon li a
 	}
 
 .navbar-default .navbar-nav > li > a.current { 
-	color: #28A7E9; 
+	color: rgb(97, 97, 97);
 }
 
 .navbar-default .navbar-nav > li > a { 
-	color: #47C6F8; 
+	color: #8e8e8e; 
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-	color: #0FF;
+	color: rgb(97, 97, 97);
 }
 
-.navbar-toggler {
-	
+.navbar-brand {
+	color: rgb(97, 97, 97);
 }
-
 
 .templatemo-nav {
 	border-radius: 0;	

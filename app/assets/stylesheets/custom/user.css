@@ -1,3 +1,10 @@
+body
+	{
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 300;
+		overflow-x: hidden; /* prevent horizontal scrollbar from appearing */
+	}
+
 /* start nagivation */
 .navbar-default
 	{
@@ -10,7 +17,6 @@
 	{
 		font-weight: 500;
 		font-size: 30px;
-		height: 70px;
 		line-height: 40px;
 		padding: 12px 0px 0px 12px;
 	}
@@ -18,25 +24,32 @@
 	{
 		font-weight: bold;
 		font-size: 13px;
-		height: 70px;
 		line-height: 40px;
 	}
 
 .navbar-default .navbar-nav > li > a.current { 
-	color: #28A7E9; 
+	color: rgb(97, 97, 97);
 }
+
+.navbar-default .navbar-nav > li > a { 
+	color: #8e8e8e; 
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+	color: rgb(97, 97, 97);
+}
+
+.navbar-brand {
+	color: rgb(97, 97, 97);
+}
+
 .templatemo-nav {
 	border-radius: 0;	
 	width: 100%;
 	z-index: 1000;
 }
-.sticky {	
-	position: fixed;
-	left: 0;
-	top: 0;	
-}
-
 /* end navigation */
+
 #polls {
 	background: rgb(236, 236, 236);
 }
