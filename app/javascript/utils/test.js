@@ -1,5 +1,5 @@
 $(function(){
 
-    $("#copy-btn").on("click", function() {console.log("HELLO!")});
+    $("#copy-btn").click(function() {console.log("HELLO!")});
     
 });

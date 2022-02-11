@@ -1,62 +1,62 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/manuel/Episkop/app/helpers/application_helper.rb": {
+      "/Users/manuel/Desktop/Episkop/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/poll_answers_helper.rb": {
+      "/Users/manuel/Desktop/Episkop/app/helpers/poll_answers_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/poll_questions_helper.rb": {
+      "/Users/manuel/Desktop/Episkop/app/helpers/poll_questions_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/poll_vote_helper.rb": {
+      "/Users/manuel/Desktop/Episkop/app/helpers/poll_vote_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/polls_helper.rb": {
+      "/Users/manuel/Desktop/Episkop/app/helpers/polls_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/sessions_helper.rb": {
+      "/Users/manuel/Desktop/Episkop/app/helpers/sessions_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/users_helper.rb": {
+      "/Users/manuel/Desktop/Episkop/app/helpers/users_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/helpers/welcome_helper.rb": {
+      "/Users/manuel/Desktop/Episkop/app/helpers/welcome_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/application_record.rb": {
+      "/Users/manuel/Desktop/Episkop/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/poll_question.rb": {
+      "/Users/manuel/Desktop/Episkop/app/models/poll_question.rb": {
         "lines": [
           1,
           null,
@@ -87,7 +87,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/poll.rb": {
+      "/Users/manuel/Desktop/Episkop/app/models/poll.rb": {
         "lines": [
           1,
           null,
@@ -119,7 +119,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/user.rb": {
+      "/Users/manuel/Desktop/Episkop/app/models/user.rb": {
         "lines": [
           1,
           1,
@@ -127,7 +127,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/sessions_controller.rb": {
+      "/Users/manuel/Desktop/Episkop/app/controllers/sessions_controller.rb": {
         "lines": [
           1,
           1,
@@ -165,7 +165,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/application_controller.rb": {
+      "/Users/manuel/Desktop/Episkop/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null,
@@ -215,7 +215,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/poll_vote.rb": {
+      "/Users/manuel/Desktop/Episkop/app/models/poll_vote.rb": {
         "lines": [
           1,
           null,
@@ -228,7 +228,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/polls_controller.rb": {
+      "/Users/manuel/Desktop/Episkop/app/controllers/polls_controller.rb": {
         "lines": [
           1,
           1,
@@ -331,7 +331,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/models/poll_answer.rb": {
+      "/Users/manuel/Desktop/Episkop/app/models/poll_answer.rb": {
         "lines": [
           1,
           1,
@@ -343,7 +343,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/poll_answers_controller.rb": {
+      "/Users/manuel/Desktop/Episkop/app/controllers/poll_answers_controller.rb": {
         "lines": [
           1,
           1,
@@ -427,7 +427,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/poll_questions_controller.rb": {
+      "/Users/manuel/Desktop/Episkop/app/controllers/poll_questions_controller.rb": {
         "lines": [
           1,
           1,
@@ -527,7 +527,7 @@
           null
         ]
       },
-      "/home/manuel/Episkop/app/controllers/poll_votes_controller.rb": {
+      "/Users/manuel/Desktop/Episkop/app/controllers/poll_votes_controller.rb": {
         "lines": [
           0,
           null,
@@ -590,555 +590,6 @@
         }
       }
     },
-    "timestamp": 1643929079
-  },
-  "Cucumber Features": {
-    "coverage": {
-      "/home/nic/Episkop/app/controllers/application_controller.rb": {
-        "lines": [
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/controllers/poll_answers_controller.rb": {
-        "lines": [
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/controllers/poll_questions_controller.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/controllers/polls_controller.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/controllers/sessions_controller.rb": {
-        "lines": [
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/helpers/application_helper.rb": {
-        "lines": [
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/helpers/poll_answers_helper.rb": {
-        "lines": [
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/helpers/poll_questions_helper.rb": {
-        "lines": [
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/helpers/polls_helper.rb": {
-        "lines": [
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/helpers/sessions_helper.rb": {
-        "lines": [
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/helpers/users_helper.rb": {
-        "lines": [
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/helpers/welcome_helper.rb": {
-        "lines": [
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/models/application_record.rb": {
-        "lines": [
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/models/poll.rb": {
-        "lines": [
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/models/poll_answer.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/models/poll_question.rb": {
-        "lines": [
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/nic/Episkop/app/models/user.rb": {
-        "lines": [
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      }
-    },
-    "timestamp": 1643600758
+    "timestamp": 1644199036
   }
 }
