@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_01_031013) do
+ActiveRecord::Schema.define(version: 2022_02_15_034344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "directories", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "parent_id"
+    t.index ["parent_id"], name: "index_directories_on_parent_id"
+    t.index ["user_id"], name: "index_directories_on_user_id"
+  end
 
   create_table "poll_answers", force: :cascade do |t|
     t.bigint "poll_id"
