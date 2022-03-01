@@ -12,7 +12,7 @@ import "jquery-ujs"
 const axios = require('axios').default;
 
 // Directory features
-$(function() {
+$(document).on('turbo:load', function() {
 
     $(".poll").on("mousedown", function(e) {
         if(e.detail > 1) {
