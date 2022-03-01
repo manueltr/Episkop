@@ -1,18 +1,51 @@
 <!-- User create polls--->
 <div class="h-100 container">
     <p style="color: red"><%= flash[:warning] %></p>
+    <p style="color: green"><%= notice %></p>
+
     <div>
         <h2> My Polls </h2>
         <%= link_to "New poll", new_poll_path %>
     </div>
 
-    <!-- Show user polls -->
-    <p style="color: green"><%= notice %></p>
-
     <%= link_to "testing", directory_path(), remote: true %>
-    <!-- Show directory -->
-    <div id="polls" class="container h-50">
-    <%= render partial: "show_directory", locals: {polls: @polls} %>
+
+    <!-- Show directory / polls -->
+    <div id="directory" class="container h-50">
+    
+        <div id="directory_nav" class="row">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 py-2">
+                <div class="container-fluid p-0 px-2">
+                <i><a class="navbar-brand fab fa-instagram" href="#"></a></i>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    </ul>
+                    <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                    </form>
+                </div>
+                </div>
+            </nav>        
+        </div>
+        <div id="polls">
+        <%= render partial: "show_directory", locals: {polls: @polls} %>
+        </div>
     </div>
 
 
