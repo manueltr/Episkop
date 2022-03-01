@@ -39,8 +39,16 @@ class ApplicationController < ActionController::Base
       @name = @user.username
 
       #set user polls
-      @polls = @user.polls
+      @polls = @user.polls.where(directory_id: session[:directory])
       render layout: "poll"
+    end
+
+    def directory
+      @user = User.find(session[:user_id])
+      @polls = @user.polls.where(directory_id: session[:directory])
+      respond_to do |format|
+        format.js
+      end
     end
 
 end

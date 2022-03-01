@@ -33,11 +33,13 @@ class PollsController < ApplicationController
   # POST /polls or /polls.json
   def create
     @poll = @user.polls.new(poll_params)
+    @poll.directory_id = session[:directory]
 
     respond_to do |format|
       if @poll.save
         flash[:notice] = "Poll was successfully created."
         format.html { redirect_to "/homepage" }
+        format.js
         format.json { render :show, status: :created, location: @poll }
       else
         format.html { render :new, status: :unprocessable_entity }

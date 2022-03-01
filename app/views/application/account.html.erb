@@ -1,21 +1,20 @@
 <!-- User create polls--->
-<div class="container">
+<div class="h-100 container">
     <p style="color: red"><%= flash[:warning] %></p>
     <div>
-        <h1> My Polls </h1>
+        <h2> My Polls </h2>
         <%= link_to "New poll", new_poll_path %>
     </div>
 
     <!-- Show user polls -->
     <p style="color: green"><%= notice %></p>
-    <div id="polls">
-    <% @polls.each do |poll| %>
-        <%= render "polls/poll_dashboard", :poll => poll %>
-        <p>
-        <%= link_to "Show this poll", poll %>
-        </p>
-    <% end %>
+
+    <%= link_to "testing", directory_path(), remote: true %>
+    <!-- Show directory -->
+    <div id="polls" class="container h-50">
+    <%= render partial: "show_directory", locals: {polls: @polls} %>
     </div>
+
 
     <h1>Participated Polls </h1>
     <div id="polls">

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
+  #Directory
+  get '/application/directory', to: 'application#directory', as: 'directory'
+
   #FormVoting
   get '/polls/:invite_token/form', to: 'polls#form', as: 'form'
   post '/polls/:invite_token/submit', to: 'poll_votes#submit', as: 'poll_submit'

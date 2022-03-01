@@ -32,6 +32,7 @@ class SessionsController < ApplicationController
     if user.valid?
       #log them in
       session[:user_id] = user.id 
+      session[:directory] = Directory.where(user_id: user.id, name: "root")[0].id
       redirect_to logged_in_path
     else
       redirect_to root_path 
