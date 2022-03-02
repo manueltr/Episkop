@@ -46,7 +46,7 @@
     </div>
 
 
-    <h1>Participated Polls </h1>
+    <h2 class="mt-4">Participated Polls </h2>
     <div id="participated_polls">
     <% @user.poll_votes.select(:poll_id).distinct(:poll_id).each do |poll_vote| %>
         

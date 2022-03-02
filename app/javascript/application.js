@@ -14,8 +14,6 @@ const axios = require('axios').default;
 // Directory features
 $(document).on('turbo:load', function() {
 
-
-
     $("#directory").on("mousedown", ".poll", function(e) {
         if(e.detail > 1) {
             e.preventDefault();
