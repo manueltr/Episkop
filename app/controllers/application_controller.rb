@@ -39,13 +39,21 @@ class ApplicationController < ActionController::Base
       @name = @user.username
 
       #set user polls
-      @polls = @user.polls.where(directory_id: session[:directory])
+      @directory = @user.directories.find(session[:directory])
+      @children = @directory.children
+      @polls = @directory.polls
       render layout: "poll"
     end
 
     def directory
       @user = User.find(session[:user_id])
-      @polls = @user.polls.where(directory_id: session[:directory])
+
+      @directory = @user.directories.where(name: "root")[0]
+      @children = @directory.children
+      @polls = @directory.polls 
+
+      session[:directory] = @directory.id
+
       respond_to do |format|
         format.js
       end

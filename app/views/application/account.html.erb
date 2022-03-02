@@ -11,38 +11,43 @@
     <!-- Show directory / polls -->
     <div id="directory" class="container h-50">
     
-        <div id="directory_nav" class="row">
+        <div id="directory_nav" class="row mb-2">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 py-2">
                 <div class="container-fluid p-0 px-2">
-                <i><%= link_to "", directory_path(), remote: true, class: "navbar-brand fa-solid fa-house" %></i>
+                <i><%= link_to "", directory_home_path(), remote: true, class: "navbar-brand fa-solid fa-house" %></i>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse d-flex" id="navbarColor01">
+                <div class="collapse navbar-collapse" id="navbarColor01">
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <%# <button class="btn btn-outline-light" type="submit">Search</button> %>
                     </form>
-                    <ul class="align-self-end navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <%= link_to "New Poll", new_poll_path, class: "nav-link"%>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">New Directory</a>
+                            <a class="nav-link" id="new_directory_link" href="javascript:;">New Directory</a>
                         </li>
                     </ul>
                 </div>
                 </div>
             </nav>        
         </div>
+
+        <!-- DISPLAY DASHBOARD -->
+        <div id="directories">
+            <%= render partial: "directories/show_directories", locals: {children: @children} %>
+        </div>
         <div id="polls">
-        <%= render partial: "show_directory", locals: {polls: @polls} %>
+            <%= render partial: "directories/show_polls", locals: {polls: @polls} %>
         </div>
     </div>
 
 
     <h1>Participated Polls </h1>
-    <div id="polls">
+    <div id="participated_polls">
     <% @user.poll_votes.select(:poll_id).distinct(:poll_id).each do |poll_vote| %>
         
         <p>

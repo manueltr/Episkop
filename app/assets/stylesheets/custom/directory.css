@@ -1,6 +1,9 @@
 .poll:hover {
     background-color: #28a7e9;
 }
+.directory:hover {
+    background-color: #28a7e9;
+}
 .poll > div > i {
     -webkit-user-select: none;
     -moz-user-select: none;

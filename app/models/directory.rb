@@ -5,4 +5,8 @@ class Directory < ApplicationRecord
     has_many :children, class_name: 'Directory', :foreign_key => 'parent_id', dependent: :destroy
     has_many :polls, dependent: :destroy
 
+    #validations
+    validates :name, presence: true
+    
+
 end

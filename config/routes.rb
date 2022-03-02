@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :poll_questions
   end
   
+  resources :directories, only: [:show, :create]
+   
   #Authentication
   get '/homepage', to: 'application#account', as: 'logged_in'
   post '/login', to: 'sessions#create'
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
   #Directory
-  get '/application/directory', to: 'application#directory', as: 'directory'
+  get '/application/directory', to: 'application#directory', as: 'directory_home'
 
   #FormVoting
   get '/polls/:invite_token/form', to: 'polls#form', as: 'form'
