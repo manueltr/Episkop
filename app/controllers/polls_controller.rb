@@ -7,7 +7,8 @@ class PollsController < ApplicationController
 
   # invitation method
   def send_email_invite
-    UserMailer.welcome_email.deliver_now
+    @user = User.find(session[:user_id])
+    UserMailer.welcome_email(@user).deliver_now
     flash[:notice] = "Email invite successfully sent."
     redirect_to logged_in_path
   end
