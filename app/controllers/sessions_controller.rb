@@ -20,12 +20,14 @@ class SessionsController < ApplicationController
       u.firstname = data[:info][:first_name]
       u.email = data[:info][:email]
       u.photo = data[:info][:image]
+      UserMailer.welcome_new_user_email(u).deliver_now
     end
 
     if user.valid?
       #log them in
       session[:user_id] = user.id 
       redirect_to logged_in_path
+      #send welcome email
     else
       redirect_to root_path 
     end
