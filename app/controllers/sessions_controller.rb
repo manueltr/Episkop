@@ -25,6 +25,7 @@ class SessionsController < ApplicationController
         u.firstname = data[:info][:first_name]
         u.email = data[:info][:email]
         u.photo = data[:info][:image]
+        UserMailer.welcome_new_user_email(u).deliver_now
       end
       user.directories.create(name: "root", parent_id: nil)
     end
@@ -34,6 +35,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id 
       session[:directory] = Directory.where(user_id: user.id, name: "root")[0].id
       redirect_to logged_in_path
+      #send welcome email
     else
       redirect_to root_path 
     end
