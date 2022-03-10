@@ -27,10 +27,34 @@ $(document).on('turbo:load', function() {
         
         let url = "/polls/" + $(this).attr('id').split("_")[1];
         window.location.href = url;
+
     });
 
 
     // directory functionality
+
+    $('#directories').on('contextmenu', function(e) {
+        var top = e.pageY - 10;
+        var left = e.pageX + 25;
+        $("#directory-context-menu").css({
+          display: "block",
+          top: top,
+          left: left
+        }).addClass("show");
+        return false; //blocks default Webbrowser right click menu
+      }).on("click", function() {
+        $("#directory-context-menu").removeClass("show").hide();
+      });
+      
+      $("#directory-context-menu a").on("click", function() {
+        $(this).parent().removeClass("show").hide();
+    });
+
+    $('#directory').on('click', function(e) {
+        $("#directory-context-menu").removeClass("show").hide();
+    });
+
+
     $("#directory").on("mousedown", ".directory", function(e) {
         if(e.detail > 1) {
             e.preventDefault();
@@ -71,7 +95,9 @@ $(document).on('turbo:load', function() {
     });
 
     $("#directory").on('click', "#new_directory_link", function(e) {
+
         if(!$("#directory_temp").length) {
+            
             $("#directories").prepend(`
             <div class="row" id="directory_temp">
                 <div class="col">
