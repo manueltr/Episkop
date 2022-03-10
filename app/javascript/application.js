@@ -1,9 +1,12 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-//import "@hotwired/turbo-rails"
-//import "controllers"
+// Entry point for the build script in your package.json
+import "@hotwired/turbo-rails"
+import "./controllers"
+import "./src/jquery"
+import "./theme/typed"
+import "./theme/jquery.singlePageNav.min"
+import * as bootstrap from "bootstrap"
+import "./theme/custom"
+import "./utils/test"
 
-//= require theme/jquery
-//= require theme/custom
-//= require theme/typed
-//= require theme/wow.min
-//= require theme/bootstrap.min
+
+

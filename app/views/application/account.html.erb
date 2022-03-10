@@ -10,7 +10,7 @@
     <p style="color: green"><%= notice %></p>
     <div id="polls">
     <% @polls.each do |poll| %>
-        <%= render "polls/poll", :poll => poll %>
+        <%= render "polls/poll_dashboard", :poll => poll %>
         <p>
         <%= link_to "Show this poll", poll %>
         </p>
