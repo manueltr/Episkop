@@ -1,0 +1,9 @@
+$("#directories").html("")
+$("#polls").html("")
+
+<% if @children %>
+$("#directories").html("<%= escape_javascript(render partial: "directories/show_directories", locals: {children: @children}) %>");
+<% end %>
+<% if @polls %>
+$("#polls").html("<%= escape_javascript(render partial: "directories/show_polls", locals: {polls: @polls}) %>");
+<% end %>

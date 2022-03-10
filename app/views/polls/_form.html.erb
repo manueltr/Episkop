@@ -10,11 +10,39 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="row mb-3">
+    <%= form.label :title, class: "col-sm-1 col-form-label" %>
+    <div class = "col-sm-10">
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
   </div>
 
+  <div class="row mb-3">
+    <%= form.label :summary, class: "col-sm-1 col-form-label" %>
+    <div class = "col-sm-10">
+      <%= form.text_area :summary, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :publish, class: "col-sm-1 col-form-label" %>
+    <div class = "col-sm-10">
+      <%= form.check_box :publish, class: "form-check" %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :ends_at, class: "col-sm-1 col-form-label" %>
+    <div class = "col-sm-10">
+      <%= form.datetime_field :ends_at, class: "form-control" %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+
+<% if false %>
   <div>
     <%= form.label :summary, style: "display: block" %>
     <%= form.text_area :summary %>
@@ -29,8 +57,10 @@
     <%= form.label :ends_at, style: "display: block" %>
     <%= form.datetime_field :ends_at %>
   </div>
-
+    
   <div>
     <%= form.submit %>
   </div>
+<% end %>
+
 <% end %>

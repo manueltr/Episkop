@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :poll_questions
   end
   
+  resources :directories, only: [:show, :create]
+   
   # email invitations
   get '/pollsinvite/sendinvite', to: 'polls#send_email_invite', as: 'send_email_invite'
 
@@ -14,6 +16,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#omniauth'
+
+  #Directory
+  get '/application/directory', to: 'application#directory', as: 'directory_home'
 
   #FormVoting
   get '/polls/:invite_token/form', to: 'polls#form', as: 'form'

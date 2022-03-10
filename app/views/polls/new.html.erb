@@ -1,3 +1,4 @@
+<div class="container">
 <h1>New poll</h1>
 
 <%= render "form", poll: @poll %>
@@ -5,5 +6,6 @@
 <br>
 
 <div>
-  <%= link_to "Back to polls", logged_in_path %>
+  <%= link_to "Back to polls", logged_in_path, class: "btn btn-primary" %>
+</div>
 </div>
