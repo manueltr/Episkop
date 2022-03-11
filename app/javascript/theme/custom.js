@@ -48,7 +48,7 @@ $(document).on('turbo:load', function(){
 });
 
 /* start preloader */
-$(window).on("load", function(){
+$(window).on('turbo:load', function(){
 	$('.preloader').fadeOut(1000); // set duration in brackets    
 });
 /* end preloader */
