@@ -15,7 +15,7 @@ const axios = require('axios').default;
 $(document).on('turbo:load', function() {
 
     $("body").on("dblclick", function (e) {
-        console.log("hello");
+        console.log("why not");
 
     });
 
