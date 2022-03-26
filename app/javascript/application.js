@@ -7,6 +7,7 @@ import "./theme/jquery.singlePageNav.min"
 import * as bootstrap from "bootstrap"
 import "./theme/custom"
 import "./utils/test"
+import "./poll/main"
 import "jquery-ujs"
 
 const axios = require('axios').default;

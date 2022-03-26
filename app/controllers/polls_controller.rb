@@ -28,6 +28,7 @@ class PollsController < ApplicationController
   # GET /polls/1 or /polls/1.json
   def show
     @poll_questions = @poll.poll_questions
+    render "main"
   end
 
   # GET /polls/new
