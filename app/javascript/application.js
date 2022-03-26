@@ -126,3 +126,16 @@ $(document).on('turbo:load', function() {
         }
     });
 });
+
+// Poll answer adding
+$(document).on('turbo:load', function() {
+    $("#new_answer_btn").on('click', function(e) {
+        if(!$("#new_answer_form").length) {
+            let id = window.location.href.split("/").reverse()[0];
+            $.ajax({
+                type: "GET",
+                url: "/polls/" + id + "/poll_questions/new.js"
+            })
+        }
+    });
+});
