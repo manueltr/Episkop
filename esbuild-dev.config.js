@@ -1,33 +1,10 @@
 #!/usr/bin/env node
 
 const path = require('path')
+const chokidar = require('chokidar')
 const http = require('http')
 
-const watch = process.argv.includes('--watch')
 const clients = []
-
-const watchOptions = {
-  onRebuild: (error, result) => {
-    if (error) {
-      console.error('Build failed:', error)
-    } else {
-      console.log('Build succeeded')
-      clients.forEach((res) => res.write('data: update\n\n'))
-      clients.length = 0
-    }
-  }
-}
-
-require("esbuild").build({
-  entryPoints: ["application.js"],
-  bundle: true,
-  outdir: path.join(process.cwd(), "app/assets/builds"),
-  absWorkingDir: path.join(process.cwd(), "app/javascript"),
-  watch: watch && watchOptions,
-  banner: {
-    js: ' (() => new EventSource("http://localhost:8082").onmessage = () => location.reload())();',
-  },
-}).catch(() => process.exit(1));
 
 http.createServer((req, res) => {
   return clients.push(
@@ -39,3 +16,24 @@ http.createServer((req, res) => {
     }),
   );
 }).listen(8082);
+
+async function builder() {
+  let result = await require("esbuild").build({
+    entryPoints: ["application.js"],
+    bundle: true,
+    outdir: path.join(process.cwd(), "app/assets/builds"),
+    absWorkingDir: path.join(process.cwd(), "app/javascript"),
+    incremental: true,
+    banner: {
+      js: ' (() => new EventSource("http://localhost:8082").onmessage = () => location.reload())();',
+    },
+  })
+  chokidar.watch(["./app/javascript/**/*.js", "./app/views/**/*.html.erb", "./app/assets/stylesheets/*.css"]).on('all', (event, path) => {
+    if (path.includes("javascript")) {
+      result.rebuild()
+    }
+    clients.forEach((res) => res.write('data: update\n\n'))
+    clients.length = 0
+  });
+}
+builder()
