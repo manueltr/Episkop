@@ -12,7 +12,7 @@
 
   <% if poll_question.question_type == "Multiple Choice" %>
     <div id="create_answer" class="container">
-      <button type="button" id="new_answer_btn">Add a Question</button>
+      <a id="new_answer_btn" href="<%= new_poll_answer_path(:poll_id => poll_question.poll_id, :question => poll_question)%>" data-remote="true">Add an MC Answer</a>
     </div>
   <%end%>
 

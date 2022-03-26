@@ -1,0 +1,3 @@
+$("#poll_questions").append(
+    "<%= escape_javascript(render partial: "form", locals: {poll_question: @poll_question, poll_answer: @poll_answer})%>"
+);
