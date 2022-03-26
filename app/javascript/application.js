@@ -111,3 +111,20 @@ $(document).on('turbo:load', function() {
     });
 
 });
+
+
+
+// Poll question adding
+$(document).on('turbo:load', function() {
+    $("#new_question_btn").on('click', function(e) {
+            $("#directories").prepend(`
+            <div class="row" id="directory_temp">
+                <div class="col">
+                    <i class="fa-solid fa-folder" aria-hidden="true" style="display: inline;"></i>
+                    <input class="form-control w-25" type="text" id="directory_name" style="display: inline;">
+                    <i id="remove_new_directory" class="fa-solid fa-xmark" ></i>
+                </div>
+            </div>
+            `);
+    });
+});

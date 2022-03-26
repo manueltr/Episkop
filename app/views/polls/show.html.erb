@@ -10,21 +10,11 @@
     <% @poll_questions.each do |poll_question| %>
     <%= render poll_question %>
 
-    # <p>
-    #   <%= link_to "Show this poll question", poll_question_path(poll_question) %>
-    # </p>
     <% end %>
-    <%= button_to "Add a question", new_poll_poll_question_path(@poll), method: :get%>
+    <%= button_to "Add a question", new_poll_poll_question_path(@poll), method: :get, id: "add_question_btn"%>
   </div>
 </div>
 <div class="container">
-  # <%= link_to "Edit this poll", edit_poll_path(@poll) %> |
-  # <%= link_to "Back to polls", logged_in_path %>
+  <%= link_to "Back to polls", logged_in_path %>
   <%= button_to "Destroy this poll", @poll, method: :delete %>
-</div>
-
-<div class="container">
-  <div id="new_poll_questions">
-    <%= render partial: "poll_questions/show_poll_dashboard", locals: {poll_questions: @poll_questions} %>
-  </div>
 </div>
