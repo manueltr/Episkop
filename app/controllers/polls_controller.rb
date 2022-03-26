@@ -1,7 +1,7 @@
 class PollsController < ApplicationController
   before_action :set_user
   before_action :set_poll, only: %i[ show edit update destroy ]
-  before_action :check_user, only: %i[ show edit update destroy ]
+  before_action :check_user, only: %i[ edit update destroy ]
 
   layout "poll"
 
@@ -18,6 +18,14 @@ class PollsController < ApplicationController
   def form
     @poll = Poll.find_by(invite_token: params[:invite_token])
     @poll_questions = @poll.poll_questions
+
+    respond_to  do |format|
+            
+      format.html { head 400, content_type: "text/html"}
+      format.js
+
+    end
+
   end
 
   # GET /polls or /polls.json
@@ -28,7 +36,16 @@ class PollsController < ApplicationController
   # GET /polls/1 or /polls/1.json
   def show
     @poll_questions = @poll.poll_questions
-    render "main"
+    @permission = has_edit_permission()
+
+    respond_to  do |format|
+            
+        format.html {render "main"}
+        format.js
+    
+    end
+
+
   end
 
   # GET /polls/new
@@ -81,6 +98,17 @@ class PollsController < ApplicationController
     end
   end
 
+
+  def results
+
+    respond_to  do |format|
+            
+      format.html { render 404}
+      format.js
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_poll
@@ -100,6 +128,18 @@ class PollsController < ApplicationController
         flash[:warning] = "That poll doesn't belong to you!"
         redirect_to "/homepage"
       end
+
+    end
+
+    def has_edit_permission
+
+      # change to include other users eventually
+      if @poll.user_id != session[:user_id]
+        return false
+      end
+
+      return true
+
 
     end
 

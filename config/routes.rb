@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   #FormVoting
   get '/polls/:invite_token/form', to: 'polls#form', as: 'form'
+  get '/polls/:invite_token/results', to: 'polls#results', as: 'results'
   post '/polls/:invite_token/submit', to: 'poll_votes#submit', as: 'poll_submit'
   get '/polls/:invite_token/qr_code', to: 'poll_votes#qr', as: 'form_qr'
 

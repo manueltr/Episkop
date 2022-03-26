@@ -1,16 +1,31 @@
 <div class="container">
-  <p style="color: green"><%= notice %></p>
+  <p id="notice" style="color: green"></p>
+  <p id="warning" style="color: red"></p>
 </div>
 <div id="sub_nav" class="container">
     <ul class="nav mt-5 nav-tabs justify-content-center">
+
+    <%if @permission %>
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="javascript:;">Edit</a>
+        <a class="nav-link active" aria-current="page" data-remote="true" href="<%=poll_path(@poll.id)%>">Edit</a>
+    </li>
+    <% end %>
+
+    <li class="nav-item">
+        <a class="nav-link <%if !@permission%> active <%end%>" data-remote="true" href="<%= form_url(@poll.invite_token)%>">Poll Form</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="javascript:;">Poll</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="javascript:;">Results</a>
+        <a class="nav-link" data-remote="true" href="<%= results_url(@poll.invite_token)%>">View results</a>
     </li>
     </ul>
+</div>
+
+<div id="main_view">
+
+    <%if @permission %>
+        <%= render partial: "polls/show" %>
+    <%else%>
+        <%= render partial: "polls/form_view"%>
+    <%end%>
+
 </div>
