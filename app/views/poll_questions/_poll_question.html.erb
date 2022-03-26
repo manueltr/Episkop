@@ -10,17 +10,17 @@
     <%= poll_question.content %>
   </p>
 
-  <% if poll_question.question_type == "Multiple Choice" %>
-    <div id="create_answer" class="container">
-      <a id="new_answer_btn" href="<%= new_poll_answer_path(:poll_id => poll_question.poll_id, :question => poll_question)%>" data-remote="true">Add an MC Answer</a>
-    </div>
-  <%end%>
-
   <% if !poll_question.poll_answers.empty? %>
-    <div id="poll_answers" class="container">
+    <a class="btn btn-dark btn-sm card-link" data-bs-toggle="collapse" data-bs-target="#poll_answers<%= poll_question.id %>" role="button" aria-expanded="false" aria-controls="poll_answers<%= poll_question.id %>">Show MC Answer Choices</a>
+    <div id="poll_answers<%= poll_question.id %>" class="collapse">
           <% poll_question.poll_answers.each do |poll_answer| %>
             <%= render poll_answer %>
           <% end %>
+          <% if poll_question.question_type == "Multiple Choice" %>
+            <div id="create_answer" class="container">
+              <a id="new_answer_btn" href="<%= new_poll_answer_path(:poll_id => poll_question.poll_id, :question => poll_question)%>" data-remote="true">Add an MC Answer</a>
+            </div>
+          <%end%>
     </div>
   <%end%>
 
