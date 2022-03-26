@@ -10,6 +10,10 @@
     <%= poll_question.content %>
   </p>
 
+  <% if poll_question.question_type == "Multiple Choice" %>
+    <div id="create_answer" class="container">
+      <%= link_to "Add answer choice", new_poll_answer_path(:poll_id => poll_question.poll_id, :question => poll_question) %>
+  <%end%>
 
   <% if !poll_question.poll_answers.empty? %>
     <div id="poll_answers" class="container">
@@ -19,10 +23,7 @@
     </div>
   <%end%>
 
-  <% if poll_question.question_type == "Multiple Choice" %>
-    <div id="create_answer" class="container">
-      <%= link_to "Add answer choice", new_poll_answer_path(:poll_id => poll_question.poll_id, :question => poll_question) %>
-  <%end%>
+  
 
 
 </div>
