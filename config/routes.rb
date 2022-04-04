@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   # API routes
   get '/polls_api', to: 'api#index', as: 'polls_api_index'
+  get '/polls_api_simple', to: 'api#index_non_db', as: 'polls_api_non_db'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'application#welcome'
