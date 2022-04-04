@@ -30,4 +30,13 @@ Rails.application.routes.draw do
   root 'application#welcome'
   # Defines the root path route ("/")
   #root "articles#index"
+
+
+  
+  # API routes
+  namespace :api do
+    namespace :v1 do
+      resources :microposts, only: [:index, :show, :create, :destroy]
+    end
+  end
 end
