@@ -26,17 +26,15 @@ Rails.application.routes.draw do
   get '/polls/:invite_token/qr_code', to: 'poll_votes#qr', as: 'form_qr'
 
 
+  # API routes
+  get '/polls_api', to: 'api#index', as: 'polls_api_index'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'application#welcome'
   # Defines the root path route ("/")
   #root "articles#index"
 
 
+
   
-  # API routes
-  namespace :api do
-    namespace :v1 do
-      resources :microposts, only: [:index, :show, :create, :destroy]
-    end
-  end
 end
