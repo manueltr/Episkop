@@ -129,9 +129,7 @@ $(document).on('turbo:load', function() {
 
 // Poll answer adding
 $(document).on('turbo:load', function() {
-    $("#new_answer_btn").on('click', function(e) {
-        if(!$("#new_answer_form").length) {
-            
-        }
+    $(".new_answer_btn").on('click', function(e) {
+            $(this).hide();
     });
 });
