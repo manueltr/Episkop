@@ -6,21 +6,20 @@
   <h1 class="display-4"><%=@poll.title%></h1>
   <p class="lead"><%=@poll.summary%></p>
 </div>
-
-<div class="container">
-    <form method="post" action="<%=poll_submit_path(@poll.invite_token)%>">
-
-        <div id="poll_questions">
-
-            <% @poll_questions.each do |poll_question| %>
-                <%= render "poll_questions/poll_question_form", :poll_question => poll_question %>
-            <% end %>
-        </div>
-
+<form method="post" action="<%=poll_submit_path(@poll.invite_token)%>">
+    <% @poll_questions.each do |poll_question| %>
+    <div class="container">
+            <div id="poll_questions">
+                <%= render "poll_questions/poll_question_form", :poll_question => poll_question %><br>
+            </div>
+            <br>
+            
+    </div>
+    <% end %>
+    <div class="container">
         <div class="form-group">
-            <%= puts poll_submit_path(@poll.invite_token)%>
-            <%= button_to "submit", poll_submit_path(@poll.invite_token), method: :post%>
+                    <%= puts poll_submit_path(@poll.invite_token)%>
+                    <%= button_to "submit", poll_submit_path(@poll.invite_token), method: :post%>
         </div>
-
-    </form>
-</div>
+    </div>
+</form>
