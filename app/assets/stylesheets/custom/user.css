@@ -64,6 +64,12 @@ body
 #poll_questions {
 	background: rgb(236, 236, 236);
 }
+#general_settings {
+	background: rgb(236, 236, 236);
+}
+#api_box {
+	background: rgb(236, 236, 236);
+}
 
 
 /* qr code */

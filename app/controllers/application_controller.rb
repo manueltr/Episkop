@@ -59,4 +59,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def settings
+
+      render "settings"
+
+    end
+
 end

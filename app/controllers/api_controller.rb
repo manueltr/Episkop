@@ -8,8 +8,8 @@ class ApiController < ApplicationController
     #   poll_questions ->
     #     poll_answers ->
 
-    render json:@polls.includes(:poll_questions)
-    # render json:@polls
+    # render json:@polls.includes(:poll_questions)
+    render json:@polls
   end
 
   def index_non_db
