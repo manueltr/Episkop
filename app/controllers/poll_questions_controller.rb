@@ -17,6 +17,7 @@ class PollQuestionsController < ApplicationController
   # GET /poll_questions/new
   def new
     @poll_question = @poll.poll_questions.new
+
   end
 
   # GET /poll_questions/1/edit

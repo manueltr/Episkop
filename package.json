@@ -14,8 +14,12 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
+    "start": "node esbuild-dev.config.js",
     "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules & sass ./app/assets/stylesheets/logged.bootstrap.scss ./app/assets/builds/logged.css --no-source-map --load-path=node_modules",
     "build:css1": "sass ./app/assets/stylesheets/application.bootstrap.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules",
     "build:css2": "sass ./app/assets/stylesheets/logged.bootstrap.scss ./app/assets/builds/logged.css --no-source-map --load-path=node_modules"
+  },
+  "devDependencies": {
+    "chokidar": "^3.5.3"
   }
 }
