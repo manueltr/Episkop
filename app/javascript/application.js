@@ -138,4 +138,15 @@ $(document).on('turbo:load', function() {
     $(".new_answer_btn").on('click', function(e) {
             $(this).hide();
     });
+
+
+    $("#poll_questions").on('click', "a.show_answers > i", function(e) {
+        
+        if($(this).hasClass('fa-minus')) {
+            $(this).removeClass('fa-minus').addClass('fa-plus')
+        }
+        else {
+            $(this).removeClass('fa-plus').addClass('fa-minus')
+        }
+    });
 });
