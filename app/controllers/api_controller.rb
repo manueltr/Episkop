@@ -7,6 +7,9 @@ class ApiController < ApplicationController
     # poll ->
     #   poll_questions ->
     #     poll_answers ->
+    #   responses ->
+    #     questions ->
+    #     answers ->
 
     # render json:@polls.includes(:poll_questions)
     render json:@polls
