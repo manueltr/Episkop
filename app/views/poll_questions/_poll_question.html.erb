@@ -1,4 +1,4 @@
-<div id="<%= dom_id poll_question %>" class="card">
+<div id="<%= dom_id poll_question %>" class="card mt-3">
 
   <div class="card-body">
     <div class="card-title">
@@ -34,7 +34,9 @@
         </div>
       
         <%end%>
-      <%= button_to "delete question", poll_question, :method => "delete", :class => "btn btn-dark btn-sm mt-3"%>
+
+        <%= button_to "delete question", poll_question, :method => "delete", :class => "btn btn-dark btn-sm mt-3"%>
+        <%= link_to "Show this poll question", poll_question_path(poll_question) %>
     </div>
 
 
