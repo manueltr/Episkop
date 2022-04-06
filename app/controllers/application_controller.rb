@@ -61,7 +61,8 @@ class ApplicationController < ActionController::Base
 
     def settings
 
-      render "settings"
+      render layout: "poll"
+      # render "settings"
 
     end
 

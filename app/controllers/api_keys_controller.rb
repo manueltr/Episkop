@@ -1,4 +1,5 @@
 class ApiKeysController < ApplicationController
+  before_action :set_user
   before_action :set_api_key, only: %i[ show edit update destroy ]
 
   # GET /api_keys or /api_keys.json
@@ -12,6 +13,7 @@ class ApiKeysController < ApplicationController
 
   # GET /api_keys/new
   def new
+
     @api_key = ApiKey.new
   end
 
@@ -21,7 +23,7 @@ class ApiKeysController < ApplicationController
 
   # POST /api_keys or /api_keys.json
   def create
-    @api_key = ApiKey.new(api_key_params)
+    @api_key = @user.api_keys.new(api_key_params)
 
     respond_to do |format|
       if @api_key.save
@@ -58,6 +60,12 @@ class ApiKeysController < ApplicationController
   end
 
   private
+    def set_user
+      @user = User.find(session[:user_id])
+      @profile_picture = @user.photo
+      @name = @user.username
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_api_key
       @api_key = ApiKey.find(params[:id])
@@ -65,6 +73,6 @@ class ApiKeysController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def api_key_params
-      params.require(:api_key).permit(:key_val, :u_id, :purpose, :in_request_mode, :accepted)
+      params.require(:api_key).permit(:purpose, :in_req_mode, :accepted, :explanation)
     end
 end

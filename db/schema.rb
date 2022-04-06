@@ -10,19 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_05_024246) do
+ActiveRecord::Schema.define(version: 2022_04_06_035115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "api_keys", force: :cascade do |t|
-    t.string "key_val"
-    t.bigint "u_id"
+    t.bigint "user_id"
     t.string "purpose"
-    t.boolean "in_request_mode"
+    t.boolean "in_req_mode"
     t.boolean "accepted"
+    t.text "explanation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "api_token"
+    t.index ["api_token"], name: "index_api_keys_on_api_token", unique: true
+    t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
   create_table "directories", force: :cascade do |t|
@@ -94,6 +97,7 @@ ActiveRecord::Schema.define(version: 2022_04_05_024246) do
     t.string "photo"
   end
 
+  add_foreign_key "api_keys", "users"
   add_foreign_key "poll_questions", "polls"
   add_foreign_key "poll_votes", "poll_answers"
   add_foreign_key "poll_votes", "poll_questions"
