@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_15_035135) do
+ActiveRecord::Schema.define(version: 2022_04_05_024246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string "key_val"
+    t.bigint "u_id"
+    t.string "purpose"
+    t.boolean "in_request_mode"
+    t.boolean "accepted"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "directories", force: :cascade do |t|
     t.bigint "user_id"
