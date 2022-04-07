@@ -17,7 +17,7 @@ $(document).on('turbo:load', function() {
 
     $("body").on("dblclick", function (e) {
         console.log("why not");
-
+        console.log("but yes"); 
     });
 
     $("#directory").on("mousedown", ".poll", function(e) {

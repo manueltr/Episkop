@@ -1,0 +1,1 @@
+json.partial! "poll_questions/results", poll_question: @poll_question
