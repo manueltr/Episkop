@@ -1,4 +1,4 @@
-<%= form_with(url: poll_poll_questions_path(poll_id: @poll, id: poll_question.id), model: poll_question) do |form| %>
+<%= form_with(url: poll_poll_questions_path(poll_id: @poll, id: poll_question.id), model: poll_question, id: "new_question_form") do |form| %>
   <% if poll_question.errors.any? %>
     <div style="color: red">
       <ul>

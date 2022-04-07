@@ -1,6 +1,6 @@
 /* HTML document is loaded. DOM is ready.
 -------------------------------------------*/
-$(function(){
+$(document).on('turbo:load', function(){
 
     /* start typed element */
     //http://stackoverflow.com/questions/24874797/select-div-title-text-and-make-array-with-jquery
@@ -48,7 +48,7 @@ $(function(){
 });
 
 /* start preloader */
-$(window).on("load", function(){
+$(window).on('turbo:load', function(){
 	$('.preloader').fadeOut(1000); // set duration in brackets    
 });
 /* end preloader */
