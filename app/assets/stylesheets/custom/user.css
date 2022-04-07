@@ -67,7 +67,13 @@ body
 #general_settings {
 	background: rgb(236, 236, 236);
 }
-#api_box {
+#api_requests {
+	background: rgb(236, 236, 236);
+}
+#my_keys {
+	background: rgb(236, 236, 236);
+}
+#api_keys {
 	background: rgb(236, 236, 236);
 }
 

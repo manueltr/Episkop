@@ -138,3 +138,11 @@ $(document).on('turbo:load', function() {
             $(this).hide();
     });
 });
+
+
+// API Key adding
+$(document).on('turbo:load', function() {
+    $(".new_key_btn").on('click', function(e) {
+            $(this).hide();
+    });
+});

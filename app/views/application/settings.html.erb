@@ -31,12 +31,31 @@
 
     <div class="col-1"></div>
 
-    <div id="api_keys" class="col">
+    <div id="my_keys" class="col">
         <p> This is where we list API keys for the current user </p>
-        <a class="btn btn-primary" data-toggle="collapse"  role="button" aria-expanded="false" >Request API Key</a>
-        <a class="btn btn-primary" data-toggle="collapse" href="/api_keys/new" role="button" aria-expanded="false" >Create New API Key</a>
     </div>
 
+</div>
+
+<br>
+
+<div class="h-75 row">
+
+    <div id="api_keys" class="col">
+
+        <div id="api_keys_container" class="container">
+            <p> This is where a user can request a new key </p>
+
+            <div class="container">
+                <p style="color: green"><%= notice %></p>
+            </div>
+
+            <div id="request_key" class="container">
+                <a class="new_key_btn" href="<%= new_api_key_path %>" data-remote="true">Request an API Key</a>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 </div>

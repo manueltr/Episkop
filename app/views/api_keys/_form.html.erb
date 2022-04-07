@@ -12,11 +12,22 @@
   <% end %>
 
   <div>
-    <%= form.label :purpose, style: "display: block" %>
-    <%= form.text_field :purpose %>
+    <%= form.label :purpose, 'What will you use this key for? To...' , style: "display: block" %>
+    <br>
+    <%= form.radio_button :purpose, 'extract', :checked => true %> 
+    <%= label :purpose_extract, 'Extract Data From Polls' %>
+    <br>
+    <%= form.radio_button :purpose, 'create' %>
+    <%= label :purpose_create, 'Create New Polls' %>
+    <br>
+    <%= form.radio_button :purpose, 'delete' %>
+    <%= label :purpose_create, 'Delete Existing Polls' %>
+    <br>
+    <%= form.radio_button :purpose, 'edit' %>
+    <%= label :purpose_create, 'Edit Existing Polls' %>
   </div>
 
-  <div>
+  <!-- <div>
     <%= form.label :in_req_mode, style: "display: block" %>
     <%= form.text_field :in_req_mode %>
   </div>
@@ -24,10 +35,12 @@
   <div>
     <%= form.label :accepted, style: "display: block" %>
     <%= form.text_field :accepted %>
-  </div>
+  </div> -->
+
+  <br>
 
   <div>
-    <%= form.label :explanation, style: "display: block" %>
+    <%= form.label :explanation, 'Please give a short explanation on why you want a key:' , style: "display: block" %>
     <%= form.text_field :explanation %>
   </div>
 

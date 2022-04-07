@@ -1,6 +1,7 @@
 class ApiKeysController < ApplicationController
   before_action :set_user
   before_action :set_api_key, only: %i[ show edit update destroy ]
+  layout "poll"
 
   # GET /api_keys or /api_keys.json
   def index
@@ -13,7 +14,6 @@ class ApiKeysController < ApplicationController
 
   # GET /api_keys/new
   def new
-
     @api_key = ApiKey.new
   end
 
@@ -25,9 +25,12 @@ class ApiKeysController < ApplicationController
   def create
     @api_key = @user.api_keys.new(api_key_params)
 
+    @api_key.in_req_mode = true;
+    @api_key.accepted = nil;
+
     respond_to do |format|
       if @api_key.save
-        format.html { redirect_to api_key_url(@api_key), notice: "Api key was successfully created." }
+        format.html { redirect_to settings_path, notice: "Your request for an API Key has been received! Be on the lookout for an email." }
         format.json { render :show, status: :created, location: @api_key }
       else
         format.html { render :new, status: :unprocessable_entity }
