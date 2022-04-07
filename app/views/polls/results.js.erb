@@ -4,9 +4,8 @@ $("#main_view").html("<%= escape_javascript(render partial: "polls/results") %>"
 <% @poll_questions.each do |poll_question| %>
 
     <% if poll_question.question_type != "Input" %>
-        $.getJSON("http://localhost:3000/poll_questions/3/results.json", function (data) {
-            $("#main_view").append(`<div id="poll_question_<%=poll_question.id%>" data-graph=` + JSON.stringify(data["data"]) + `> LOL </div>`);
+        $.getJSON("<%= escape_javascript(poll_question_results_url(poll_question.id)) %>", function (data) {
+            $("#main_view").append(`<div class="poll_question_results" id="<%=poll_question.id%>" data-graph=` + JSON.stringify(data["data"]) + `> LOL </div>`);
         });
     <%end%>
-    
 <% end %>

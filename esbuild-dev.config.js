@@ -26,7 +26,7 @@ http.createServer((req, res) => {
 
 async function builder() {
   let result = await require("esbuild").build({
-    entryPoints: ["application.js"],
+    entryPoints: ["application.js", "graphs.js"],
     bundle: true,
     outdir: path.join(process.cwd(), "app/assets/builds"),
     absWorkingDir: path.join(process.cwd(), "app/javascript"),

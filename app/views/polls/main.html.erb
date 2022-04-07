@@ -15,7 +15,7 @@
         <a class="nav-link <%if !@permission%> active <%end%>" data-remote="true" href="<%= form_url(@poll.invite_token)%>">Poll Form</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-remote="true" href="<%= results_url(@poll.invite_token)%>">View results</a>
+        <a id="show_graphs" class="nav-link" data-remote="true" href="<%= results_url(@poll.invite_token)%>">View results</a>
     </li>
     </ul>
 </div>
