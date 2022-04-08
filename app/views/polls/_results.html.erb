@@ -3,9 +3,24 @@
   <div class="card mt-3">
         <div class="card-header" style="background: #212529;"></div>
         <div class="card-body">
-            <h1 class="card-title">Responses</h5>
+            <h1 class="card-title">Responses</h1>
             <p class="card-text">Number of responses: <%= @poll.poll_votes.count / @poll.poll_questions.count %></p>
         </div>
   </div>
 
+  <% @poll_questions.each do |poll_question| %>
+
+    <% if poll_question.question_type != "Input" %>
+
+
+        <div class="card mt-3">
+          <div class="card-body">
+              <p class="card-title" style="font-size: 20px;"><%= poll_question.content%></p>
+               <div class="d-flex poll_question_results justify-content-center" id="<%=poll_question.id%>" data-path="<%= poll_question_results_url(poll_question.id)%>"></div>
+          </div>
+        </div>
+       
+    <%end%>
+
+  <% end %>
 </div>

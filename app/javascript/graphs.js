@@ -102,18 +102,28 @@ $(document).on('turbo:load', function() {
 
   $("#show_graphs").on('click', async function () {
     
-    await sleep(250);
+    await sleep(100);
     
     $(".poll_question_results").each(function (index) {
-      let data = JSON.parse($(this).attr("data-graph"));
-      data[0]["value"] = 10
-      console.log(data)
-      // data = [{"no": 100}, {"yes": 50}]
 
-      $(this).append(PieChart(data,{
-        name: d => d.label,
-        value: d => d.value
-      }))
-    })
-  })
+      let data_api = $(this).attr("data-path")
+      $.getJSON(data_api, index, function (data) {
+      
+        data = data["data"]
+
+        // !REMOVE
+        data[0]["value"] = 10
+
+
+        $(".poll_question_results")[index].append(PieChart(data,{
+          name: d => d.label,
+          value: d => d.value,
+          width: 640, 
+          height: 300
+        }));
+      });
+    });
+
+
+  });
 });
