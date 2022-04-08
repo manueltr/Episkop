@@ -1,0 +1,5 @@
+.poll_answers_edit:hover {
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-color: grey;
+}

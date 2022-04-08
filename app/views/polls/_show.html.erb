@@ -1,0 +1,22 @@
+<div class="container">
+  <p style="color: green"><%= notice %></p>
+</div>
+
+<div class="container mb-5">
+  <%= render @poll %>
+</div>
+
+<div class="container">
+  
+  <div id="poll_questions">
+    <% @poll_questions.each do |poll_question| %>
+    <%= render poll_question %>
+    <% end %>
+    <%= button_to "Add a question", new_poll_poll_question_path(@poll), method: :get%>
+  </div>
+</div>
+<div class="container">
+  <%= link_to "Edit this poll", edit_poll_path(@poll) %> |
+  <%= link_to "Back to polls", logged_in_path %>
+  <%= button_to "Destroy this poll", @poll, method: :delete %>
+</div>
