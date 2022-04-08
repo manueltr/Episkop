@@ -1,4 +1,11 @@
-<div class="mt-5 container d-flex justify-content-center">
-    <h1>UNDER CONSTRUCTION ... <br> DR. RITCHEY!</h1>
-    <%= image_tag("under_construction")%>
+<div class="container">
+
+  <div class="card mt-3">
+        <div class="card-header" style="background: #212529;"></div>
+        <div class="card-body">
+            <h1 class="card-title">Responses</h5>
+            <p class="card-text">Number of responses: <%= @poll.poll_votes.count / @poll.poll_questions.count %></p>
+        </div>
+  </div>
+
 </div>

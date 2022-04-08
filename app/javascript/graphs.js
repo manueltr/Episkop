@@ -103,6 +103,7 @@ $(document).on('turbo:load', function() {
   $("#show_graphs").on('click', async function () {
     
     await sleep(250);
+    
     $(".poll_question_results").each(function (index) {
       let data = JSON.parse($(this).attr("data-graph"));
       data[0]["value"] = 10
