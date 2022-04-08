@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<div id="api_keys">
+  <% api_keys.each do |api_key| %>
+    <%= render api_key %>
+    <p>
+      <%= link_to "Show this api key", api_key %>
+    </p>
+  <% end %>
+</div>

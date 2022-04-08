@@ -8,6 +8,11 @@ class ApiKeysController < ApplicationController
     @api_keys = ApiKey.all
   end
 
+  # API Keys on settings page
+  def my_keys
+    @api_keys = ApiKey.all
+  end
+
   # GET /api_keys/1 or /api_keys/1.json
   def show
   end

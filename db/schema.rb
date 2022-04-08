@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_035115) do
+ActiveRecord::Schema.define(version: 2022_04_08_000637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_035115) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider"
     t.string "photo"
+    t.boolean "admin"
   end
 
   add_foreign_key "api_keys", "users"

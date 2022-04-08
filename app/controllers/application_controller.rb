@@ -60,7 +60,8 @@ class ApplicationController < ActionController::Base
     end
 
     def settings
-
+      @user = User.find(session[:user_id])
+      @api_keys = @user.api_keys
       render layout: "poll"
       # render "settings"
 
