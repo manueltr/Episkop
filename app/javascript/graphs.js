@@ -106,21 +106,58 @@ $(document).on('turbo:load', function() {
     
     $(".poll_question_results").each(function (index) {
 
-      let data_api = $(this).attr("data-path")
-      $.getJSON(data_api, index, function (data) {
+      let data_api = $(this).attr("data-path");
+
+      let params = {
+        graph_index: index,
+        graph_type: $(this).attr("data-graph-type")
+      }
+
+      console.log(params.graph_index);
+      $.getJSON(data_api, params, function (data) {
       
         data = data["data"]
 
         // !REMOVE
         data[0]["value"] = 10
+        console.log(data)
 
+        if(params.graph_type != "Input") {
 
-        $(".poll_question_results")[index].append(PieChart(data,{
-          name: d => d.label,
-          value: d => d.value,
-          width: 640, 
-          height: 300
-        }));
+          $(".poll_question_results")[params.graph_index].append(PieChart(data,{
+            name: d => d.label,
+            value: d => d.value,
+            width: 640, 
+            height: 300
+          }));
+
+        } else {
+          data = ["Write short paragraphs and cover one topic per paragraph. Long paragraphs discourage users from even trying to understand your material. Short paragraphs are easier to read and understand. Writing experts recommend paragraphs of no more than 150 words in three to eight sentences.","Hello","Hello","Hello","Hello","Hello","Hello","Hello","Hello"]
+          $(".poll_question_results").eq(params.graph_index).append(`<table class="table table-striped">
+                                                            <thead>
+                                                              <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Respondent</th>
+                                                                <th scope="col">Response</th>
+                                                              </tr>
+                                                          </thead>
+                                                          <tbody id="graph_` + params.graph_index + `">
+                                                          </tbody>
+                                                          </table>`)
+
+          let table_row = "";
+          for(let i=0; i < data.length; i++) {
+            table_row = `<tr>
+                          <th scope="row">`+ i +`</th>
+                          <td></td>
+                          <td>`+data[i]+`</td>
+                        </tr>`
+
+            let table_id = "#graph_" + params.graph_index
+            $(table_id).append(table_row);
+          }
+        }
+      
       });
     });
 
