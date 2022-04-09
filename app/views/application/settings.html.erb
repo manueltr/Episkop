@@ -7,14 +7,16 @@
         <h2 class="mt-4"> Settings </h2>
     </div>
 
+    <% if @user.admin %>
     <div class="col ps-0">
         <h2 class="mt-4"> Pending Requests </h2>
     </div>
+    <% end %>
 
     <div class="col ps-0">
         <h2 class="mt-4"> API Keys </h2>
     </div>
-
+    
 </div>
 
 <div class="h-75 row">
@@ -22,14 +24,21 @@
     <div id="general_settings" class="col">
         <p> This is where we will put site-wide settings options </p>
         <hr>
+        <button> Dark Mode </button>
     </div>
 
     <div class="col-1"></div>
 
+    <% if @user.admin %>
     <div id="api_requests" class="col">
         <p> This is where admins will see api key requests </p>
         <hr>
+        
+            <p> User Status: Admin</p>
+            <%= render partial: "api_keys/requested_keys", locals: {requested_api_keys: @requested_api_keys} %>
+    
     </div>
+    <% end %>
 
     <div class="col-1"></div>
 
