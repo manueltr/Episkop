@@ -96,13 +96,36 @@ function PieChart(data, {
   return Object.assign(svg.node(), {scales: {color}});
 }
 
+// form events
+$(document).on('turbo:load', function() {
+
+  
+  $(document).on('change', '#graph-type-select', function() {
+
+    var target = this.value
+
+    $(".form_questions_option").addClass("form_hide")
+  
+    if(target == "Table") {
+      $("#input_options").removeClass("form_hide")
+    }
+    else if (target == "Yes no beeswarm graph" || target == "Yes no bar graph") {
+      $("#yes_no_options").removeClass("form_hide")
+    }
+    else {
+      $("#multi_yes_no_options").removeClass("form_hide")
+    }
+  });
+});
 
 // load graphs
 $(document).on('turbo:load', function() {
 
   $("#show_graphs").on('click', async function () {
     
-    await sleep(100);
+    while(!$("#ready").length) {
+      await sleep(10);
+    }
     
     $(".poll_question_results").each(function (index) {
 

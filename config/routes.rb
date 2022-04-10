@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   #PollQuestionResults
   get '/poll_questions/:id/results', to: 'poll_questions#results', as: 'poll_question_results'
 
+  #PollGraphs
+  post '/poll_graphs/:id', to: 'poll_graphs#create', as: 'graphs_create'
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'application#welcome'

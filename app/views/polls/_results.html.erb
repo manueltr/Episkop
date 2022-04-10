@@ -4,7 +4,7 @@
         <div class="card-header" style="background: #212529;"></div>
         <div class="card-body">
             <h1 class="card-title">Responses</h1>
-            <p class="card-text">Number of responses: <%= @poll.poll_votes.count / @poll.poll_questions.count %></p>
+            <p class="card-text">Number of responses: <%= @poll.poll_votes.distinct.pluck(:user_id).length %></p>
         </div>
   </div>
 
@@ -24,4 +24,32 @@
       </div>
 
   <% end %>
+
+  
+
+  <button class="btn btn-dark mt-3 mb-5" data-bs-toggle="modal" data-bs-target="#addGraphModal">Add a graph</button>
+
+  <div class="modal" id="addGraphModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add a graph</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form action="<%=graphs_create_url(@poll.id)%>.js" data-remote="true" method="post">
+          <div class="modal-body">
+            <%= render partial: "poll_graphs/add_graph_form", locals: { poll_questions: @poll_questions }%>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create graph</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+<div id="ready"></div>

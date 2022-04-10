@@ -3,3 +3,8 @@
     border-bottom-style: solid;
     border-color: grey;
 }
+
+
+.form_hide {
+    display: none;
+}
