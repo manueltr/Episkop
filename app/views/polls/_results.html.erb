@@ -8,20 +8,17 @@
         </div>
   </div>
 
-  <% @poll_questions.each do |poll_question| %>
+  <% @poll_graphs.each do |poll_graph| %>
 
+      <%questions = poll_graph.questions.split(',')%>
+      
 
-      <div class="card mt-3">
-        <div class="card-body">
-            <p class="card-title" style="font-size: 20px;"><%= poll_question.content%></p>
-              <div class="d-flex poll_question_results justify-content-center" 
-              id="<%=poll_question.id%>" 
-              data-path="<%= poll_question_results_url(poll_question.id)%>" 
-              data-graph-type="<%=poll_question.question_type%>"
-              <%if poll_question.question_type == "Input"%>style="height: 300px; overflow: scroll;"<%end%>>
-              </div>
-        </div>
-      </div>
+      <%if questions.length == 1
+        poll_question = PollQuestion.find(questions[0]) 
+      else
+        poll_question = nil
+      end %>
+      <%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, questions: questions, votes: @poll.poll_votes.length}%>
 
   <% end %>
 

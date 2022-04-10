@@ -102,6 +102,7 @@ class PollsController < ApplicationController
   def results
 
     @poll = Poll.find_by(invite_token: params[:invite_token])
+    @poll_graphs = @poll.poll_graphs
     @poll_questions = @poll.poll_questions
     
     respond_to  do |format|

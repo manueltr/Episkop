@@ -96,10 +96,106 @@ function PieChart(data, {
   return Object.assign(svg.node(), {scales: {color}});
 }
 
+// Copyright 2021 Observable, Inc.
+// Released under the ISC license.
+// https://observablehq.com/@d3/bar-chart
+function BarChart(data, {
+  x = (d, i) => i, // given d in data, returns the (ordinal) x-value
+  y = d => d, // given d in data, returns the (quantitative) y-value
+  title, // given d in data, returns the title text
+  marginTop = 20, // the top margin, in pixels
+  marginRight = 0, // the right margin, in pixels
+  marginBottom = 30, // the bottom margin, in pixels
+  marginLeft = 40, // the left margin, in pixels
+  width = 640, // the outer width of the chart, in pixels
+  height = 400, // the outer height of the chart, in pixels
+  xDomain, // an array of (ordinal) x-values
+  xRange = [marginLeft, width - marginRight], // [left, right]
+  yType = d3.scaleLinear, // y-scale type
+  yDomain, // [ymin, ymax]
+  yRange = [height - marginBottom, marginTop], // [bottom, top]
+  xPadding = 0.1, // amount of x-range to reserve to separate bars
+  yFormat, // a format specifier string for the y-axis
+  yLabel, // a label for the y-axis
+  color = "currentColor" // bar fill color
+} = {}) {
+  // Compute values.
+  const X = d3.map(data, x);
+  const Y = d3.map(data, y);
+
+  // Compute default domains, and unique the x-domain.
+  if (xDomain === undefined) xDomain = X;
+  if (yDomain === undefined) yDomain = [0, d3.max(Y)];
+  xDomain = new d3.InternSet(xDomain);
+
+  // Omit any data not present in the x-domain.
+  const I = d3.range(X.length).filter(i => xDomain.has(X[i]));
+
+  // Construct scales, axes, and formats.
+  const xScale = d3.scaleBand(xDomain, xRange).padding(xPadding);
+  const yScale = yType(yDomain, yRange);
+  const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
+  const yAxis = d3.axisLeft(yScale).ticks(height / 40, yFormat);
+
+  // Compute titles.
+  if (title === undefined) {
+    const formatValue = yScale.tickFormat(100, yFormat);
+    title = i => `${X[i]}\n${formatValue(Y[i])}`;
+  } else {
+    const O = d3.map(data, d => d);
+    const T = title;
+    title = i => T(O[i], i, data);
+  }
+
+  const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [0, 0, width, height])
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+  svg.append("g")
+      .attr("transform", `translate(${marginLeft},0)`)
+      .call(yAxis)
+      .call(g => g.select(".domain").remove())
+      .call(g => g.selectAll(".tick line").clone()
+          .attr("x2", width - marginLeft - marginRight)
+          .attr("stroke-opacity", 0.1))
+      .call(g => g.append("text")
+          .attr("x", -marginLeft)
+          .attr("y", 10)
+          .attr("fill", "currentColor")
+          .attr("text-anchor", "start")
+          .text(yLabel));
+
+  const bar = svg.append("g")
+      .attr("fill", color)
+    .selectAll("rect")
+    .data(I)
+    .join("rect")
+      .attr("x", function(i) {
+        return xScale.bandwidth() > width/10 ? xScale(X[i]) + (xScale.bandwidth()/2) - (width/20) : xScale(X[i])
+      })
+      .attr("y", i => yScale(Y[i]))
+      .attr("height", i => yScale(0) - yScale(Y[i]))
+      .attr("width", function(d) {
+        return xScale.bandwidth() > width/10 ? width/10 : xScale.bandwidth();
+      })
+
+  if (title) bar.append("title")
+      .text(title);
+
+  svg.append("g")
+      .attr("transform", `translate(0,${height - marginBottom})`)
+      .call(xAxis);
+
+  return svg.node();
+}
+
+
 // form events
 $(document).on('turbo:load', function() {
 
-  
+
   $(document).on('change', '#graph-type-select', function() {
 
     var target = this.value
@@ -123,10 +219,12 @@ $(document).on('turbo:load', function() {
 
   $("#show_graphs").on('click', async function () {
     
+    await sleep(50);
     while(!$("#ready").length) {
-      await sleep(10);
+      await sleep(50);
     }
     
+    console.log($(".poll_question_results").length)
     $(".poll_question_results").each(function (index) {
 
       let data_api = $(this).attr("data-path");
@@ -136,7 +234,6 @@ $(document).on('turbo:load', function() {
         graph_type: $(this).attr("data-graph-type")
       }
 
-      console.log(params.graph_index);
       $.getJSON(data_api, params, function (data) {
       
         data = data["data"]
@@ -147,14 +244,32 @@ $(document).on('turbo:load', function() {
 
         if(params.graph_type != "Input") {
 
-          $(".poll_question_results")[params.graph_index].append(PieChart(data,{
-            name: d => d.label,
-            value: d => d.value,
-            width: 640, 
-            height: 300
-          }));
+          if(params.graph_type != "Yes No") {
+            console.log("why?!")
+            $(".poll_question_results").eq(params.graph_index).append(BarChart(data,{
+              x: d => d.label,
+              y: d => d.value,
+              width: 640, 
+              height: 300,
+              yFormat: 'r',
+              color: 'steelblue',
+              yLabel: 'votes'
+            }));
+
+          }
+          else {
+            console.log("why??")
+            $(".poll_question_results").eq(params.graph_index).append(PieChart(data,{
+              name: d => d.label,
+              value: d => d.value,
+              width: 640, 
+              height: 300
+            }));
+
+          }
 
         } else {
+          console.log("wtf??")
           data = ["Write short paragraphs and cover one topic per paragraph. Long paragraphs discourage users from even trying to understand your material. Short paragraphs are easier to read and understand. Writing experts recommend paragraphs of no more than 150 words in three to eight sentences.","Hello","Hello","Hello","Hello","Hello","Hello","Hello","Hello"]
           $(".poll_question_results").eq(params.graph_index).append(`<table class="table table-striped">
                                                             <thead>

@@ -1,0 +1,29 @@
+
+
+<% if poll_question != nil %>
+
+    <%if votes != 0%>   
+        <div class="card mt-3">
+            <div class="card-body">
+                <p class="card-title" style="font-size: 20px;"><%=poll_question.content%></p>
+                    <div class="d-flex poll_question_results justify-content-center" 
+                    id="<%=poll_question.id%>" 
+                    data-path="<%= poll_question_results_url(poll_question.id)%>" 
+                    data-graph-type="<%=poll_question.question_type%>"
+                    <%if poll_question.question_type == "Input"%>style="height: 300px; overflow: scroll;"<%end%>>
+                    </div>
+            </div>
+        </div>
+
+    <%else%>
+        <div class="card mt-3">
+            <div class="card-body">
+                <p class="card-title" style="font-size: 20px;"><%=poll_question.content%></p>
+                <p class="card-text">No responses</p>
+            </div>
+        </div>
+    <% end %>
+<% else %>
+    <div>HAHAH lol</div>
+
+<% end %>

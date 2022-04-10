@@ -37,6 +37,20 @@ class PollQuestionsController < ApplicationController
 
     respond_to do |format|
       if @poll_question.save
+
+        #create a poll graph
+        @poll_graph = @poll.poll_graphs.new
+        @poll_graph.questions = @poll_question.id.to_s
+    
+        if @poll_question.question_type == "Input"
+          @poll_graph.graph_type = "Table"
+        elsif @poll_question.question_type == "Yes No"
+          @poll_graph.graph_type = "Pie chart"
+        else
+          @poll_graph.graph_type = "Bar graph"
+        end
+        @poll_graph.save
+
         format.html { redirect_to poll_path(@poll), notice: "Poll question was successfully created." }
         format.json { render :show, status: :created, location: @poll_question }
       else
@@ -61,6 +75,7 @@ class PollQuestionsController < ApplicationController
 
   # DELETE /poll_questions/1 or /poll_questions/1.json
   def destroy
+    @poll_question.poll.poll_graphs.where("questions like ?", "%"+@poll_question.id.to_s+"%").destroy_all
     @poll_question.destroy
 
     respond_to do |format|
