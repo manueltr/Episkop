@@ -28,11 +28,12 @@
                 <p class="card-title" style="font-size: 20px;"><%=poll_graph.graph_type%></p>
                     <div class="d-flex poll_question_results justify-content-center" 
                     id="<%=poll_graph.id%>" 
-                    data-path="<%= yes_no_graph_results_url(poll_graph.questions, poll_graph.poll.id)%>" 
+                    data-path="<%= yes_no_graph_results_url(poll_graph.questions, poll_graph.poll.id, graph_type: poll_graph.graph_type)%>" 
                     data-graph-type="<%=poll_graph.graph_type%>"
                     >
                     </div>
             </div>
+            <div class="card-footer">Step forth, step back graph where each No is -1 and each Yes is +1</div>
         </div>
 
     <%else%>

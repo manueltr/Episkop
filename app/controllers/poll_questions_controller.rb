@@ -23,27 +23,39 @@ class PollQuestionsController < ApplicationController
   # GET /poll_questions/yes_no_graph
   def yesNo
 
+    @graph_type = params[:graph_type]
     questions = params[:questions].split(',').map(&:to_i)
     votes = PollQuestion.select("poll_votes.user_id, poll_answers.content, count(poll_votes.id)").joins(poll_answers: :poll_votes).where('poll_questions.id IN (?)', questions).group(["poll_votes.user_id", "poll_answers.content"]).to_sql()
     records_array = ActiveRecord::Base.connection.execute(votes)
-    results = {}
-
-    binding.pry
+    @results = {}
+    @barResults = {}
+    @domain = [-questions.length, questions.length]
 
     records_array.each do |tuple|
-      if !results.key?(tuple["user_id"])
-        results[tuple["user_id"]] = 0
+      if !@results.key?(tuple["user_id"])
+        @results[tuple["user_id"]] = 0
       end
       if tuple["content"] == "Yes"
-        results[tuple["user_id"]] += tuple["count"]
+        @results[tuple["user_id"]] += tuple["count"]
       else
-        results[tuple["user_id"]] -= tuple["count"]
+        @results[tuple["user_id"]] -= tuple["count"]
       end
     end
 
-    binding.pry
+    
+    if @graph_type == "Yes no bar graph"
+
+      (@domain[0]..@domain[1]).each do |key|
+        @barResults[key] = 0
+      end
+
+      @results.each do |key, val|
+        @barResults[val] += 1
+      end
+    end
+
     respond_to do |format|
-      format.json {render}
+      format.json {render "yes_no"}
     end 
   end
 

@@ -117,7 +117,8 @@ function BarChart(data, {
   xPadding = 0.1, // amount of x-range to reserve to separate bars
   yFormat, // a format specifier string for the y-axis
   yLabel, // a label for the y-axis
-  color = "currentColor" // bar fill color
+  color = "currentColor", // bar fill color
+  yTickSize = height / 40
 } = {}) {
   // Compute values.
   const X = d3.map(data, x);
@@ -135,7 +136,7 @@ function BarChart(data, {
   const xScale = d3.scaleBand(xDomain, xRange).padding(xPadding);
   const yScale = yType(yDomain, yRange);
   const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
-  const yAxis = d3.axisLeft(yScale).ticks(height / 40, yFormat);
+  const yAxis = d3.axisLeft(yScale).ticks(yTickSize, yFormat);
 
   // Compute titles.
   if (title === undefined) {
@@ -191,6 +192,241 @@ function BarChart(data, {
   return svg.node();
 }
 
+// Copyright 2021 Observable, Inc.
+// Released under the ISC license.
+// https://observablehq.com/@d3/mirrored-beeswarm
+function BeeswarmChart(data, {
+  value = d => d, // convience alias for x
+  label, // convenience alias for xLabel
+  domain, // convenience alias for xDomain
+  x = value, // given d in data, returns the quantitative x value
+  title = null, // given d in data, returns the title
+  radius = 3, // (fixed) radius of the circles
+  padding = 1.5, // (fixed) padding between the circles
+  marginTop = 10, // top margin, in pixels
+  marginRight = 20, // right margin, in pixels
+  marginBottom = 30, // bottom margin, in pixels
+  marginLeft = 20, // left margin, in pixels
+  width = 640, // outer width, in pixels
+  height, // outer height, in pixels
+  xLabel = label, // a label for the x-axis
+  xDomain = domain, // [xmin, xmax]
+  xRange = [marginLeft, width - marginRight] // [left, right]
+} = {}) {
+  // Compute values.
+  const X = d3.map(data, x);
+  const T = title == null ? null : d3.map(data, title);
+  
+  // Compute which data points are considered defined.
+  const I = d3.range(X.length).filter(i => !isNaN(X[i]));
+
+  // Compute default domains.
+  if (xDomain === undefined) xDomain = d3.extent(X);
+
+  // Construct scales and axes.
+  const xScale = d3.scaleLinear(xDomain, xRange);
+  const xAxis = d3.axisBottom(xScale).tickSizeOuter(0)
+                .tickValues(d3.range(xScale.domain()[0], xScale.domain()[1] + 1, 1));
+
+  // Compute the y-positions.
+  const Y = dodge(I.map(i => xScale(X[i])), radius * 2 + padding);
+
+  // Compute the default height;
+  if (height === undefined) height = (d3.max(Y, Math.abs) + radius + padding) * 2 + marginTop + marginBottom;
+
+  // Given an array of x-values and a separation radius, returns an array of y-values.
+  function dodge(X, radius) {
+    const Y = new Float64Array(X.length);
+    const radius2 = radius ** 2;
+    const epsilon = 1e-3;
+    let head = null, tail = null;
+  
+    // Returns true if circle ⟨x,y⟩ intersects with any circle in the queue.
+    function intersects(x, y) {
+      let a = head;
+      while (a) {
+        const ai = a.index;
+        if (radius2 - epsilon > (X[ai] - x) ** 2 + (Y[ai] - y) ** 2) return true;
+        a = a.next;
+      }
+      return false;
+    }
+  
+    // Place each circle sequentially.
+    for (const bi of d3.range(X.length).sort((i, j) => X[i] - X[j])) {
+  
+      // Remove circles from the queue that can’t intersect the new circle b.
+      while (head && X[head.index] < X[bi] - radius2) head = head.next;
+  
+      // Choose the minimum non-intersecting tangent.
+      if (intersects(X[bi], Y[bi] = 0)) {
+        let a = head;
+        Y[bi] = Infinity;
+        do {
+          const ai = a.index;
+          let y1 = Y[ai] + Math.sqrt(radius2 - (X[ai] - X[bi]) ** 2);
+          let y2 = Y[ai] - Math.sqrt(radius2 - (X[ai] - X[bi]) ** 2);
+          if (Math.abs(y1) < Math.abs(Y[bi]) && !intersects(X[bi], y1)) Y[bi] = y1;
+          if (Math.abs(y2) < Math.abs(Y[bi]) && !intersects(X[bi], y2)) Y[bi] = y2;
+          a = a.next;
+        } while (a);
+      }
+  
+      // Add b to the queue.
+      const b = {index: bi, next: null};
+      if (head === null) head = tail = b;
+      else tail = tail.next = b;
+    }
+  
+    return Y;
+  }
+
+  const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [0, 0, width, height])
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+  svg.append("g")
+      .attr("transform", `translate(0,${height - marginBottom})`)
+      .call(xAxis)
+      .call(g => g.append("text")
+          .attr("x", width)
+          .attr("y", marginBottom - 4)
+          .attr("fill", "currentColor")
+          .attr("text-anchor", "end")
+          .text(xLabel));
+
+  const dot = svg.append("g")
+    .selectAll("circle")
+    .data(I)
+    .join("circle")
+      .attr("cx", i => xScale(X[i]))
+      .attr("cy", i => (marginTop + height - marginBottom) / 2 + Y[i])
+      .attr("r", radius);
+
+  if (T) dot.append("title")
+      .text(i => T[i]);
+
+  return svg.node();
+}
+
+// Copyright 2021 Observable, Inc.
+// Released under the ISC license.
+// https://observablehq.com/@d3/horizontal-bar-chart
+function HorizontalBarChart(data, {
+  x = d => d, // given d in data, returns the (quantitative) x-value
+  y = (d, i) => i, // given d in data, returns the (ordinal) y-value
+  title, // given d in data, returns the title text
+  marginTop = 30, // the top margin, in pixels
+  marginRight = 0, // the right margin, in pixels
+  marginBottom = 10, // the bottom margin, in pixels
+  marginLeft = 30, // the left margin, in pixels
+  width = 640, // the outer width of the chart, in pixels
+  height, // outer height, in pixels
+  xType = d3.scaleLinear, // type of x-scale
+  xDomain, // [xmin, xmax]
+  xRange = [marginLeft, width - marginRight], // [left, right]
+  xFormat, // a format specifier string for the x-axis
+  xLabel, // a label for the x-axis
+  yPadding = 0.1, // amount of y-range to reserve to separate bars
+  yDomain, // an array of (ordinal) y-values
+  yRange, // [top, bottom]
+  color = "currentColor", // bar fill color
+  titleColor = "white", // title fill color when atop bar
+  titleAltColor = "currentColor", // title fill color when atop background
+} = {}) {
+  // Compute values.
+  const X = d3.map(data, x);
+  const Y = d3.map(data, y);
+
+  // Compute default domains, and unique the y-domain.
+  if (xDomain === undefined) xDomain = [0, d3.max(X)];
+  if (yDomain === undefined) yDomain = Y;
+  yDomain = new d3.InternSet(yDomain);
+
+  // Omit any data not present in the y-domain.
+  const I = d3.range(X.length).filter(i => yDomain.has(Y[i]));
+
+  // Compute the default height.
+  if (height === undefined) height = Math.ceil((yDomain.size + yPadding) * 25) + marginTop + marginBottom;
+  if (yRange === undefined) yRange = [marginTop, height - marginBottom];
+
+  // Construct scales and axes.
+  const xScale = xType(xDomain, xRange);
+  const yScale = d3.scaleBand(yDomain, yRange).padding(yPadding);
+  const xAxis = d3.axisTop(xScale).ticks(width / 80, xFormat);
+  const yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
+
+  // Compute titles.
+  if (title === undefined) {
+    const formatValue = xScale.tickFormat(100, xFormat);
+    title = i => `${formatValue(X[i])}`;
+  } else {
+    const O = d3.map(data, d => d);
+    const T = title;
+    title = i => T(O[i], i, data);
+  }
+
+  const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [0, 0, width, height])
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+  svg.append("g")
+      .attr("transform", `translate(0,${marginTop})`)
+      .call(xAxis)
+      .call(g => g.select(".domain").remove())
+      .call(g => g.selectAll(".tick line").clone()
+          .attr("y2", height - marginTop - marginBottom)
+          .attr("stroke-opacity", 0.1))
+      .call(g => g.append("text")
+          .attr("x", width - marginRight)
+          .attr("y", -22)
+          .attr("fill", "currentColor")
+          .attr("text-anchor", "end")
+          .text(xLabel));
+
+  svg.append("g")
+      .attr("fill", color)
+    .selectAll("rect")
+    .data(I)
+    .join("rect")
+      .attr("x", xScale(0))
+      .attr("y", i => yScale(Y[i]))
+      .attr("y", function(i) {
+        return yScale.bandwidth() > height/10 ? yScale(Y[i]) + (yScale.bandwidth()/2) - (height/20) : yScale(Y[i])
+      })
+      .attr("width", i => xScale(X[i]) - xScale(0))
+      .attr("height", function(d) {
+        return yScale.bandwidth() > height/10 ? height/10 : yScale.bandwidth();
+      })
+
+  svg.append("g")
+      .attr("fill", titleColor)
+      .attr("text-anchor", "end")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 10)
+    .selectAll("text")
+    .data(I)
+    .join("text")
+      .attr("x", i => xScale(X[i]))
+      .attr("y", i => yScale(Y[i]) + yScale.bandwidth() / 2)
+      .attr("dy", "0.35em")
+      .attr("dx", -4)
+      .text(title)
+      .call(text => text.filter(i => xScale(X[i]) - xScale(0) < 20) // short bars
+          .attr("dx", +4)
+          .attr("fill", titleAltColor)
+          .attr("text-anchor", "start"));
+
+  svg.append("g")
+      .attr("transform", `translate(${marginLeft},0)`)
+      .call(yAxis);
+
+  return svg.node();
+}
 
 // form events
 $(document).on('turbo:load', function() {
@@ -244,16 +480,13 @@ function load_graphs() {
     }
 
     $.getJSON(data_api, params, function (data) {
-    
-      data = data["data"]
 
-      // !REMOVE
-      data[0]["value"] = 10
-      console.log(data)
-
+      let domain = ""
       switch(params.graph_type) {
+
         case "Pie chart":
 
+          data = data["data"]
           $(".poll_question_results").eq(params.graph_index).append(PieChart(data,{
             name: d => d.label,
             value: d => d.value,
@@ -265,6 +498,7 @@ function load_graphs() {
 
         case "Bar graph":
 
+          data = data["data"]
           $(".poll_question_results").eq(params.graph_index).append(BarChart(data,{
             x: d => d.label,
             y: d => d.value,
@@ -276,10 +510,25 @@ function load_graphs() {
           }));
 
           break;
+        
+        case "Horizontal bar graph":
+
+          data = data["data"]
+          $(".poll_question_results").eq(params.graph_index).append(HorizontalBarChart(data,{
+            x: d => d.value,
+            y: d => d.label,
+            width: 640, 
+            height: 300,
+            yFormat: 'r',
+            color: 'steelblue',
+            yLabel: 'votes'
+          }));
+
+          break;
 
         case "Table":
-          console.log("wtf??")
-          data = ["Write short paragraphs and cover one topic per paragraph. Long paragraphs discourage users from even trying to understand your material. Short paragraphs are easier to read and understand. Writing experts recommend paragraphs of no more than 150 words in three to eight sentences.","Hello","Hello","Hello","Hello","Hello","Hello","Hello","Hello"]
+          
+          data = data["data"]
           $(".poll_question_results").eq(params.graph_index).append(`<table class="table table-striped">
                                                             <thead>
                                                               <tr>
@@ -303,6 +552,40 @@ function load_graphs() {
             let table_id = "#graph_" + params.graph_index
             $(table_id).append(table_row);
           }
+          break;
+        
+        case "Yes no beeswarm graph":
+
+          domain = data["domain"]
+          data = data["data"]
+          $(".poll_question_results").eq(params.graph_index).append(BeeswarmChart(data,{
+            x: d => d.value,
+            label: "position",
+            domain: domain,
+            width: 640, 
+            height: 300,
+            title: d => d.label
+          }));
+
+          break;
+
+        case "Yes no bar graph":
+
+          domain = data["domain"]
+          data = data["data"]
+          $(".poll_question_results").eq(params.graph_index).append(BarChart(data,{
+            x: d => d.label,
+            y: d => d.value,
+            width: 640, 
+            height: 300,
+            yFormat: 'r',
+            color: 'steelblue',
+            yLabel: 'Number of users',
+            yTickSize: 1
+          }));
+
+          break;
+
         default:
           console.log("Chart not supported")
       }
