@@ -2,11 +2,33 @@
 
 <div id="api_keys">
   <% api_keys.each do |api_key| %>
+    <% if api_key.in_req_mode %>
+
+
+
+    <a class="btn btn-dark btn-sm card-link" data-bs-toggle="collapse" data-bs-target="#my_api_request_<%= api_key.api_token %>" role="button" aria-expanded="false" aria-controls="my_api_request_<%= api_key.api_token %>">Show this Request</a>
+    <div id="my_api_request_<%= api_key.api_token %>" class="collapse">
     <hr>
     <%= render api_key %>
     <p>
       <%= link_to "Show this api key", api_key %>
     </p>
     <hr>
+    </div>
+
+    <% else %>
+
+    <a class="btn btn-dark btn-sm card-link" data-bs-toggle="collapse" data-bs-target="#my_api_request_<%= api_key.api_token %>" role="button" aria-expanded="false" aria-controls="my_api_request_<%= api_key.api_token %>">Show this Key</a>
+    <div id="my_api_request_<%= api_key.api_token %>" class="collapse">
+    <hr>
+    <%= render api_key %>
+    <p>
+      <%= link_to "Show this api key", api_key %>
+    </p>
+    <hr>
+    </div>
+
+    <% end %>
+
   <% end %>
 </div>
