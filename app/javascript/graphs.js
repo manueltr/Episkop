@@ -223,52 +223,61 @@ $(document).on('turbo:load', function() {
     while(!$("#ready").length) {
       await sleep(50);
     }
+
+    load_graphs();
+
+  });
+});
+
+
+function load_graphs() {
+
+  console.log($(".poll_question_results").length)
+
+  $(".poll_question_results").each(function (index) {
+
+    let data_api = $(this).attr("data-path");
+
+    let params = {
+      graph_index: index,
+      graph_type: $(this).attr("data-graph-type")
+    }
+
+    $.getJSON(data_api, params, function (data) {
     
-    console.log($(".poll_question_results").length)
-    $(".poll_question_results").each(function (index) {
+      data = data["data"]
 
-      let data_api = $(this).attr("data-path");
+      // !REMOVE
+      data[0]["value"] = 10
+      console.log(data)
 
-      let params = {
-        graph_index: index,
-        graph_type: $(this).attr("data-graph-type")
-      }
+      switch(params.graph_type) {
+        case "Pie chart":
 
-      $.getJSON(data_api, params, function (data) {
-      
-        data = data["data"]
+          $(".poll_question_results").eq(params.graph_index).append(PieChart(data,{
+            name: d => d.label,
+            value: d => d.value,
+            width: 640, 
+            height: 300
+          }));
 
-        // !REMOVE
-        data[0]["value"] = 10
-        console.log(data)
+          break;
 
-        if(params.graph_type != "Input") {
+        case "Bar graph":
 
-          if(params.graph_type != "Yes No") {
-            console.log("why?!")
-            $(".poll_question_results").eq(params.graph_index).append(BarChart(data,{
-              x: d => d.label,
-              y: d => d.value,
-              width: 640, 
-              height: 300,
-              yFormat: 'r',
-              color: 'steelblue',
-              yLabel: 'votes'
-            }));
+          $(".poll_question_results").eq(params.graph_index).append(BarChart(data,{
+            x: d => d.label,
+            y: d => d.value,
+            width: 640, 
+            height: 300,
+            yFormat: 'r',
+            color: 'steelblue',
+            yLabel: 'votes'
+          }));
 
-          }
-          else {
-            console.log("why??")
-            $(".poll_question_results").eq(params.graph_index).append(PieChart(data,{
-              name: d => d.label,
-              value: d => d.value,
-              width: 640, 
-              height: 300
-            }));
+          break;
 
-          }
-
-        } else {
+        case "Table":
           console.log("wtf??")
           data = ["Write short paragraphs and cover one topic per paragraph. Long paragraphs discourage users from even trying to understand your material. Short paragraphs are easier to read and understand. Writing experts recommend paragraphs of no more than 150 words in three to eight sentences.","Hello","Hello","Hello","Hello","Hello","Hello","Hello","Hello"]
           $(".poll_question_results").eq(params.graph_index).append(`<table class="table table-striped">
@@ -282,7 +291,7 @@ $(document).on('turbo:load', function() {
                                                           <tbody id="graph_` + params.graph_index + `">
                                                           </tbody>
                                                           </table>`)
-
+  
           let table_row = "";
           for(let i=0; i < data.length; i++) {
             table_row = `<tr>
@@ -290,15 +299,13 @@ $(document).on('turbo:load', function() {
                           <td></td>
                           <td>`+data[i]+`</td>
                         </tr>`
-
+  
             let table_id = "#graph_" + params.graph_index
             $(table_id).append(table_row);
           }
-        }
-      
-      });
+        default:
+          console.log("Chart not supported")
+      }
     });
-
-
   });
-});
+}

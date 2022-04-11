@@ -15,9 +15,35 @@ class PollQuestionsController < ApplicationController
   end
 
   def results
-
     respond_to do |format|
       format.json {render :results}
+    end 
+  end
+
+  # GET /poll_questions/yes_no_graph
+  def yesNo
+
+    questions = params[:questions].split(',').map(&:to_i)
+    votes = PollQuestion.select("poll_votes.user_id, poll_answers.content, count(poll_votes.id)").joins(poll_answers: :poll_votes).where('poll_questions.id IN (?)', questions).group(["poll_votes.user_id", "poll_answers.content"]).to_sql()
+    records_array = ActiveRecord::Base.connection.execute(votes)
+    results = {}
+
+    binding.pry
+
+    records_array.each do |tuple|
+      if !results.key?(tuple["user_id"])
+        results[tuple["user_id"]] = 0
+      end
+      if tuple["content"] == "Yes"
+        results[tuple["user_id"]] += tuple["count"]
+      else
+        results[tuple["user_id"]] -= tuple["count"]
+      end
+    end
+
+    binding.pry
+    respond_to do |format|
+      format.json {render}
     end 
   end
 

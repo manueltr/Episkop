@@ -1,5 +1,6 @@
 
-json.question_type == poll_question.question_type
+json.question_type poll_question.question_type
+
 if poll_question.question_type == "Input"
     json.data poll_question.get_graph_data
 else

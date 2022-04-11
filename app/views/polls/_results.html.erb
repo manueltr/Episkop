@@ -18,7 +18,7 @@
       else
         poll_question = nil
       end %>
-      <%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, questions: questions, votes: @poll.poll_votes.length}%>
+      <%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, poll_graph: poll_graph, votes: @poll.poll_votes.length}%>
 
   <% end %>
 
