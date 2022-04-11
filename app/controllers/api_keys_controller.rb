@@ -48,7 +48,7 @@ class ApiKeysController < ApplicationController
   def update
     respond_to do |format|
       if @api_key.update(api_key_params)
-        format.html { redirect_to api_key_url(@api_key), notice: "Api key was successfully updated." }
+        format.html { redirect_to settings_path, notice: "Api key was successfully updated." }
         format.json { render :show, status: :ok, location: @api_key }
       else
         format.html { render :edit, status: :unprocessable_entity }
