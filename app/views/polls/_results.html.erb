@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div class="card mt-3">
+  <div class="card mt-3 mb-5">
         <div class="card-header" style="background: #212529;"></div>
         <div class="card-body">
             <h1 class="card-title">Responses</h1>
@@ -8,19 +8,21 @@
         </div>
   </div>
 
-  <% @poll_graphs.each do |poll_graph| %>
+  <div id="poll_graphs">
+    <% @poll_graphs.each do |poll_graph| %>
 
-      <%questions = poll_graph.questions.split(',')%>
-      
+        <%questions = poll_graph.questions.split(',').map(&:to_i)%>
+        <%question_titles = PollQuestion.find(questions).pluck("content")%>
+        
+        <%if questions.length == 1
+          poll_question = PollQuestion.find(questions[0]) 
+        else
+          poll_question = nil
+        end %>
+        <%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, poll_graph: poll_graph, votes: @poll.poll_votes.length, question_titles: question_titles}%>
 
-      <%if questions.length == 1
-        poll_question = PollQuestion.find(questions[0]) 
-      else
-        poll_question = nil
-      end %>
-      <%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, poll_graph: poll_graph, votes: @poll.poll_votes.length}%>
-
-  <% end %>
+    <% end %>
+  </div>
 
   
 
@@ -34,13 +36,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="<%=graphs_create_url(@poll.id)%>.js" data-remote="true" method="post">
+        <form id="addGraphForm" action="<%=graphs_create_url(@poll.id)%>.js" data-remote="true" method="post">
           <div class="modal-body">
             <%= render partial: "poll_graphs/add_graph_form", locals: { poll_questions: @poll_questions }%>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Create graph</button>
+            <button id="create_graph_submit" type="submit" class="btn btn-primary">Create graph</button>
           </div>
         </form>
       </div>

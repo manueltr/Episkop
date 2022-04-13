@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   #PollGraphs
   post '/poll_graphs/:id', to: 'poll_graphs#create', as: 'graphs_create'
+  delete '/poll_graphs/:id', to: 'poll_graphs#destroy', as: 'graphs_delete'
   
 
 

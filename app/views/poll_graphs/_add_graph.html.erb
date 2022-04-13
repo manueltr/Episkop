@@ -1,0 +1,11 @@
+
+
+<%questions = @graph.questions.split(',').map(&:to_i)%>
+<%question_titles = PollQuestion.find(questions).pluck("content")%>
+
+<%if questions.length == 1
+    poll_question = PollQuestion.find(questions[0]) 
+else
+    poll_question = nil
+end %>
+<%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, poll_graph: @graph, votes: @poll.poll_votes.length, question_titles: question_titles}%>

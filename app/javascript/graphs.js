@@ -35,6 +35,7 @@ function PieChart(data, {
   names = new d3.InternSet(names);
 
   // Chose a default color scheme based on cardinality.
+  if (colors == undefined && names.size == 1) colors = ["steelblue"]
   if (colors === undefined) colors = d3.schemeSpectral[names.size];
   if (colors === undefined) colors = d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), names.size);
 
@@ -428,25 +429,43 @@ function HorizontalBarChart(data, {
   return svg.node();
 }
 
-// form events
 $(document).on('turbo:load', function() {
 
 
+  // show valid questions on form
   $(document).on('change', '#graph-type-select', function() {
 
     var target = this.value
 
     $(".form_questions_option").addClass("form_hide")
+    $(".form_questions_option").find('input').removeAttr('required')
   
     if(target == "Table") {
       $("#input_options").removeClass("form_hide")
+      $("#input_options").find('input').prop('required', true)
     }
     else if (target == "Yes no beeswarm graph" || target == "Yes no bar graph") {
       $("#yes_no_options").removeClass("form_hide")
+      $("#yes_no_options").find('input').prop('required', true)
     }
     else {
       $("#multi_yes_no_options").removeClass("form_hide")
+      $("#multi_yes_no_options").find('input').prop('required', true)
     }
+  });
+
+  // delete graphs
+  $(document).on('click', '.graph-delete', function(e) {
+    let delete_path = $(this).attr("data-delete") + ".js";
+    let element = $(this)
+
+    $.ajax({
+      type: "DELETE",
+      url: delete_path
+    })
+      .done(function() {
+        element.parent().parent().remove()
+      });   
   });
 });
 
@@ -461,14 +480,26 @@ $(document).on('turbo:load', function() {
     }
 
     load_graphs();
-
   });
+
+  // Poll graph adding
+  $("#main_view").on('submit', "#addGraphForm", async function(e) {
+
+    console.log("hello?");
+    e.preventDefault();
+    $('#addGraphModal').modal('toggle');
+
+    await sleep(50);
+    while(!$("#ready").length) {
+      await sleep(50);
+    }
+    load_graphs();
+  });
+
 });
 
 
 function load_graphs() {
-
-  console.log($(".poll_question_results").length)
 
   $(".poll_question_results").each(function (index) {
 
@@ -482,12 +513,13 @@ function load_graphs() {
     $.getJSON(data_api, params, function (data) {
 
       let domain = ""
+      $(".poll_question_results").eq(params.graph_index).children('svg, table').remove();
       switch(params.graph_type) {
 
         case "Pie chart":
 
           data = data["data"]
-          $(".poll_question_results").eq(params.graph_index).append(PieChart(data,{
+          $(".poll_question_results").eq(params.graph_index).prepend(PieChart(data,{
             name: d => d.label,
             value: d => d.value,
             width: 640, 
@@ -499,7 +531,7 @@ function load_graphs() {
         case "Bar graph":
 
           data = data["data"]
-          $(".poll_question_results").eq(params.graph_index).append(BarChart(data,{
+          $(".poll_question_results").eq(params.graph_index).prepend(BarChart(data,{
             x: d => d.label,
             y: d => d.value,
             width: 640, 
@@ -514,7 +546,7 @@ function load_graphs() {
         case "Horizontal bar graph":
 
           data = data["data"]
-          $(".poll_question_results").eq(params.graph_index).append(HorizontalBarChart(data,{
+          $(".poll_question_results").eq(params.graph_index).prepend(HorizontalBarChart(data,{
             x: d => d.value,
             y: d => d.label,
             width: 640, 
@@ -529,7 +561,7 @@ function load_graphs() {
         case "Table":
           
           data = data["data"]
-          $(".poll_question_results").eq(params.graph_index).append(`<table class="table table-striped">
+          $(".poll_question_results").eq(params.graph_index).prepend(`<table class="table table-striped">
                                                             <thead>
                                                               <tr>
                                                                 <th scope="col">#</th>
@@ -558,7 +590,7 @@ function load_graphs() {
 
           domain = data["domain"]
           data = data["data"]
-          $(".poll_question_results").eq(params.graph_index).append(BeeswarmChart(data,{
+          $(".poll_question_results").eq(params.graph_index).prepend(BeeswarmChart(data,{
             x: d => d.value,
             label: "position",
             domain: domain,
@@ -573,7 +605,7 @@ function load_graphs() {
 
           domain = data["domain"]
           data = data["data"]
-          $(".poll_question_results").eq(params.graph_index).append(BarChart(data,{
+          $(".poll_question_results").eq(params.graph_index).prepend(BarChart(data,{
             x: d => d.label,
             y: d => d.value,
             width: 640, 

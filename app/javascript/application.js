@@ -15,11 +15,6 @@ const axios = require('axios').default;
 // Directory features
 $(document).on('turbo:load', function() {
 
-    $("body").on("dblclick", function (e) {
-        console.log("why not");
-        console.log("but yes"); 
-    });
-
     $("#directory").on("mousedown", ".poll", function(e) {
         if(e.detail > 1) {
             e.preventDefault();
@@ -140,13 +135,14 @@ $(document).on('turbo:load', function() {
     });
 
 
-    $("#poll_questions").on('click', "a.show_answers > i", function(e) {
+    $(document).on('click', "a.show_answers", function(e) {
         
-        if($(this).hasClass('fa-minus')) {
-            $(this).removeClass('fa-minus').addClass('fa-plus')
+        if($(this).children().first().hasClass('fa-minus')) {
+            $(this).children().first().removeClass('fa-minus').addClass('fa-plus')
         }
         else {
-            $(this).removeClass('fa-plus').addClass('fa-minus')
+            $(this).children().first().removeClass('fa-plus').addClass('fa-minus')
         }
     });
+
 });
