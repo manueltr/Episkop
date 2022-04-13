@@ -1,0 +1,83 @@
+<!-- start body -->
+<div class="container">
+
+<div class="row">
+
+    <div class="col ps-0">
+        <h2 class="mt-4"> Settings </h2>
+    </div>
+
+    <% if @user.admin %>
+    <div class="col ps-0">
+        <h2 class="mt-4"> Pending Requests </h2>
+    </div>
+    <% end %>
+
+    <div class="col ps-0">
+        <h2 class="mt-4"> API Keys </h2>
+    </div>
+    
+</div>
+
+<div class="h-75 row">
+
+    <div id="general_settings" class="col">
+        <p> This is where we will put site-wide settings options </p>
+        <hr>
+        <button> Dark Mode </button>
+    </div>
+
+    <div class="col-1"></div>
+
+    <% if @user.admin %>
+    <div id="api_requests" class="col">
+        <p> This is where admins will see api key requests </p>
+        <hr>
+        
+            <p> User Status: Admin</p>
+            <%= render partial: "api_keys/requested_keys", locals: {requested_api_keys: @requested_api_keys} %>
+    
+    </div>
+    <% end %>
+
+    <div class="col-1"></div>
+
+    <div id="my_keys" class="col">
+        <p> This is where we list API keys for the current user </p>
+        <br> <hr>
+        <br> If the Accepted field is empty, your request for an API key is still under review by our admins...
+        <br><br> Otherwise:
+        <br> true=accepted, false=rejected
+        <br> <hr> <br>
+
+        <%= render partial: "api_keys/mykeys", locals: {api_keys: @api_keys} %>
+    </div>
+
+</div>
+
+<br>
+
+<div class="h-75 row">
+
+    <div id="api_keys" class="col">
+    
+        <h2 class="mt-4"> API Requests </h2>
+
+        <div id="api_keys_container" class="container">
+            <p> This is where a user can request a new key </p>
+
+            <div class="container">
+                <p style="color: green"><%= notice %></p>
+            </div>
+
+            <div id="request_key" class="container">
+                <a class="new_key_btn" href="<%= new_api_key_path %>" data-remote="true">Request an API Key</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<!-- end body -->
