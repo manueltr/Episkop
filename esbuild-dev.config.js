@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
 
 const path = require('path')
 const chokidar = require('chokidar')
@@ -19,7 +26,7 @@ http.createServer((req, res) => {
 
 async function builder() {
   let result = await require("esbuild").build({
-    entryPoints: ["application.js"],
+    entryPoints: ["application.js", "graphs.js"],
     bundle: true,
     outdir: path.join(process.cwd(), "app/assets/builds"),
     absWorkingDir: path.join(process.cwd(), "app/javascript"),
@@ -28,9 +35,12 @@ async function builder() {
       js: ' (() => new EventSource("http://localhost:8082").onmessage = () => location.reload())();',
     },
   })
-  chokidar.watch(["./app/javascript/**/*.js", "./app/views/**/*.html.erb", "./app/assets/stylesheets/*.css"]).on('all', (event, path) => {
+  chokidar.watch(["./app/javascript/**/*.js", "./app/views/**/*.html.erb", "./app/assets/stylesheets/**/*.css"]).on('all', (event, path) => {
     if (path.includes("javascript")) {
       result.rebuild()
+    }
+    if (path.includes("stylesheets")) {
+      sleep(500)
     }
     clients.forEach((res) => res.write('data: update\n\n'))
     clients.length = 0

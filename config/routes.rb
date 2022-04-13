@@ -22,8 +22,15 @@ Rails.application.routes.draw do
 
   #FormVoting
   get '/polls/:invite_token/form', to: 'polls#form', as: 'form'
+  get '/polls/:invite_token/results', to: 'polls#results', as: 'results'
   post '/polls/:invite_token/submit', to: 'poll_votes#submit', as: 'poll_submit'
   get '/polls/:invite_token/qr_code', to: 'poll_votes#qr', as: 'form_qr'
+  
+  #PollQuestionResults
+  get '/poll_questions/:id/results', to: 'poll_questions#results', as: 'poll_question_results'
+
+  #PollGraphs
+  post '/poll_graphs/:id', to: 'poll_graphs#create', as: 'graphs_create'
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

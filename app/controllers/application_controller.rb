@@ -16,8 +16,12 @@ class ApplicationController < ActionController::Base
 
     private
     def require_login
-      user = session[:user_id]
-      if user == nil
+      user_id = session[:user_id]
+
+      #check for api key
+      api_key = request.headers["Api-Key"]
+
+      if user_id == nil && api_key == nil
         flash[:alert] = "You must be logged in to access this section"
         redirect_to root_path
       end

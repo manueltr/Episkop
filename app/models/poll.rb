@@ -5,6 +5,7 @@ class Poll < ApplicationRecord
     has_many :poll_questions, dependent: :destroy
     has_many :poll_answers, dependent: :destroy
     has_many :poll_votes, dependent: :destroy
+    has_many :poll_graphs, dependent: :destroy
     has_secure_token :invite_token
 
     #validations
