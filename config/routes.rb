@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   #Directory
   get '/application/directory', to: 'application#directory', as: 'directory_home'
+  get '/application/directory/back', to: 'application#directory_back', as: 'directory_back'
 
   #FormVoting
   get '/polls/:invite_token/form', to: 'polls#form', as: 'form'
@@ -29,9 +30,12 @@ Rails.application.routes.draw do
   
   #PollQuestionResults
   get '/poll_questions/:id/results', to: 'poll_questions#results', as: 'poll_question_results'
+  get '/poll_questions/:questions/:poll_id/yes_no/results', to: 'poll_questions#yesNo', as: 'yes_no_graph_results'
 
   #PollGraphs
   post '/poll_graphs/:id', to: 'poll_graphs#create', as: 'graphs_create'
+  delete '/poll_graphs/:id', to: 'poll_graphs#destroy', as: 'graphs_delete'
+  
 
 
   # API routes

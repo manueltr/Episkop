@@ -15,9 +15,47 @@ class PollQuestionsController < ApplicationController
   end
 
   def results
-
     respond_to do |format|
       format.json {render :results}
+    end 
+  end
+
+  # GET /poll_questions/yes_no_graph
+  def yesNo
+
+    @graph_type = params[:graph_type]
+    questions = params[:questions].split(',').map(&:to_i)
+    votes = PollQuestion.select("poll_votes.user_id, poll_answers.content, count(poll_votes.id)").joins(poll_answers: :poll_votes).where('poll_questions.id IN (?)', questions).group(["poll_votes.user_id", "poll_answers.content"]).to_sql()
+    records_array = ActiveRecord::Base.connection.execute(votes)
+    @results = {}
+    @barResults = {}
+    @domain = [-questions.length, questions.length]
+
+    records_array.each do |tuple|
+      if !@results.key?(tuple["user_id"])
+        @results[tuple["user_id"]] = 0
+      end
+      if tuple["content"] == "Yes"
+        @results[tuple["user_id"]] += tuple["count"]
+      else
+        @results[tuple["user_id"]] -= tuple["count"]
+      end
+    end
+
+    
+    if @graph_type == "Yes no bar graph"
+
+      (@domain[0]..@domain[1]).each do |key|
+        @barResults[key] = 0
+      end
+
+      @results.each do |key, val|
+        @barResults[val] += 1
+      end
+    end
+
+    respond_to do |format|
+      format.json {render "yes_no"}
     end 
   end
 
@@ -37,6 +75,20 @@ class PollQuestionsController < ApplicationController
 
     respond_to do |format|
       if @poll_question.save
+
+        #create a poll graph
+        @poll_graph = @poll.poll_graphs.new
+        @poll_graph.questions = @poll_question.id.to_s
+    
+        if @poll_question.question_type == "Input"
+          @poll_graph.graph_type = "Table"
+        elsif @poll_question.question_type == "Yes No"
+          @poll_graph.graph_type = "Pie chart"
+        else
+          @poll_graph.graph_type = "Bar graph"
+        end
+        @poll_graph.save
+
         format.html { redirect_to poll_path(@poll), notice: "Poll question was successfully created." }
         format.json { render :show, status: :created, location: @poll_question }
       else
@@ -61,6 +113,7 @@ class PollQuestionsController < ApplicationController
 
   # DELETE /poll_questions/1 or /poll_questions/1.json
   def destroy
+    @poll_question.poll.poll_graphs.where("questions like ?", "%"+@poll_question.id.to_s+"%").destroy_all
     @poll_question.destroy
 
     respond_to do |format|

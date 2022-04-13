@@ -3,12 +3,32 @@ html {
 }
 
 body
-	{
+	{	
+		background-color: #f5f5f5;
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 300;
 		height: 100%;
 		overflow-x: hidden; /* prevent horizontal scrollbar from appearing */
 	}
+
+.nav-tabs {
+	border-color: black;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #f5f5f5;
+    border-color: black black #f5f5f5;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+	border-color: black black #f5f5f5;
+	isolation: isolate;
+}
+
+.card-header {
+	background-color: white;
+}
 
 /* start nagivation */
 .navbar-default
@@ -56,13 +76,14 @@ body
 /* end navigation */
 
 #directory {
-	background: rgb(236, 236, 236);
+	background: white;
+	border-radius: 0px 0px 20px 20px;
+	overflow: scroll;
 }
 #participated_polls {
-	background: rgb(236, 236, 236);
-}
-#poll_questions {
-	background: rgb(255, 255, 255);
+	background: white;
+	border-radius: 0px 0px 20px 20px;
+	overflow: scroll;
 }
 #general_settings {
 	background: rgb(236, 236, 236);
@@ -84,4 +105,17 @@ body
 
 	margin-top: 50px;
 
+}
+
+/* graphs */
+
+.graph-delete:hover{
+	cursor: pointer;
+}
+
+.grabbable {
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
 }

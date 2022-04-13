@@ -63,13 +63,34 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def directory_back
+      @user = User.find(session[:user_id])
+
+      @directory = @user.directories.where(id: session[:directory])[0]
+      @directory = @directory.parent
+
+      if @directory == nil
+        @directory = @user.directories.where(name: "root")[0]
+      end
+
+      @children = @directory.children
+      @polls = @directory.polls 
+
+      session[:directory] = @directory.id
+
+      respond_to do |format|
+        format.js {render 'application/directory'}
+      end
+
+    end
+
+
     def settings
       @user = User.find(session[:user_id])
       @api_keys = @user.api_keys
       @requested_api_keys = ApiKey.where(in_req_mode: true)
       render layout: "poll"
       # render "settings"
-
     end
 
 end

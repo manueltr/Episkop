@@ -1,6 +1,15 @@
 $("#directories").html("")
 $("#polls").html("")
 
+<% if @directory.name == "root" %>
+    $("#directory-back").hide()
+    $("#current_dir").html("Home")
+<% else %>
+    $("#directory-back").show()
+    $("#current_dir").html("<%=@directory.name%>")
+<%end%>
+
+
 <% if @children %>
 $("#directories").html("<%= escape_javascript(render partial: "directories/show_directories", locals: {children: @children}) %>");
 <% end %>

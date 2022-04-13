@@ -12,11 +12,17 @@
     <% @poll_questions.each do |poll_question| %>
     <%= render poll_question %>
     <% end %>
-    <%= button_to "Add a question", new_poll_poll_question_path(@poll), method: :get%>
   </div>
 </div>
+
+
+<div class="container">
+  <button type="button" id="new_question_btn">Add a Question</button>
+  <%= button_to "Destroy this poll", @poll, method: :delete %>
+</div>
+
+
 <div class="container">
   <%= link_to "Edit this poll", edit_poll_path(@poll) %> |
-  <%= link_to "Back to polls", logged_in_path %>
   <%= button_to "Destroy this poll", @poll, method: :delete %>
 </div>

@@ -17,8 +17,8 @@ class PollGraphsController < ApplicationController
 
 
       
-      if @graph.graph_type == "Input"
-        @graph.questions = params[:input]
+      if @graph.graph_type == "Table"
+        @graph.questions = params[:input].to_s
       elsif @graph.graph_type == "Yes no beeswarm graph" || @graph.graph_type == "Yes no bar graph"
         @graph.questions = question_ids.join(',')
       else
@@ -27,7 +27,9 @@ class PollGraphsController < ApplicationController
       
       respond_to do |format|
         if @graph.save
-          flash[:notice] = "Poll was successfully created."
+
+          @poll_questions = @poll.poll_questions
+          
           format.html { redirect_to "/homepage" }
           format.js
           format.json { render :show, status: :created, location: @poll }
@@ -40,12 +42,15 @@ class PollGraphsController < ApplicationController
   
     # DELETE /polls/1 or /polls/1.json
     def destroy
-      @poll.destroy
+
+      @graph = PollGraph.find(params[:id])
+      @graph.destroy
   
       respond_to do |format|
-        format.html { redirect_to "/homepage", notice: "Poll was successfully destroyed." }
+        format.js { render json: nil, status: :ok }
         format.json { head :no_content }
       end
+
     end
   
   
