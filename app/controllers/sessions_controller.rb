@@ -25,6 +25,7 @@ class SessionsController < ApplicationController
         u.firstname = data[:info][:first_name]
         u.email = data[:info][:email]
         u.photo = data[:info][:image]
+        u.admin = false
         # UserMailer.welcome_new_user_email(u).deliver_now
       end
       user.directories.create(name: "root", parent_id: nil)

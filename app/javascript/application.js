@@ -138,6 +138,14 @@ $(document).on('turbo:load', function() {
     $(".new_answer_btn").on('click', function(e) {
             $(this).hide();
     });
+});
+
+
+// API Key adding
+$(document).on('turbo:load', function() {
+    $(".new_key_btn").on('click', function(e) {
+            $(this).hide();
+    });
 
 
     $(document).on('click', "a.show_answers", function(e) {

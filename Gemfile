@@ -97,4 +97,5 @@ gem 'omniauth-rails_csrf_protection'
 gem 'pry'
 gem "rqrcode", "~> 2.0"
 
-# Fonts
+# API
+gem 'active_model_serializers', '~> 0.10.13'

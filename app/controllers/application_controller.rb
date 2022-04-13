@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
       if user_id == nil && api_key == nil
         flash[:alert] = "You must be logged in to access this section"
-        redirect_to root_path
+        redirect_to "/auth/google_oauth2"
       end
     end
 
@@ -81,6 +81,16 @@ class ApplicationController < ActionController::Base
       respond_to do |format|
         format.js {render 'application/directory'}
       end
+
+    end
+
+
+    def settings
+      @user = User.find(session[:user_id])
+      @api_keys = @user.api_keys
+      @requested_api_keys = ApiKey.where(in_req_mode: true)
+      render layout: "poll"
+      # render "settings"
     end
 
 end
