@@ -480,6 +480,18 @@ $(document).on('turbo:load', function() {
     $("#ready").remove();
 
     load_graphs();
+
+    // !Temperory testing!
+    let i = 0;
+    while($("#poll_graphs").length) {
+      
+      if( i % 10 == 0 ){
+        load_graphs();
+      }
+      await sleep(1000)
+      i += 1;
+    
+    }
   });
 
   // Poll graph adding
