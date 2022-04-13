@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_000637) do
+ActiveRecord::Schema.define(version: 2022_04_10_023351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2022_04_08_000637) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["poll_id"], name: "index_poll_answers_on_poll_id"
     t.index ["poll_question_id"], name: "index_poll_answers_on_poll_question_id"
+  end
+
+  create_table "poll_graphs", force: :cascade do |t|
+    t.bigint "poll_id"
+    t.string "graph_type"
+    t.string "questions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["poll_id"], name: "index_poll_graphs_on_poll_id"
   end
 
   create_table "poll_questions", force: :cascade do |t|

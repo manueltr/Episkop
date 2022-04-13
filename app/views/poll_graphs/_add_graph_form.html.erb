@@ -1,0 +1,22 @@
+  <div class="mb-3">
+    <label for="graph-type-select" class="form-label">Email address</label>
+    <select class="form-select" name="graph_type" id="graph-type-select">
+        <option value="Pie chart"selected>Pie chart</option>
+        <option value="Bar graph">Bar graph</option>
+        <option value="Horizontal bar graph">Horizontal bar graph</option>
+        <option value="Table">Table</option>
+        <option value="Yes no beeswarm graph">Yes no beeswarm graph</option>
+        <option value="Yes no bar graph">Yes no bar graph</option>
+    </select>
+  </div>
+  <div class="mb-3">Valid questions for graph type:</div>
+  <div class="mb-3 form_hide form_questions_option" id="yes_no_options">
+    <%= render partial: "poll_graphs/add_question_form", locals: {poll_questions: poll_questions, form_type: "yes no"}%>
+  </div>
+  <div class="mb-3 form_questions_option" id="multi_yes_no_options">
+    <%= render partial: "poll_graphs/add_question_form", locals: {poll_questions: poll_questions, form_type: "multi and yes no"}%>
+  </div>
+   <div class="mb-3 form_hide form_questions_option" id="input_options">
+    <%= render partial: "poll_graphs/add_question_form", locals: {poll_questions: poll_questions, form_type: "input"}%>
+  </div>
+

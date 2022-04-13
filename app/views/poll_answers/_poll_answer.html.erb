@@ -1,10 +1,15 @@
-<div id="<%= dom_id poll_answer %>">
-  <p>
-    <strong>Answer choice:</strong>
-    <%= poll_answer.content %> 
+<div id="<%= dom_id poll_answer %>" class="poll_answers_edit mt-1">
+  <div class="row">
+    <div class="col-10">
+      <%= poll_answer.content %>
+    </div>
+    <div class="col"> 
     <%if poll_answer.poll_question.question_type == "Multiple Choice"%>
-      <%= button_to "delete", poll_answer, :method => "delete", :class => "btn btn-primary btn-sm"%> 
+      <%= button_to poll_answer, :method => "delete", class: "float-end" do %>
+        <i class="fa-solid fa-xmark"></i>
+      <% end %> 
     <%end%>
-  </p>
+    </div>
+  </div>
 
 </div>

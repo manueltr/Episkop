@@ -1,3 +1,5 @@
+require 'json'
+
 class PollQuestion < ApplicationRecord
 
     #associations
@@ -22,6 +24,21 @@ class PollQuestion < ApplicationRecord
             @question_answer.content = "No"
             @question_answer.save
         end
+    end
+
+    def get_graph_data
+        if self.question_type == "Input"
+            data = []
+            self.poll_votes.each do |vote|
+                data.append(vote.response)
+            end
+        else
+           data = {}
+           self.poll_answers.each do |answer|
+            data[answer.content] = answer.poll_votes.count
+           end
+       end
+       return data
     end
             
 end

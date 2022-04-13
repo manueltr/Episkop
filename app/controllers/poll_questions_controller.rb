@@ -1,5 +1,5 @@
 class PollQuestionsController < ApplicationController
-  before_action :set_poll_question, only: %i[ show edit update destroy ]
+  before_action :set_poll_question, only: %i[ results show edit update destroy ]
   before_action :set_poll
   before_action :check_user, only: %i[ show edit update destroy ]
 
@@ -12,6 +12,13 @@ class PollQuestionsController < ApplicationController
 
   # GET /poll_questions/1 or /poll_questions/1.json
   def show
+  end
+
+  def results
+
+    respond_to do |format|
+      format.json {render :results}
+    end 
   end
 
   # GET /poll_questions/new

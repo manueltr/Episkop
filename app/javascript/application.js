@@ -7,6 +7,7 @@ import "./theme/jquery.singlePageNav.min"
 import * as bootstrap from "bootstrap"
 import "./theme/custom"
 import "./utils/test"
+import "./poll/main"
 import "jquery-ujs"
 
 const axios = require('axios').default;
@@ -16,7 +17,7 @@ $(document).on('turbo:load', function() {
 
     $("body").on("dblclick", function (e) {
         console.log("why not");
-
+        console.log("but yes"); 
     });
 
     $("#directory").on("mousedown", ".poll", function(e) {
@@ -144,5 +145,16 @@ $(document).on('turbo:load', function() {
 $(document).on('turbo:load', function() {
     $(".new_key_btn").on('click', function(e) {
             $(this).hide();
+    });
+
+
+    $("#poll_questions").on('click', "a.show_answers > i", function(e) {
+        
+        if($(this).hasClass('fa-minus')) {
+            $(this).removeClass('fa-minus').addClass('fa-plus')
+        }
+        else {
+            $(this).removeClass('fa-plus').addClass('fa-minus')
+        }
     });
 });
