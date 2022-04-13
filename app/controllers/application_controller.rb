@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
       user = session[:user_id]
       if user == nil
         flash[:alert] = "You must be logged in to access this section"
-        redirect_to root_path
+        redirect_to "/auth/google_oauth2"
       end
     end
 
