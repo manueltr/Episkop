@@ -33,6 +33,11 @@ $(document).on('turbo:load', function() {
 
 
     // directory functionality
+    let dirName = $("#current_dir").text().trim();
+    if(dirName == "Home") {
+        $("#directory-back").hide();
+    }
+
 
     $('#directories').on('contextmenu', function(e) {
         var top = e.pageY - 10;

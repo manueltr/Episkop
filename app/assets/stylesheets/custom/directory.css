@@ -21,3 +21,25 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+#current_dir {
+    color: white;
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.fa-arrow-left {
+    color: white;
+    font-size: 26px;
+    margin-right: 10px;
+    font-weight: bolder;
+}
+
+#directory-back > a{
+    text-decoration: none;
+    color: white;
+}
+
+#directory-back:hover {
+    cursor: pointer;
+}

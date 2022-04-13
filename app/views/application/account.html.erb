@@ -26,10 +26,12 @@
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 py-2">
                     <div class="container-fluid p-0 px-2">
                     <i><%= link_to "", directory_home_path(), remote: true, class: "navbar-brand fa-solid fa-house" %></i>
+                    <i class="mt-1" id="directory-back"><%= link_to "", directory_back_path(), remote: true, class: "fa-solid fa-arrow-left" %></i>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarColor01">
+                        <p class="mb-0 me-3" id="current_dir"><%if @directory.name == "root" %>Home <%else%> <%=@directory.name%> <%end%></p>
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                             <%# <button class="btn btn-outline-light" type="submit">Search</button> %>

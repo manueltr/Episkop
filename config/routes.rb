@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   #Directory
   get '/application/directory', to: 'application#directory', as: 'directory_home'
+  get '/application/directory/back', to: 'application#directory_back', as: 'directory_back'
 
   #FormVoting
   get '/polls/:invite_token/form', to: 'polls#form', as: 'form'

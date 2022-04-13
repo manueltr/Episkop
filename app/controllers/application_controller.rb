@@ -63,4 +63,24 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def directory_back
+      @user = User.find(session[:user_id])
+
+      @directory = @user.directories.where(id: session[:directory])[0]
+      @directory = @directory.parent
+
+      if @directory == nil
+        @directory = @user.directories.where(name: "root")[0]
+      end
+
+      @children = @directory.children
+      @polls = @directory.polls 
+
+      session[:directory] = @directory.id
+
+      respond_to do |format|
+        format.js {render 'application/directory'}
+      end
+    end
+
 end
