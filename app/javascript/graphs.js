@@ -474,10 +474,10 @@ $(document).on('turbo:load', function() {
 
   $("#show_graphs").on('click', async function () {
     
-    await sleep(50);
     while(!$("#ready").length) {
       await sleep(50);
     }
+    $("#ready").remove();
 
     load_graphs();
   });
@@ -489,10 +489,11 @@ $(document).on('turbo:load', function() {
     e.preventDefault();
     $('#addGraphModal').modal('toggle');
 
-    await sleep(50);
     while(!$("#ready").length) {
       await sleep(50);
     }
+    $("#ready").remove();
+
     load_graphs();
   });
 
