@@ -2,7 +2,7 @@
 
     <%if votes != 0%>   
         <div class="card mt-3">
-            <div class="d-flex card-header justify-content-between"><i></i><i class="fa-solid fa-grip-lines"></i><i data-delete="<%=graphs_delete_url(poll_graph.id)%>" class="graph-delete fa-solid fa-xmark"></i></div>
+            <div class="d-flex card-header justify-content-between"><i></i><i class="grabbable fa-solid fa-grip-lines"></i><i data-delete="<%=graphs_delete_url(poll_graph.id)%>" class="graph-delete fa-solid fa-xmark"></i></div>
             <div class="card-body">
                 <p class="card-title" style="font-size: 20px;"><%=poll_question.content%></p>
                     <div class="d-flex poll_question_results justify-content-center" 
