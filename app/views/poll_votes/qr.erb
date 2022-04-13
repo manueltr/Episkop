@@ -1,3 +1,20 @@
 <div class = "container qr" >
-    <%= raw @svg.html_safe %>
+
+    <div class="card mt-2 mb-3">
+        <div class="card-header" style="background: #212529;"></div>
+        <div class="card-body">
+            <h1 class="card-title"><%= @poll.title %></h5>
+            <p class="card-text"><%= @poll.summary %></p>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <div class="container">
+            <div class="row">
+                <h5>Scan to go to poll form!</h5>
+            </div>
+            <div class="row">
+                <%= raw @svg.html_safe %>
+            </div>
+        </div>
+    </div>
 </div>
