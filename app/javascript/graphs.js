@@ -456,6 +456,7 @@ $(document).on('turbo:load', function() {
 
   // delete graphs
   $(document).on('click', '.graph-delete', function(e) {
+  
     let delete_path = $(this).attr("data-delete") + ".js";
     let element = $(this)
 
@@ -497,7 +498,6 @@ $(document).on('turbo:load', function() {
   // Poll graph adding
   $("#main_view").on('submit', "#addGraphForm", async function(e) {
 
-    console.log("hello?");
     e.preventDefault();
     $('#addGraphModal').modal('toggle');
 

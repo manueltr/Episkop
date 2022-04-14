@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
       api_key = request.headers["Api-Key"]
 
       if user_id == nil && api_key == nil
-        flash[:alert] = "You must be logged in to access this section"
+        session[:store_location] = request.fullpath
         redirect_to "/auth/google_oauth2"
       end
     end
