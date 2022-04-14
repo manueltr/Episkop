@@ -87,6 +87,10 @@ class ApplicationController < ActionController::Base
 
     def settings
       @user = User.find(session[:user_id])
+      @profile_picture = @user.photo
+      @name = @user.username
+      @settings = true
+
       @api_keys = @user.api_keys
       @requested_api_keys = ApiKey.where(in_req_mode: true)
       render layout: "poll"
