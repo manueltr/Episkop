@@ -120,9 +120,10 @@ $(document).on('turbo:load', function() {
 
 
 
-// Poll question adding
+
 $(document).on('turbo:load', function() {
-    $("#new_question_btn").on('click', function(e) {
+    // Poll question adding
+    $(document).on('click', "#new_question_btn", function(e) {
         if(!$("#new_question_form").length) {
             let id = window.location.href.split("/").reverse()[0];
             $.ajax({
@@ -130,6 +131,18 @@ $(document).on('turbo:load', function() {
                 url: "/polls/" + id + "/poll_questions/new.js"
             })
         }
+    });
+    $(document).on('click', ".question-del", function(e){
+        let que_id = $(this).attr("data-*");
+        let quediv = `#poll_question_${que_id}`;
+        $.ajax({
+                type: "DELETE",
+                url: `/poll_questions/${que_id}.json`,
+                success: function(res){
+                    $(quediv).remove();
+                }
+            });
+        console.log(response);
     });
 });
 
