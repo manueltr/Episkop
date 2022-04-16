@@ -32,7 +32,7 @@ class ApiKeysController < ApplicationController
 
     @api_key.in_req_mode = true;
     @api_key.accepted = nil;
-
+    
     respond_to do |format|
       if @api_key.save
         format.html { redirect_to settings_path, notice: "Your request for an API Key has been received! Be on the lookout for an email." }
@@ -62,7 +62,7 @@ class ApiKeysController < ApplicationController
     @api_key.destroy
 
     respond_to do |format|
-      format.html { redirect_to api_keys_url, notice: "Api key was successfully destroyed." }
+      format.html { redirect_to settings_path, notice: "Api key was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -81,6 +81,6 @@ class ApiKeysController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def api_key_params
-      params.require(:api_key).permit(:purpose, :in_req_mode, :accepted, :explanation)
+      params.require(:api_key).permit(:create_key, :delete_key, :extract_key, :edit_key, :in_req_mode, :accepted, :explanation)
     end
 end

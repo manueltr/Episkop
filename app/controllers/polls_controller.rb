@@ -41,6 +41,11 @@ class PollsController < ApplicationController
     respond_to  do |format|
             
         format.html {render "main"}
+        if @api_key && @api_key.extract_key
+          format.json { render :show, status: :ok }
+        else
+          format.json { render :json => {status: "Not an extract key"}, status: :unauthorized }
+        end
         format.js
     
     end
@@ -60,10 +65,18 @@ class PollsController < ApplicationController
   # POST /polls or /polls.json
   def create
     @poll = @user.polls.new(poll_params)
-    @poll.directory_id = session[:directory]
+
+    if session[:user_id]
+      @poll.directory_id = session[:directory]
+    elsif !params[:directory_id]
+      @poll.directory_id = @user.directories.where(name: "root")[0].id
+    end
+
 
     respond_to do |format|
-      if @poll.save
+      if !session[:user_id] && @api_key && !@api_key.create_key
+        format.json { render :json => {status: "Not a create key"}, status: :unauthorized }
+      elsif @poll.save
         flash[:notice] = "Poll was successfully created."
         format.html { redirect_to "/homepage" }
         format.js
@@ -120,7 +133,17 @@ class PollsController < ApplicationController
     end
 
     def set_user
-      @user = User.find(session[:user_id])
+      @api_key = nil
+      api_key = request.headers["ApiKey"]
+      @user = nil
+      if session[:user_id]
+        @user = User.find(session[:user_id])
+      elsif api_key
+        @api_key = ApiKey.where(api_token: api_key)[0]
+        user_id = @api_key.user_id
+        @user = User.find(user_id)
+      end
+      
       @profile_picture = @user.photo
       @name = @user.username
     end
@@ -150,6 +173,6 @@ class PollsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def poll_params
-      params.require(:poll).permit(:title, :summary, :opened, :publish, :ends_at)
+      params.require(:poll).permit(:title, :summary, :opened, :publish, :ends_at, :directory_id)
     end
 end
