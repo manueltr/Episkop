@@ -133,11 +133,27 @@ $(document).on('turbo:load', function() {
     });
 });
 
-// Poll answer adding
+
 $(document).on('turbo:load', function() {
+    // Poll answer adding
     $(".new_answer_btn").on('click', function(e) {
             $(this).hide();
     });
+
+    //Poll answer deleting
+    $(document).on('click', ".delete_answer_icon", function(e){
+        let ans_id = $(this).attr("data-*");
+        let answerdiv = `#poll_answer_${ans_id}`;
+        $.ajax({
+                type: "DELETE",
+                url: `/poll_answers/${ans_id}.json`,
+                success: function(res){
+                    $(answerdiv).remove();
+                }
+            });
+        console.log(response);
+    });
+
 });
 
 

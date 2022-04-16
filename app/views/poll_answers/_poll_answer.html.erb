@@ -5,9 +5,7 @@
     </div>
     <div class="col"> 
     <%if poll_answer.poll_question.question_type == "Multiple Choice"%>
-      <%= button_to poll_answer, :method => "delete", class: "float-end" do %>
-        <i class="fa-solid fa-xmark"></i>
-      <% end %> 
+        <i class="fa-solid fa-xmark float-end delete_answer_icon" data-*="<%= poll_answer.id%>"></i>
     <%end%>
     </div>
   </div>

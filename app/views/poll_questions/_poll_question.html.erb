@@ -1,6 +1,7 @@
 <div id="<%= dom_id poll_question %>" class="card mt-3">
 
   <div class="card-body">
+  <div class="d-flex card-header justify-content-end"><i data-delete= poll_question class="question-del fa-solid fa-xmark"></i></div>
     <div class="card-title">
       <p style="font-size: 20px;">
         <% if poll_question.question_type == "Yes No"%>
@@ -28,7 +29,7 @@
                   <%= render poll_answer %>
                 <% end %>
                 <div id="create_answer">
-                  <a class="new_answer_btn" href="<%= new_poll_answer_path(:poll_id => poll_question.poll_id, :question => poll_question)%>" data-remote="true">Add an MC Answer</a>
+                  <a class="new_answer_btn" href="<%= new_poll_answer_path(:poll_id => poll_question.poll_id, :question => poll_question)%>" data-remote="true"><i class="fa-solid fa-plus add_ac"></i>Add Answer Choice</a>
                 </div>
           </div>
         </div>

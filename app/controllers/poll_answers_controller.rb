@@ -61,7 +61,7 @@ class PollAnswersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to poll_path(@poll), notice: "Poll answer was successfully destroyed." }
-      format.json { head :no_content }
+      format.json { head :no_content, status: :ok}
     end
   end
 

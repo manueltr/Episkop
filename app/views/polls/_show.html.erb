@@ -15,14 +15,8 @@
   </div>
 </div>
 
-
+<br>
 <div class="container">
-  <button type="button" id="new_question_btn">Add a Question</button>
-  <%= button_to "Destroy this poll", @poll, method: :delete %>
+  <i class="fa-solid fa-plus" id="new_question_btn"><span id="questionhelper">Add a Question</span></i>
 </div>
-
-
-<div class="container">
-  <%= link_to "Edit this poll", edit_poll_path(@poll) %> |
-  <%= button_to "Destroy this poll", @poll, method: :delete %>
-</div>
+<br>
