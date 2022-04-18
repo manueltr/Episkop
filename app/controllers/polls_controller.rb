@@ -92,12 +92,19 @@ class PollsController < ApplicationController
   # PATCH/PUT /polls/1 or /polls/1.json
   def update
     respond_to do |format|
-      if @poll.update(poll_params)
-        format.html { redirect_to poll_url(@poll), notice: "Poll was successfully updated." }
-        format.json { render :show, status: :ok, location: @poll }
+      if !session[:user_id] && @api_key && !@api_key.edit_key
+        format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @poll.errors, status: :unprocessable_entity }
+        if @poll.update(poll_params)
+          if @api_key
+            format.json { render :show, status: :ok, location: @poll }
+          else 
+            format.html { redirect_to poll_url(@poll), notice: "Poll was successfully updated." }
+          end
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @poll.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
