@@ -122,7 +122,7 @@ class PollsController < ApplicationController
        if !@api_key.delete_key
         format.json { render :json => {status: "Not a delete key"}, status: :unauthorized }
        elsif 
-        format.json { render :json => {status: "Successfully deleted poll", id: @curr_poll_id, title: @curr_poll_title}, status: :unauthorized }
+        format.json { render :json => {status: "Successfully deleted poll", id: @curr_poll_id, title: @curr_poll_title} }
        end
       else
         format.html { redirect_to "/homepage", notice: "Poll was successfully destroyed." }

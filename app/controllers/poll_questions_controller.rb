@@ -2,8 +2,8 @@ class PollQuestionsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_poll_question, only: %i[ results show edit update destroy ]
   before_action :set_poll
-  before_action :check_user, only: %i[ show edit update destroy ]
   before_action :check_api
+  before_action :check_user, only: %i[ show edit update destroy ]
 
   layout "poll"
 
@@ -107,9 +107,14 @@ class PollQuestionsController < ApplicationController
   # PATCH/PUT /poll_questions/1 or /poll_questions/1.json
   def update
     respond_to do |format|
-      if @poll_question.update(poll_question_params)
-        format.html { redirect_to poll_path(@poll), notice: "Poll question was successfully updated." }
-        format.json { render :show, status: :ok, location: @poll_question }
+      if !session[:user_id] && @api_key && !@api_key.edit_key
+        format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
+      elsif @poll_question.update(poll_question_params)
+        if @api_key
+          format.json { render :show, status: :ok, location: @poll_question }
+        else
+          format.html { redirect_to poll_path(@poll), notice: "Poll question was successfully updated." }
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @poll_question.errors, status: :unprocessable_entity }
@@ -125,8 +130,12 @@ class PollQuestionsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to  poll_path(@poll), notice: "Poll question was successfully destroyed." }
-      format.json { head :no_content }
+      if @api_key
+        format.json { render :json => {status: "Successfully deleted question" } }
+      else
+        format.html { redirect_to  poll_path(@poll), notice: "Poll question was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -142,7 +151,7 @@ class PollQuestionsController < ApplicationController
     def check_user
 
       # !change, temporary later on the owner of a poll can allow access to modify a poll
-      if @poll.user_id != session[:user_id]
+      if (@poll.user_id != session[:user_id]) && (@poll.user_id != @api_key.user_id)
         flash[:warning] = "That poll doesn't belong to you!"
         redirect_to "/homepage"
       end
