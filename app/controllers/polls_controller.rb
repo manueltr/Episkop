@@ -1,4 +1,5 @@
 class PollsController < ApplicationController
+  protect_from_forgery with: :null_session
   before_action :set_user
   before_action :set_poll, only: %i[ show edit update destroy ]
   before_action :check_user, only: %i[ edit update destroy ]
@@ -103,11 +104,17 @@ class PollsController < ApplicationController
 
   # DELETE /polls/1 or /polls/1.json
   def destroy
+    @curr_poll_id = @poll.id
+    @curr_poll_title = @poll.title
     @poll.destroy
 
     respond_to do |format|
-      format.html { redirect_to "/homepage", notice: "Poll was successfully destroyed." }
-      format.json { head :no_content }
+      if @api_key
+        format.json { render :json => {status: "Successfully deleted poll", id: @curr_poll_id, title: @curr_poll_title}, status: :unauthorized }
+      else
+        format.html { redirect_to "/homepage", notice: "Poll was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -151,7 +158,7 @@ class PollsController < ApplicationController
     def check_user
 
       # !change, temporary later on the owner of a poll can allow access to modify a poll
-      if @poll.user_id != session[:user_id]
+      if @api_key == nil && @poll.user_id != session[:user_id]
         flash[:warning] = "That poll doesn't belong to you!"
         redirect_to "/homepage"
       end
