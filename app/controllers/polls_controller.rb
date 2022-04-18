@@ -106,11 +106,17 @@ class PollsController < ApplicationController
   def destroy
     @curr_poll_id = @poll.id
     @curr_poll_title = @poll.title
-    @poll.destroy
+    if (@api_key && @api_key.delete_key) || session[:user_id]
+      @poll.destroy
+    end
 
     respond_to do |format|
       if @api_key
+       if !@api_key.delete_key
+        format.json { render :json => {status: "Not a delete key"}, status: :unauthorized }
+       elsif 
         format.json { render :json => {status: "Successfully deleted poll", id: @curr_poll_id, title: @curr_poll_title}, status: :unauthorized }
+       end
       else
         format.html { redirect_to "/homepage", notice: "Poll was successfully destroyed." }
         format.json { head :no_content }
