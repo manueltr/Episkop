@@ -439,6 +439,8 @@ $(document).on('turbo:load', function() {
 
     $(".form_questions_option").addClass("form_hide");
     $(".form_questions_option").find('input').removeAttr('required');
+    $(".form_questions_option").find('input').off('change')
+
   
     if(target == "Table") {
       $("#input_options").removeClass("form_hide")
@@ -446,6 +448,7 @@ $(document).on('turbo:load', function() {
     }
     else if (target == "Yes no beeswarm graph" || target == "Yes no bar graph") {
       $("#yes_no_options").removeClass("form_hide")
+      $("#input_options").find('input').on('change')
     }
     else {
       $("#multi_yes_no_options").removeClass("form_hide")
@@ -469,37 +472,40 @@ $(document).on('turbo:load', function() {
   });
 
 
-  $(document).on('click', "#add_graph_btn" , function() {
-    const form = document.querySelector('#addGraphForm');
-    const checkboxes = form.querySelectorAll('input[type=checkbox]');
-    const checkboxLength = checkboxes.length;
-    const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
+  // $(document).on('click', "#add_graph_btn" , function() {
 
-    function init() {
-        if (firstCheckbox) {
-            for (let i = 0; i < checkboxLength; i++) {
-                checkboxes[i].addEventListener('change', checkValidity);
-            }
+  //   const form = document.querySelector('#addGraphForm');
+  //   const checkboxes = form.querySelectorAll('input[type=checkbox]');
+  //   const checkboxLength = checkboxes.length;
+  //   const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
 
-            checkValidity();
-        }
-    }
+  //   function init() {
+  //       if (firstCheckbox) {
+  //           for (let i = 0; i < checkboxLength; i++) {
+  //               checkboxes[i].addEventListener('change', checkValidity);
+  //               $(checkboxes[i]).off('change');
+  //           }
 
-    function isChecked() {
-        for (let i = 0; i < checkboxLength; i++) {
-            if (checkboxes[i].checked) return true;
-        }
+  //           checkValidity();
+  //       }
+  //   }
 
-        return false;
-    }
+  //   function isChecked() {
+  //       for (let i = 0; i < checkboxLength; i++) {
+  //           if (checkboxes[i].checked) return true;
+  //       }
 
-    function checkValidity() {
-        const errorMessage = !isChecked() ? 'At least one checkbox must be selected.' : '';
-        firstCheckbox.setCustomValidity(errorMessage);
-    }
+  //       return false;
+  //   }
 
-    init();
-  });
+  //   function checkValidity() {
+  //       const errorMessage = !isChecked() ? 'At least one checkbox must be selected.' : '';
+  //       firstCheckbox.setCustomValidity(errorMessage);
+  //   }
+
+  //   init();
+  // });
+  
 });
 
 // load graphs
