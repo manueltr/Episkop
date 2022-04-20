@@ -37,11 +37,20 @@ Rails.application.routes.draw do
   
 
 
-  # API routes
+  # API KEY routes
   get '/polls_api', to: 'api#index', as: 'polls_api_index'
   get '/polls_api_simple', to: 'api#index_non_db', as: 'polls_api_non_db'
 
   get '/settings', to: 'application#settings', as: 'settings'
+
+
+  # API Usage routes
+  # create
+  # delete
+  # extract
+  # edit
+
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'application#welcome'
