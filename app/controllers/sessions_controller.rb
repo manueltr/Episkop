@@ -38,7 +38,9 @@ class SessionsController < ApplicationController
       session[:directory] = Directory.where(user_id: user.id, name: "root")[0].id
 
       if session[:store_location]
-        redirect_to session[:store_location]
+        @path = session[:store_location]
+        session[:store_location] = nil
+        redirect_to @path
       else
         redirect_to logged_in_path
       end
