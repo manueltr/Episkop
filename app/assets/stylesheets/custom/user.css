@@ -134,10 +134,13 @@ body
 
 #new_question_btn:hover{
 	cursor: pointer;
+	
 }
 #new_question_btn{
 	padding-left: 10px;
 	font-size: 25px;
+	text-decoration: none;
+	color:inherit;
 }
 #questionhelper {
 	display: none;
@@ -149,7 +152,8 @@ body
 	border-radius: 7px;
 	margin-left:10px;
 	margin-bottom:15px;
-  }
+}
+
 #new_question_btn:hover #questionhelper{
 	display: inline-block;
 }

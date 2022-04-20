@@ -437,8 +437,8 @@ $(document).on('turbo:load', function() {
 
     var target = this.value
 
-    $(".form_questions_option").addClass("form_hide")
-    $(".form_questions_option").find('input').removeAttr('required')
+    $(".form_questions_option").addClass("form_hide");
+    $(".form_questions_option").find('input').removeAttr('required');
   
     if(target == "Table") {
       $("#input_options").removeClass("form_hide")
@@ -446,7 +446,6 @@ $(document).on('turbo:load', function() {
     }
     else if (target == "Yes no beeswarm graph" || target == "Yes no bar graph") {
       $("#yes_no_options").removeClass("form_hide")
-      $("#yes_no_options").find('input').prop('required', true)
     }
     else {
       $("#multi_yes_no_options").removeClass("form_hide")
@@ -468,6 +467,39 @@ $(document).on('turbo:load', function() {
         element.parent().parent().remove()
       });   
   });
+
+
+  $(document).on('click', "#add_graph_btn" , function() {
+    const form = document.querySelector('#addGraphForm');
+    const checkboxes = form.querySelectorAll('input[type=checkbox]');
+    const checkboxLength = checkboxes.length;
+    const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
+
+    function init() {
+        if (firstCheckbox) {
+            for (let i = 0; i < checkboxLength; i++) {
+                checkboxes[i].addEventListener('change', checkValidity);
+            }
+
+            checkValidity();
+        }
+    }
+
+    function isChecked() {
+        for (let i = 0; i < checkboxLength; i++) {
+            if (checkboxes[i].checked) return true;
+        }
+
+        return false;
+    }
+
+    function checkValidity() {
+        const errorMessage = !isChecked() ? 'At least one checkbox must be selected.' : '';
+        firstCheckbox.setCustomValidity(errorMessage);
+    }
+
+    init();
+  });
 });
 
 // load graphs
@@ -486,7 +518,7 @@ $(document).on('turbo:load', function() {
     let i = 0;
     while($("#poll_graphs").length) {
       
-      if( i % 10 == 0 ){
+      if( i % 5 == 0 ){
         load_graphs();
       }
       await sleep(1000)
