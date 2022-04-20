@@ -152,7 +152,7 @@ $(document).on('turbo:load', function() {
 
 $(document).on('turbo:load', function() {
     // Poll answer adding
-    $(".new_answer_btn").on('click', function(e) {
+    $(document).on('click',".new_answer_btn", function(e) {
             $(this).hide();
     });
 

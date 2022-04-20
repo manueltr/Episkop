@@ -1,7 +1,6 @@
 <div id="<%= dom_id poll_question %>" class="card mt-3">
-
+<div class="d-flex card-header justify-content-end"><i data-*= "<%=poll_question.id%>" class="question-del fa-solid float-end fa-xmark pe-2"></i></div>
   <div class="card-body">
-    <div class="d-flex card-header justify-content-end"><i data-*= "<%=poll_question.id%>" class="question-del fa-solid fa-xmark"></i></div>
     <div class="card-title">
       <p style="font-size: 20px;">
         <% if poll_question.question_type == "Yes No"%>
