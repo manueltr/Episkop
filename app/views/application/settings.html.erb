@@ -1,27 +1,10 @@
 <!-- start body -->
 <div class="container">
 
-<div class="row">
-
-    <div class="col ps-0">
-        <h2 class="mt-4"> Settings </h2>
-    </div>
-
-    <% if @user.admin %>
-    <div class="col ps-0">
-        <h2 class="mt-4"> Pending Requests </h2>
-    </div>
-    <% end %>
-
-    <div class="col ps-0">
-        <h2 class="mt-4"> API Keys </h2>
-    </div>
-    
-</div>
-
 <div class="h-75 row">
 
     <div id="general_settings" class="col">
+        <h2 class="mt-4"> Settings </h2>
         <p> This is where we will put site-wide settings options </p>
         <hr>
         <button> Dark Mode </button>
@@ -31,6 +14,7 @@
 
     <% if @user.admin %>
     <div id="api_requests" class="col">
+        <h2 class="mt-4"> Pending Requests </h2>
         <p> This is where admins will see api key requests </p>
         <hr>
         
@@ -43,6 +27,7 @@
     <div class="col-1"></div>
 
     <div id="my_keys" class="col">
+         <h2 class="mt-4"> API Keys </h2>
         <p> This is where we list API keys for the current user </p>
         <br> <hr>
         <br> If the Accepted field is empty, your request for an API key is still under review by our admins...
