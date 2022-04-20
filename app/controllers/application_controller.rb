@@ -48,6 +48,8 @@ class ApplicationController < ActionController::Base
       @user = User.find(session[:user_id])
       @profile_picture = @user.photo
       @name = @user.username
+      @poll = Poll.new
+      
 
       #set user polls
       @directory = @user.directories.find(session[:directory])

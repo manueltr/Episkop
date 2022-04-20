@@ -38,7 +38,7 @@
                         </form>
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <%= link_to "New Poll", new_poll_path, class: "nav-link"%>
+                                <a class="nav-link" id="new_poll" href="javascript:;"><span data-bs-toggle="modal" data-bs-target="#addPoll">New Poll</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="new_directory_link" href="javascript:;">New Directory</a>
@@ -96,6 +96,21 @@
                 <%= link_to "Go to poll form", form_url(poll_vote.poll.invite_token) %>
                 </p>
             <% end %>
+        </div>
+    </div>
+    <div class="modal" id="addPoll" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create a Poll</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                        <div class = "container">
+                        <%=render "polls/form", poll: @poll %>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
 </div>
