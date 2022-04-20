@@ -10,13 +10,13 @@
   <% end %>
 
   <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_field :content %>
+    <%= form.label :content, "Answer Content", style: "display: block", class: "form-label mt-2"%>
+    <%= form.text_area :content, class:"form-control", rows: 1%>
   </div>
 
   <div>
     <%= hidden_field_tag(:question, poll_question.id) %>
     <%= hidden_field_tag(:poll_id, poll_question.poll_id) %>
-    <%= form.submit %>
+    <%= form.submit class: "mt-2 btn btn-dark btn-sm"%>
   </div>
 <% end %>

@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   get '/polls/:invite_token/results', to: 'polls#results', as: 'results'
   post '/polls/:invite_token/submit', to: 'poll_votes#submit', as: 'poll_submit'
   get '/polls/:invite_token/qr_code', to: 'poll_votes#qr', as: 'form_qr'
-  
   #PollQuestionResults
   get '/poll_questions/:id/results', to: 'poll_questions#results', as: 'poll_question_results'
   get '/poll_questions/:questions/:poll_id/yes_no/results', to: 'poll_questions#yesNo', as: 'yes_no_graph_results'
@@ -38,11 +37,20 @@ Rails.application.routes.draw do
   
 
 
-  # API routes
+  # API KEY routes
   get '/polls_api', to: 'api#index', as: 'polls_api_index'
   get '/polls_api_simple', to: 'api#index_non_db', as: 'polls_api_non_db'
 
   get '/settings', to: 'application#settings', as: 'settings'
+
+
+  # API Usage routes
+  # create
+  # delete
+  # extract
+  # edit
+
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'application#welcome'

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-
+    # CSRF error
+    protect_from_forgery with: :null_session
     # set session value for request/controller testing
     if Rails.env.test?
       prepend_before_action :stub_current_user
@@ -16,10 +17,16 @@ class ApplicationController < ActionController::Base
 
     private
     def require_login
-      user_id = session[:user_id]
 
       #check for api key
-      api_key = request.headers["Api-Key"]
+      api_key = request.headers["ApiKey"]
+      if session[:user_id]
+        user_id = session[:user_id] 
+      elsif api_key
+        user_id = ApiKey.where(api_token: api_key)[0].user_id
+      else
+        user_id = nil
+      end
 
       if user_id == nil && api_key == nil
         session[:store_location] = request.fullpath

@@ -14,17 +14,17 @@
   <div>
     <%= form.label :purpose, 'What will you use this key for? To...' , style: "display: block" %>
     <br>
-    <%= form.radio_button :purpose, 'extract', :checked => true %> 
-    <%= label :purpose_extract, 'Extract Data From Polls' %>
+    <%= form.check_box :create_key %>
+    <%= label :set_create, 'Create New Polls' %>
     <br>
-    <%= form.radio_button :purpose, 'create' %>
-    <%= label :purpose_create, 'Create New Polls' %>
+    <%= form.check_box :delete_key %>
+    <%= label :set_delete, 'Delete Existing Polls' %>
     <br>
-    <%= form.radio_button :purpose, 'delete' %>
-    <%= label :purpose_create, 'Delete Existing Polls' %>
+    <%= form.check_box :extract_key %>
+    <%= label :set_extract, 'Extract Data From Polls' %>
     <br>
-    <%= form.radio_button :purpose, 'edit' %>
-    <%= label :purpose_create, 'Edit Existing Polls' %>
+    <%= form.check_box :edit_key %>
+    <%= label :set_edit, 'Edit Existing Polls' %>
   </div>
 
   <!-- <div>

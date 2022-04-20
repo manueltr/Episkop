@@ -119,3 +119,55 @@ body
     cursor: -moz-grab;
     cursor: -webkit-grab;
 }
+
+/*questions*/
+
+#new_question_btn:hover{
+	cursor: pointer;
+}
+#new_question_btn{
+	padding-left: 10px;
+	font-size: 25px;
+}
+#questionhelper {
+	display: none;
+	font-size:13px;
+	color:white;
+	background-color: rgb(33,37,41);
+	font-family:Helvetica Neue;
+	padding: 10px;
+	border-radius: 7px;
+	margin-left:10px;
+	margin-bottom:15px;
+  }
+#new_question_btn:hover #questionhelper{
+	display: inline-block;
+}
+
+.delete_answer_icon:hover{
+	cursor:pointer;
+}
+
+.add_ac:hover{
+	cursor:pointer;
+}
+.add_ac{
+	text-decoration: none;
+	color:black;
+	margin-top: 15px;
+}
+
+.new_answer_btn:hover{
+	color:black;
+}
+.new_answer_btn{
+	text-decoration: none;
+	color:inherit;
+	font-size:15px;
+	
+}
+
+.question-del:hover{
+	cursor:pointer;
+	color:black;
+}
