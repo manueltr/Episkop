@@ -75,16 +75,26 @@ body
 }
 /* end navigation */
 
-#directory {
+#MyPolls {
 	background: white;
-	border-radius: 0px 0px 20px 20px;
+	border-radius: 10px 10px 20px 20px;
 	overflow: scroll;
+	height: 85%;
 }
+
+
 #participated_polls {
 	background: white;
-	border-radius: 0px 0px 20px 20px;
+	border-radius: 10px 10px 20px 20px;
+	overflow: scroll;
+	height: 85%;
+}
+
+#display_polls{
+	height: 90%;
 	overflow: scroll;
 }
+
 #general_settings {
 	background: rgb(236, 236, 236);
 }

@@ -5,97 +5,100 @@
     <p style="color: red"><%= flash[:warning] %></p>
     <p style="color: green"><%= notice %></p>
 
-    <div class="row">
-
-        <div class="col-8 ps-0">
-            <h2 class="mt-4"> My Polls </h2>
-        </div>
+    <%# <div class="row">
 
         <div class="col-4 ps-0">
             <h2 class="mt-4">Participated Polls </h2>
         </div>
 
-    </div>
+    </div> %>
 
-    <div class="h-75 row">
-
+    <div id="display_polls" class="row">
         <!-- Show directory / polls -->
-        <div id="directory" class="col-7">
+        <div id="directory" class="col-md-7 p-0">
+            <h2 class="mt-4"> My polls </h2>
 
-            <div id="directory_nav" class="row mb-2">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 py-2">
-                    <div class="container-fluid p-0 px-2">
-                    <i><%= link_to "", directory_home_path(), remote: true, class: "navbar-brand fa-solid fa-house" %></i>
-                    <i class="mt-1" id="directory-back"><%= link_to "", directory_back_path(), remote: true, class: "fa-solid fa-arrow-left" %></i>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarColor01">
-                        <p class="mb-0 me-3" id="current_dir"><%if @directory.name == "root" %>Home <%else%> <%=@directory.name%> <%end%></p>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <%# <button class="btn btn-outline-light" type="submit">Search</button> %>
-                        </form>
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" id="new_poll" href="javascript:;"><span data-bs-toggle="modal" data-bs-target="#addPoll">New Poll</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="new_directory_link" href="javascript:;">New Directory</a>
-                            </li>
-                        </ul>
-                    </div>
-                    </div>
-                </nav>        
-            </div>
-
-
-            <!-- DISPLAY DASHBOARD -->
-            <div id="directories">
-
-                <div class="dropdown-menu dropdown-menu-sm" id="directory-context-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-                <%= render partial: "directories/show_directories", locals: {children: @children} %>
-                
-            </div>
-            <div id="polls">
-                <%= render partial: "directories/show_polls", locals: {polls: @polls} %>
-            </div>
-        </div>
-
-        <div class="col-1"></div>
-
-        <div id="participated_polls" class="col-4">
-
-            <div id="participated_nav" class="row mb-2">
+            <div id="MyPolls" class="p-2 pt-0">
+                <div id="directory_nav" class="row mb-2">
                     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 py-2">
                         <div class="container-fluid p-0 px-2">
-                        
-                            <i><%= link_to "", directory_home_path(), remote: true, class: "navbar-brand fa-solid fa-filter ps-1" %></i>
-                            <form class="d-flex ms-2 me-auto">
+                        <i><%= link_to "", directory_home_path(), remote: true, class: "navbar-brand fa-solid fa-house" %></i>
+                        <i class="mt-1" id="directory-back"><%= link_to "", directory_back_path(), remote: true, class: "fa-solid fa-arrow-left" %></i>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarColor01">
+                            <p class="mb-0 me-3" id="current_dir"><%if @directory.name == "root" %>Home <%else%> <%=@directory.name%> <%end%></p>
+                            <form class="d-flex">
                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                                 <%# <button class="btn btn-outline-light" type="submit">Search</button> %>
                             </form>
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="new_poll" href="javascript:;"><span data-bs-toggle="modal" data-bs-target="#addPoll">New Poll</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="new_directory_link" href="javascript:;">New Directory</a>
+                                </li>
+                            </ul>
+                        </div>
                         </div>
                     </nav>        
-            </div>
-            <% @user.poll_votes.select(:poll_id).distinct(:poll_id).each do |poll_vote| %>
-            
-                <p>
-                    <strong>Title:</strong>
-                    <%= poll_vote.poll.title %>
-                </p>
+                </div>
 
-                <p>
-                    <strong>Summary:</strong>
-                    <%= poll_vote.poll.summary %>
-                </p>
-                <%= link_to "Go to poll form", form_url(poll_vote.poll.invite_token) %>
-                </p>
-            <% end %>
+
+            
+                <!-- DISPLAY DASHBOARD -->
+                <div id="directories">
+
+                    <div class="dropdown-menu dropdown-menu-sm" id="directory-context-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                    <%= render partial: "directories/show_directories", locals: {children: @children} %>
+                    
+                </div>
+                <div id="polls">
+                    <%= render partial: "directories/show_polls", locals: {polls: @polls} %>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-1"></div>
+
+        <div id="participated_polls_container" class="col-md-4 p-0">
+            <h2 class="mt-4">Participated Polls </h2>
+            <div id="participated_polls" class="p-2 pt-0">
+                <div id="participated_nav" class="row mb-2">
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 py-2">
+                            <div class="container-fluid p-0 px-2">
+                            
+                                <i><%= link_to "", directory_home_path(), remote: true, class: "navbar-brand fa-solid fa-filter ps-1" %></i>
+                                <form class="d-flex ms-2 me-auto">
+                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                    <%# <button class="btn btn-outline-light" type="submit">Search</button> %>
+                                </form>
+                            </div>
+                        </nav>        
+                </div>
+                <% @user.poll_votes.select(:poll_id).distinct(:poll_id).each do |poll_vote| %>
+                
+                    <p>
+                        <strong>Title:</strong>
+                        <%= poll_vote.poll.title %>
+                    </p>
+
+                    <p>
+                        <strong>Summary:</strong>
+                        <%= poll_vote.poll.summary %>
+                    </p>
+                    <%= link_to "Go to poll form", form_url(poll_vote.poll.invite_token) %>
+                    </p>
+                <% end %>
+            </div>
         </div>
     </div>
     <div class="modal" id="addPoll" tabindex="-1">
