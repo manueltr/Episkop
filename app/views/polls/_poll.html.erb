@@ -7,6 +7,8 @@
 
     <a class="btn btn-dark btn-sm card-link" role="button" href="<%=  form_url(poll.invite_token) %>">Go to Poll</a>
     <a class="btn btn-dark btn-sm card-link" data-bs-toggle="collapse" data-bs-target="#collapse<%= poll.id %>" role="button" aria-expanded="false" aria-controls="collapse<%= poll.id%>">Share Poll</a>
+    <a class="btn btn-dark btn-sm card-link" role="button" href="<%=  edit_poll_path(@poll) %>">Edit Poll</a>
+    <a class="btn btn-dark btn-sm card-link" role="button" data-method = "delete" href="<%= @poll%>">Delete Poll</a>
       <div id="collapse<%= poll.id %>" class="collapse">
         <div class="card-body mt-4 p-0">
 

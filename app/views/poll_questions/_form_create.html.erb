@@ -8,19 +8,23 @@
       </ul>
     </div>
   <% end %>
+  <div class = "card mt-3">
+    <div class= "card-body">
+      <div>
+        <%= form.label :question_type, style: "display: block" , class:"form-label"%>
+        <%= form.select(:question_type, options_for_select(["Multiple Choice", "Yes No", "Input"]), {},{class:"form-select"} )%>
 
-  <div>
-    <%= form.label :question_type, style: "display: block" %>
-    <%= form.select(:question_type, options_for_select(["Multiple Choice", "Yes No", "Input"])) %>
+      </div>
 
+      <div>
+        <%= form.label :content, "Question Content", style: "display: block", class: "form-label"%>
+        <%= form.text_area :content, class:"form-control", rows: 2%>
+      </div>
+
+      <div>
+        <%= form.submit class: "mt-2 btn btn-dark"%>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :content, "Question Content", style: "display: block" %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+</div>
 <% end %>

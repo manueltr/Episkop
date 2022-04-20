@@ -120,24 +120,56 @@ $(document).on('turbo:load', function() {
 
 
 
-// Poll question adding
+
 $(document).on('turbo:load', function() {
-    $("#new_question_btn").on('click', function(e) {
+    // Poll question adding
+    $(document).on('click', "#new_question_btn", function(e) {
+        $(this).hide();
         if(!$("#new_question_form").length) {
             let id = window.location.href.split("/").reverse()[0];
             $.ajax({
                 type: "GET",
                 url: "/polls/" + id + "/poll_questions/new.js"
             })
+            console.log(response);
         }
+    });
+    //Poll question deleting
+    $(document).on('click', ".question-del", function(e){
+        let que_id = $(this).attr("data-*");
+        let quediv = `#poll_question_${que_id}`;
+        $.ajax({
+                type: "DELETE",
+                url: `/poll_questions/${que_id}.json`,
+                success: function(res){
+                    $(quediv).remove();
+                }
+            });
+        console.log(response);
     });
 });
 
-// Poll answer adding
+
 $(document).on('turbo:load', function() {
-    $(".new_answer_btn").on('click', function(e) {
+    // Poll answer adding
+    $(document).on('click',".new_answer_btn", function(e) {
             $(this).hide();
     });
+
+    //Poll answer deleting
+    $(document).on('click', ".delete_answer_icon", function(e){
+        let ans_id = $(this).attr("data-*");
+        let answerdiv = `#poll_answer_${ans_id}`;
+        $.ajax({
+                type: "DELETE",
+                url: `/poll_answers/${ans_id}.json`,
+                success: function(res){
+                    $(answerdiv).remove();
+                }
+            });
+        console.log(response);
+    });
+
 });
 
 
