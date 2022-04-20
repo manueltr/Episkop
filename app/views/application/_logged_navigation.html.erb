@@ -9,8 +9,11 @@
         </div>
         <div id="navbarNav" class="collapse navbar-collapse flex-row-reverse" style="min-width: 50%;">
             <ul class="navbar-nav navbar-right">
-                <li class="nav-item" ><a class="nav-link" href="/logout">Logout</a></li>
+                <%if @settings %>
+                <li class="nav-item"><a class="nav-link" href="/homepage">Homepage</a></li>
+                <%else%>
                 <li class="nav-item" ><a class="nav-link" href="/settings">Settings</a></li>
+                <%end%>
                 <li class="nav-item" ><a class="nav-link" href="#">
                         <span>
                             <%=@name%>
@@ -18,6 +21,7 @@
                         <img class="nav-image" src=<%=@profile_picture%>>
                     </a>
                 </li>
+                <li class="nav-item" ><a class="nav-link" href="/logout">Logout</a></li>
             </ul>
         </div>
     </div>

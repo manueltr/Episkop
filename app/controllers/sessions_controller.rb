@@ -32,10 +32,18 @@ class SessionsController < ApplicationController
     end
 
     if user.valid?
+
       #log them in
       session[:user_id] = user.id 
       session[:directory] = Directory.where(user_id: user.id, name: "root")[0].id
-      redirect_to logged_in_path
+
+      if session[:store_location]
+        redirect_to session[:store_location]
+      else
+        redirect_to logged_in_path
+      end
+
+
       #send welcome email
     else
       redirect_to root_path 
