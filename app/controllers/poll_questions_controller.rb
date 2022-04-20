@@ -109,7 +109,7 @@ class PollQuestionsController < ApplicationController
     respond_to do |format|
       if !session[:user_id] && @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
-      elsif @poll_question.update(poll_question_params)
+      elsif @poll_question.update(poll_question_edit_params)
         if @api_key
           format.json { render :show, status: :ok, location: @poll_question }
         else
@@ -172,6 +172,10 @@ class PollQuestionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def poll_question_params
       params.require(:poll_question).permit(:question_type, :content)
+    end
+
+    def poll_question_edit_params
+      params.require(:poll_question).permit( :content)
     end
 
     def check_api
