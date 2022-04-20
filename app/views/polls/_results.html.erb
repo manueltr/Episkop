@@ -14,7 +14,7 @@
         <%questions = poll_graph.questions.split(',').map(&:to_i)%>
         <%question_titles = PollQuestion.find(questions).pluck("content")%>
         
-        <%if questions.length == 1
+        <%if questions.length == 1 && poll_graph.graph_type != "Yes no beeswarm graph"  && poll_graph.graph_type != "Yes no bar graph"
           poll_question = PollQuestion.find(questions[0]) 
         else
           poll_question = nil
