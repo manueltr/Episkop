@@ -139,6 +139,60 @@ $(document).on('turbo:load', function() {
                 }
             });
     });
+
+    //showpoll question editing
+    $(document).on('click', ".question-edit-icon", function(e){
+        let question_id = $(this).attr("data-*");
+
+        if ($(`#question-title-show-${question_id}`).is(":visible")) {
+            $(`#question-title-show-${question_id}`).hide();
+            $(`#question-title-form-${question_id}`).show();            
+        } 
+        else {
+            $(`#question-title-show-${question_id}`).show();
+            $(`#question-title-form-${question_id}`).hide();
+        }
+
+        // $.ajax({
+        //         type: "DELETE",
+        //         url: `/poll_answers/${ans_id}.json`,
+        //         success: function(res){
+        //             $(answerdiv).remove();
+        //         }
+        // });
+    });
+
+    $(document).on('click', ".cancel-question-title", function(e) {
+        let question_id = $(this).attr("data-*");
+        let title = $(`#question-title-show-${question_id}`).find(".question-title-span").html();
+        $(`#question-title-form-${question_id} input`).val(title);
+        $(`#question-title-form-${question_id}`).hide()
+        $(`#question-title-show-${question_id}`).show();      
+    });
+
+    $(document).on('click', '.update-question-title', function(e) {
+        let question_id = $(this).attr("data-*");
+        let old_question_title = $(`#question-title-show-${question_id}`).find(".question-title-span").html();
+        let new_question_title = $(`#question-title-form-${question_id} input`).val();
+
+         $.ajax({
+            type: "PUT",
+            url: `/poll_questions/${question_id}.json`,
+            data: {poll_question: {content: new_question_title}},
+            success: res => {
+                $(`#question-title-show-${question_id}`).find(".question-title-span").html(new_question_title);  
+                $(`#question-title-show-${question_id}`).show();
+                $(`#question-title-form-${question_id} input`).val(new_question_title);  
+                $(`#question-title-form-${question_id}`).hide();
+            }
+        })
+        .fail(err => {
+            console.log(err);
+            $(`#question-title-form-${question_id}`).hide();
+            $(`#question-title-show-${question_id}`).show();
+        });
+
+    });
 });
 
 
@@ -158,7 +212,7 @@ $(document).on('turbo:load', function() {
                 success: function(res){
                     $(answerdiv).remove();
                 }
-            });
+        });
     });
 
 });

@@ -49,6 +49,7 @@ class ApplicationController < ActionController::Base
       @profile_picture = @user.photo
       @name = @user.username
       @poll = Poll.new
+      @homepage = true
       
 
       #set user polls
