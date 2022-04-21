@@ -7,21 +7,24 @@ RSpec.feature "PollAnswers", type: :feature do
     end
     
     describe "When I go to a poll page" do
-        it "should be able to create an answer choice" do
+        it "should all me to create an answer choice" do
           visit poll_path(@poll)
-          page.should have_content("test")
-          page.should have_content("Add answer choice")
-          click_on("Add answer choice")
-          fill_in("Content", with: "test1")
+          page.should have_content("Add Answer Choice")
+          click_on("Add Answer Choice")
+          fill_in("Answer Content", with: "test1")
           click_on("Create Poll answer")
           expect(page).to have_current_path(poll_path(@poll))
           expect(page).to have_content("test1")
         end
+
         it "should be able to destroy an answer choice" do
-            PollAnswer.create(:poll_id => @poll.id, :poll_question_id => @pollq.id, :content => "test2")
+            @poll_answer = PollAnswer.create(:poll_id => @poll.id, :poll_question_id => @pollq.id, :content => "test2")
             visit poll_path(@poll)
-            expect(page).to have_content("delete")
-            click_on("delete")
+            expect(page).to have_content("test2")
+            expect(page.html).to have_css(".delete_answer_icon")
+            find(:css,".delete_answer_icon").click
+            expect(page).to have_current_path(poll_path(@poll))
+            sleep(1)
             expect(page).to have_no_content("test2")
         end
     end

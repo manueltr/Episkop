@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
       def stub_current_user
         if !params[:user]
           session[:user_id] = 1
+          session[:directory] = Directory.where(user_id: 1, name: "root")[0].id
         end
       end
     end
