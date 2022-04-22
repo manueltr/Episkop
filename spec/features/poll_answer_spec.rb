@@ -18,14 +18,13 @@ RSpec.feature "PollAnswers", type: :feature do
         end
 
         it "should be able to destroy an answer choice" do
-            @poll_answer = PollAnswer.create(:poll_id => @poll.id, :poll_question_id => @pollq.id, :content => "test2")
+            @poll_answer = PollAnswer.create(:poll_id => @poll.id, :poll_question_id => @pollq.id, :content => "howdy")
             visit poll_path(@poll)
-            expect(page).to have_content("test2")
+            expect(page).to have_content("howdy")
             expect(page.html).to have_css(".delete_answer_icon")
-            find(:css,".delete_answer_icon").click
-            expect(page).to have_current_path(poll_path(@poll))
-            sleep(1)
-            expect(page).to have_no_content("test2")
+            find(:css, ".delete_answer_icon").click
+            visit poll_path(@poll)
+            expect(page).to have_no_content("howdy")
         end
     end
 

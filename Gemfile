@@ -79,6 +79,8 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'rack_session_access'
   gem 'database_cleaner'
+  gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 #added gems

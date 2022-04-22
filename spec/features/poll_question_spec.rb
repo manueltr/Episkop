@@ -13,25 +13,19 @@ RSpec.feature "PollQuestions", type: :feature do
       page.should have_content("Testing show of questions")
     end
 
-    it "should allow me to click on show this question" do
+    it "should show me all the questions" do
       poll_question = PollQuestion.create(:poll_id => @poll.id, :question_type => "Input", :content => "Testing show of questions")
       visit poll_path(@poll)
-      click_link("Show this poll question")
       page.should have_content("Testing show of questions")
-      expect(page).to have_current_path(poll_question_path(poll_question))
     end
 
-    it "should allow me to create a new question" do
+    it "should allow me to create add a new question form" do
       visit poll_path(@poll)
-      click_button("Add a question")
-      select('Yes No', :from => 'Question type')
-      fill_in('Question Content', with: 'new question')
-      click_button("Create Poll question")
-      page.should have_content("new question")
-      page.should have_content("Yes")
-      page.should have_content("No")
-      expect(page).to have_current_path(poll_path(@poll))
-    end
+      find(:css,"#new_question_btn").click
+      page.should have_content("Question type")
+      page.should have_content("Question Content")
+      end
+
   end
 
   describe "When I am on the show poll question page" do

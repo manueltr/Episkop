@@ -6,6 +6,7 @@ class PollQuestionsController < ApplicationController
   before_action :check_user, only: %i[ show edit update destroy ]
 
   layout "poll"
+  protect_from_forgery except: %i[ new create ]
 
   # GET /poll_questions or /poll_questions.json
   # def index
