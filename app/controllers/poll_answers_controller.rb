@@ -35,6 +35,8 @@ class PollAnswersController < ApplicationController
     respond_to do |format|
       if @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
       elsif @poll_answer.save
         if @api_key
           format.json { render :show, status: :created, location: @poll_answer }
@@ -69,10 +71,12 @@ class PollAnswersController < ApplicationController
     end
 
     respond_to do |format|
-      if @api_key && @api_key.edit_key
+      if @api_key && @api_key.edit_key && @api_key.accepted
         format.json { render :json => {status: "Successfully deleted answer" } }
       elsif @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not a delete key"}, status: :unauthorized }
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
       else
         format.html { redirect_to poll_path(@poll), notice: "Poll answer was successfully destroyed." }
         format.json { head :no_content }
