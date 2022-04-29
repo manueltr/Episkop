@@ -54,8 +54,7 @@ class PollVotesController < ApplicationController
       module_size: 9,
       standalone: true,
       use_path: true
-    )
-    
+    )  
   end
 
   def check_api

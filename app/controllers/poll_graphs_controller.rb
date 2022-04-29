@@ -26,11 +26,11 @@ class PollGraphsController < ApplicationController
       end
       
       respond_to do |format|
-        if @graph.save
-
+        if @graph.questions == "" || @graph.questions == nil
+          format.js { head :ok, status: :unprocessable_entity}
+          format.json { render json: {status: "Not a valid graph"}, status: :unprocessable_entity}
+        elsif @graph.save
           @poll_questions = @poll.poll_questions
-          
-          format.html { redirect_to "/homepage" }
           format.js
           format.json { render :show, status: :created, location: @poll }
         else

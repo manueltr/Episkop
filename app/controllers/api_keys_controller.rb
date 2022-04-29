@@ -4,18 +4,18 @@ class ApiKeysController < ApplicationController
   layout "poll"
 
   # GET /api_keys or /api_keys.json
-  def index
-    @api_keys = ApiKey.all
-  end
+  # def index
+  #   @api_keys = ApiKey.all
+  # end
 
   # API Keys on settings page
-  def my_keys
-    @api_keys = ApiKey.all
-  end
+  # def my_keys
+  #   @api_keys = ApiKey.all
+  # end
 
   # GET /api_keys/1 or /api_keys/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /api_keys/new
   def new
@@ -23,8 +23,8 @@ class ApiKeysController < ApplicationController
   end
 
   # GET /api_keys/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /api_keys or /api_keys.json
   def create

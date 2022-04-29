@@ -12,8 +12,12 @@ class PollQuestionsController < ApplicationController
   #   @poll_questions = @poll.poll_questions
   # end
 
-  # GET /poll_questions/1 or /poll_questions/1.json
+  # /oll_questions/1.json
   def show
+    @poll_answers = @poll_question.poll_answers
+    respond_to do |format|
+      format.json
+    end 
   end
 
   def results
@@ -114,6 +118,7 @@ class PollQuestionsController < ApplicationController
 
   # PATCH/PUT /poll_questions/1 or /poll_questions/1.json
   def update
+    @poll_answers = @poll_question.poll_answers
     respond_to do |format|
       if !session[:user_id] && @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
@@ -123,6 +128,7 @@ class PollQuestionsController < ApplicationController
         if @api_key
           format.json { render :show, status: :ok, location: @poll_question }
         else
+          format.json { render :show, status: :ok, location: @poll_question }
           format.html { redirect_to poll_path(@poll), notice: "Poll question was successfully updated." }
         end
       else
@@ -191,9 +197,11 @@ class PollQuestionsController < ApplicationController
     end
 
     def check_api
+      
+      @user = nil
       @api_key = nil
       api_key = request.headers["ApiKey"]
-      @user = nil
+  
       if api_key
         @api_key = ApiKey.where(api_token: api_key)[0]
         user_id = @api_key.user_id

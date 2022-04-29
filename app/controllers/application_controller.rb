@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
-    # CSRF error
+    
+  # CSRF error
     protect_from_forgery with: :null_session
-    # set session value for request/controller testing
+
+    # set session value for request/controller testing !DELETE
     if Rails.env.test?
       prepend_before_action :stub_current_user
       def stub_current_user
@@ -28,8 +30,8 @@ class ApplicationController < ActionController::Base
         user_id = nil
       end
 
-      if user_id == nil
-        flash[:alert] = "You must be logged in to access this section"
+      if user_id == nil && api_key == nil
+        session[:store_location] = request.fullpath
         redirect_to "/auth/google_oauth2"
       end
     end
@@ -48,6 +50,9 @@ class ApplicationController < ActionController::Base
       @user = User.find(session[:user_id])
       @profile_picture = @user.photo
       @name = @user.username
+      @poll = Poll.new
+      @homepage = true
+      
 
       #set user polls
       @directory = @user.directories.find(session[:directory])
@@ -94,10 +99,13 @@ class ApplicationController < ActionController::Base
 
     def settings
       @user = User.find(session[:user_id])
+      @profile_picture = @user.photo
+      @name = @user.username
+      @settings = true
+
       @api_keys = @user.api_keys
       @requested_api_keys = ApiKey.where(in_req_mode: true)
       render layout: "poll"
-      # render "settings"
     end
 
 end

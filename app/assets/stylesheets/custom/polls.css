@@ -8,3 +8,31 @@
 .form_hide {
     display: none;
 }
+
+
+/* questions edit */
+
+.fa-pencil {
+    font-size: 12px;
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+i.fa-pencil {
+    cursor: pointer;
+}
+
+.question-title-form {
+    display: none;
+}
+
+
+/* poll settings page */
+
+#settings-delete-poll {
+    border-top: solid;
+    border-width:1spx;
+    border-color: black;
+}
+
+/* ------------------ */

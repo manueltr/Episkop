@@ -4,11 +4,15 @@ RSpec.feature "Applications", type: :feature do
   
   describe "When I go to the welcome page route" do
     it "should display the welcome page" do
+
       page.set_rack_session(:user_id => nil)
       visit "/?user=false"
       page.should have_content("Episkop")
       page.should have_content("Google Login")
+      
     end
+
+    
 
   end
 

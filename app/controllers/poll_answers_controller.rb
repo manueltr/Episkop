@@ -17,8 +17,7 @@ class PollAnswersController < ApplicationController
   # GET /poll_answers/new
   def new
     @poll_answer = @poll_question.poll_answers.new(poll_id: params[:poll_id])
-    @question_toAdd_id = "#poll_answers" + (@poll_question.id).to_s;
-    
+    @question_id_to_add_answer = "#poll_answers" + (@poll_question.id).to_s;
   end
 
   # GET /poll_answers/1/edit

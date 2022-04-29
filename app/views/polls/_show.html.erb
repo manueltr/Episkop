@@ -15,14 +15,8 @@
   </div>
 </div>
 
-
+<br>
 <div class="container">
-  <button type="button" id="new_question_btn">Add a Question</button>
-  <%= button_to "Destroy this poll", @poll, method: :delete %>
+  <a id="new_question_btn" href="/polls/<%=@poll.id%>/poll_questions/new.js" data-remote="true"><i class="fa-solid fa-plus" id="new_question_btn_nest"></i><span id="questionhelper">Add a Question</span></a>
 </div>
-
-
-<div class="container">
-  <%= link_to "Edit this poll", edit_poll_path(@poll) %> |
-  <%= button_to "Destroy this poll", @poll, method: :delete %>
-</div>
+<br>

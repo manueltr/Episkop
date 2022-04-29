@@ -1,23 +1,46 @@
 <div id="<%= dom_id poll_question %>" class="card mt-3">
-
+<div class="d-flex card-header justify-content-end"><i data-*="<%=poll_question.id%>" class="fa-solid fa-pencil question-edit-icon"></i><i data-*= "<%=poll_question.id%>" class="question-del fa-solid float-end fa-xmark pe-2"></i></div>
   <div class="card-body">
     <div class="card-title">
-      <p style="font-size: 20px;">
-        <% if poll_question.question_type == "Yes No"%>
-          <i class="fa fa-question-circle" aria-hidden="true" style="display: inline;"></i>
-        <%end%>
-        <% if poll_question.question_type == "Input" %>
-          <i class="fa fa-comments-o" aria-hidden="true" style="display: inline;"></i>
-        <%end%>
-         <% if poll_question.question_type == "Multiple Choice"%>
-          <i class="fa fa-clipboard-question" aria-hidden="true" style="display: inline;"></i>
-        <%end%>
-        <%= poll_question.content %> 
 
-         <% if poll_question.question_type == "Multiple Choice" %>
-          <a class="btn btn-sm card-link show_answers" data-bs-toggle="collapse" data-bs-target="#poll_answers<%= poll_question.id %>" role="button" aria-expanded="false" aria-controls="poll_answers<%= poll_question.id %>"><i class="fa-solid fa-minus"></i></a>
-        <%end%>
-      </p>
+      <div id="question-title-show-<%=poll_question.id%>">
+        <p style="font-size: 20px;">
+          <% if poll_question.question_type == "Yes No"%>
+            <i class="fa fa-question-circle" aria-hidden="true" style="display: inline;"></i>
+          <%end%>
+          <% if poll_question.question_type == "Input" %>
+            <i class="fa fa-comments-o" aria-hidden="true" style="display: inline;"></i>
+          <%end%>
+          <% if poll_question.question_type == "Multiple Choice"%>
+            <i class="fa fa-clipboard-question" aria-hidden="true" style="display: inline;"></i>
+          <%end%>
+            <span class="question-title-span"><%= poll_question.content%></span>
+
+          <% if poll_question.question_type == "Multiple Choice" %>
+            <a class="btn btn-sm card-link show_answers" data-bs-toggle="collapse" data-bs-target="#poll_answers<%= poll_question.id %>" role="button" aria-expanded="false" aria-controls="poll_answers<%= poll_question.id %>"><i class="fa-solid fa-minus"></i></a>
+          <%end%>
+        </p>
+      </div>
+
+      <div id="question-title-form-<%=poll_question.id%>"class="mb-3 question-title-form">
+        <label for="title_input" class="form-label" style="font-size: 20px;">
+          <% if poll_question.question_type == "Yes No"%>
+            <i class="fa fa-question-circle" aria-hidden="true" style="display: inline;"></i>
+          <%end%>
+          <% if poll_question.question_type == "Input" %>
+            <i class="fa fa-comments-o" aria-hidden="true" style="display: inline;"></i>
+          <%end%>
+          <% if poll_question.question_type == "Multiple Choice"%>
+            <i class="fa fa-clipboard-question" aria-hidden="true" style="display: inline;"></i>
+          <%end%>
+          Question title
+        </label>
+        <input type="text" class="form-control" value="<%= poll_question.content%>">
+        <div class="mb-3 mt-2">
+          <button data-*="<%=poll_question.id%>" class="btn btn-dark btn-sm cancel-question-title">Cancel</button>
+          <button data-*="<%=poll_question.id%>" class="btn btn-dark btn-sm update-question-title">Update</button>
+        </div>
+      </div>
     </div>
 
     <div class="card-text">
@@ -28,15 +51,12 @@
                   <%= render poll_answer %>
                 <% end %>
                 <div id="create_answer">
-                  <a class="new_answer_btn" href="<%= new_poll_answer_path(:poll_id => poll_question.poll_id, :question => poll_question)%>" data-remote="true">Add an MC Answer</a>
+                  <a class="new_answer_btn" href="<%= new_poll_answer_path(:poll_id => poll_question.poll_id, :question => poll_question)%>" data-remote="true"><i class="fa-solid fa-plus add_ac"></i>Add Answer Choice</a>
                 </div>
           </div>
         </div>
       
         <%end%>
-
-        <%= button_to "delete question", poll_question, :method => "delete", :class => "btn btn-dark btn-sm mt-3"%>
-        <%= link_to "Show this poll question", poll_question_path(poll_question) %>
     </div>
 
 
