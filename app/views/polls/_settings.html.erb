@@ -1,0 +1,25 @@
+<div class="container">
+    <div id="settings-update-poll">
+        <h3 class="mt-5">Update poll information</h3>
+        <%=render partial: "form", locals:{poll: @poll}%>
+    </div>
+    <div id="settings-delete-poll" class="mt-4 pt-4">
+        <button data-url="<%=logged_in_url()%>" data-poll="<%=@poll.id%>" id="delete-poll-btn" class="btn btn-danger">Delete poll</button>
+    </div>
+</div>
+
+
+<!-- Confirm delete modal -->
+<div class="modal fade" id="settings_confirm_delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        The poll is not empty! Are you sure you want to delete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+        <button data-url="<%=logged_in_url()%>" data-poll="<%=@poll.id%>" type="button" id="delete-poll-btn-confirm" class="btn btn-danger" data-bs-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

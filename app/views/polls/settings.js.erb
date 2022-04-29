@@ -1,0 +1,5 @@
+<% if @permission %>
+    $("#main_view").html("<%= escape_javascript(render partial: "polls/settings") %>");
+<% else %>
+    $("#warning").html("You do not have access to that page!")
+<% end %>

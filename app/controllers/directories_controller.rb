@@ -18,6 +18,7 @@ class DirectoriesController < ApplicationController
         end
     end
 
+    
     def show
         @directory = @user.directories.find(params[:id])
         @children = @directory.children
@@ -28,6 +29,33 @@ class DirectoriesController < ApplicationController
             format.js {render "application/directory"}
         end
     end
+
+    def destroy
+        @directory = @user.directories.find(params[:id])
+        @children = @directory.children.count
+        @polls = @directory.polls.count
+
+        respond_to do |format|
+            if ((@children!=0 || @polls!=0) && (params[:destroy] != "true"))
+                format.json {render json: {status: "Directory is not empty", type: "warning"}}
+            else
+                @directory.destroy
+                format.json {render json: {status: "Directory has been destroyed!", type: "success"}}
+            end
+        end
+    end
+
+    def update
+        
+        @directory = @user.directories.find(params[:id])
+        respond_to do |format|
+            if @directory.update(directory_params)
+                format.json {render json: {status: "Success, update directory name", type:"success"}}
+            else
+                format.json {render json: {type: "error"}, status: :unprocessable_entity}
+            end
+        end
+      end
 
 
     private

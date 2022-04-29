@@ -50,14 +50,7 @@
             
                 <!-- DISPLAY DASHBOARD -->
                 <div id="directories">
-
-                    <div class="dropdown-menu dropdown-menu-sm" id="directory-context-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                    <%= render partial: "directories/show_directories", locals: {children: @children} %>
-                    
+                    <%= render partial: "directories/show_directories", locals: {children: @children} %>                  
                 </div>
                 <div id="polls">
                     <%= render partial: "directories/show_polls", locals: {polls: @polls} %>
@@ -116,4 +109,13 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<%= render partial: "application/confirmation_modals" %>
+
+<!-- CONTEXT MENU -->
+<div class="dropdown-menu dropdown-menu-sm" id="directory-context-menu">
+    <a id="directory-rename" class="dropdown-item" href="#">Rename</a>
+    <a id="directory-delete" class="dropdown-item" href="#">Delete</a>
 </div>

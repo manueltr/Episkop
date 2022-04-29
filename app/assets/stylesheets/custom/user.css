@@ -78,7 +78,8 @@ body
 #MyPolls {
 	background: white;
 	border-radius: 10px 10px 20px 20px;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 	height: 85%;
 }
 
@@ -86,13 +87,13 @@ body
 #participated_polls {
 	background: white;
 	border-radius: 10px 10px 20px 20px;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 	height: 85%;
 }
 
 #display_polls{
 	height: 90%;
-	overflow: scroll;
 }
 
 #general_settings {

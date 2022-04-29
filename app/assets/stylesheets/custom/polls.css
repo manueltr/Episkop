@@ -26,3 +26,13 @@ i.fa-pencil {
     display: none;
 }
 
+
+/* poll settings page */
+
+#settings-delete-poll {
+    border-top: solid;
+    border-width:2px;
+    border-color: black;
+}
+
+/* ------------------ */
