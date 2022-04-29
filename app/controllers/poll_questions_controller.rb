@@ -125,14 +125,14 @@ class PollQuestionsController < ApplicationController
   # DELETE /poll_questions/1 or /poll_questions/1.json
   def destroy
     @poll_question.poll.poll_graphs.where("questions like ?", "%"+@poll_question.id.to_s+"%").destroy_all
-    if (@api_key && @api_key.delete_key) || session[:user_id]
+    if (@api_key && @api_key.edit_key) || session[:user_id]
       @poll_question.destroy
     end
 
     respond_to do |format|
-      if @api_key && @api_key.delete_key
+      if @api_key && @api_key.edit_key
         format.json { render :json => {status: "Successfully deleted question" } }
-      elsif @api_key && !@api_key.delete_key
+      elsif @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not a delete key"}, status: :unauthorized }
       else
         format.html { redirect_to  poll_path(@poll), notice: "Poll question was successfully destroyed." }
