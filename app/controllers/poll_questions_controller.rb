@@ -185,9 +185,11 @@ class PollQuestionsController < ApplicationController
     end
 
     def check_api
+      
+      @user = nil
       @api_key = nil
       api_key = request.headers["ApiKey"]
-      @user = nil
+  
       if api_key
         @api_key = ApiKey.where(api_token: api_key)[0]
         user_id = @api_key.user_id

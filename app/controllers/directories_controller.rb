@@ -9,12 +9,11 @@ class DirectoriesController < ApplicationController
         respond_to  do |format|
             
             if @directory.save
-                # flash[:notice] = "Directory was successfully created."
                 format.json {render json: {status: "success"}}
-                format.js
+                format.js 
             else
-                format.html { head 400, content_type: "text/html" }
                 format.json { render json: @poll.errors, status: :unprocessable_entity }
+                format.js { head :ok, status: :unprocessable_entity}
             end
         end
     end

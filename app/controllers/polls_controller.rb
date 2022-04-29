@@ -20,13 +20,6 @@ class PollsController < ApplicationController
     @poll = Poll.find_by(invite_token: params[:invite_token])
     @poll_questions = @poll.poll_questions
 
-    # respond_to  do |format|
-            
-    #   format.html { head 400, content_type: "text/html"}
-    #   format.js
-
-    # end
-
   end
 
   # GET /polls or /polls.json

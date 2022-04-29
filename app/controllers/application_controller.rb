@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
-    # CSRF error
+    
+  # CSRF error
     protect_from_forgery with: :null_session
-    # set session value for request/controller testing
+
+    # set session value for request/controller testing !DELETE
     if Rails.env.test?
       prepend_before_action :stub_current_user
       def stub_current_user
@@ -104,7 +106,6 @@ class ApplicationController < ActionController::Base
       @api_keys = @user.api_keys
       @requested_api_keys = ApiKey.where(in_req_mode: true)
       render layout: "poll"
-      # render "settings"
     end
 
 end
