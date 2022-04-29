@@ -1,6 +1,8 @@
 require "rqrcode"
 
 class PollVotesController < ApplicationController
+  protect_from_forgery with: :null_session
+  before_action :check_api
   layout "poll"
 
   # POST /polls/:invite_token/submit?form_params
@@ -53,5 +55,16 @@ class PollVotesController < ApplicationController
       standalone: true,
       use_path: true
     )  
+  end
+
+  def check_api
+    @api_key = nil
+    api_key = request.headers["ApiKey"]
+    @user = nil
+    if api_key
+      @api_key = ApiKey.where(api_token: api_key)[0]
+      user_id = @api_key.user_id
+      @user = User.find(user_id)
+    end
   end
 end
