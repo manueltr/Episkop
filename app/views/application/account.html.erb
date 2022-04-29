@@ -16,7 +16,7 @@
     <div id="display_polls" class="row">
         <!-- Show directory / polls -->
         <div id="directory" class="col-md-7 p-0">
-            <h2 class="mt-4"> My polls </h2>
+            <h2 class="mt-4 dashboard-header"> My polls </h2>
 
             <div id="MyPolls" class="p-2 pt-0">
                 <div id="directory_nav" class="row mb-2">
@@ -29,10 +29,13 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarColor01">
                             <p class="mb-0 me-3" id="current_dir"><%if @directory.name == "root" %>Home <%else%> <%=@directory.name%> <%end%></p>
-                            <form class="d-flex">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+                            <%# Would be a nice implementation to add search! %>
+                            <%# <form class="d-flex"> %>
+                                <%# <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> %>
                                 <%# <button class="btn btn-outline-light" type="submit">Search</button> %>
-                            </form>
+                            <%# </form> %>
+
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
                                     <a class="nav-link" id="new_poll" href="javascript:;"><span data-bs-toggle="modal" data-bs-target="#addPoll">New Poll</span></a>
@@ -63,17 +66,20 @@
         <div class="col-md-1"></div>
 
         <div id="participated_polls_container" class="col-md-4 p-0">
-            <h2 class="mt-4">Participated Polls </h2>
+            <h2 class="mt-4 dashboard-header">Participated Polls </h2>
             <div id="participated_polls" class="p-2 pt-0">
                 <div id="participated_nav" class="row mb-2">
                         <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 py-2">
                             <div class="container-fluid p-0 px-2">
                             
                                 <i><%= link_to "", directory_home_path(), remote: true, class: "navbar-brand fa-solid fa-filter ps-1" %></i>
-                                <form class="d-flex ms-2 me-auto">
-                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+                                <%# Again, possible search bar %>
+                                <%# <form class="d-flex ms-2 me-auto"> %>
+                                    <%# <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> %>
                                     <%# <button class="btn btn-outline-light" type="submit">Search</button> %>
-                                </form>
+                                <%# </form> %>
+
                             </div>
                         </nav>        
                 </div>

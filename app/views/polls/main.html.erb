@@ -8,7 +8,7 @@
 
     <%if @permission %>
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" data-remote="true" href="<%=poll_settings_url(@poll.invite_token)%>">Edit</a>
+            <a class="nav-link" aria-current="page" data-remote="true" href="<%=poll_settings_url(@poll.invite_token)%>">Settings</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" data-remote="true" href="<%=poll_path(@poll.id)%>">Edit</a>

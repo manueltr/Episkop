@@ -99,7 +99,7 @@ class PollsController < ApplicationController
           if @api_key
             format.json { render :show, status: :ok, location: @poll }
           else 
-            format.html { redirect_to poll_url(@poll), notice: "Poll was successfully updated." }
+            format.html { redirect_to poll_url(@poll)}
           end
         else
           format.html { render :edit, status: :unprocessable_entity }

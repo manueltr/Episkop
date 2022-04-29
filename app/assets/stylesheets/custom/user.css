@@ -4,7 +4,7 @@ html {
 
 body
 	{	
-		background-color: #f5f5f5;
+		background-color: #e7e7e7;
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 300;
 		height: 100%;
@@ -15,14 +15,19 @@ body
 	border-color: black;
 }
 
+.dashboard-header {
+	color: #229de0;
+}
+
+
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
     color: #495057;
-    background-color: #f5f5f5;
-    border-color: black black #f5f5f5;
+    background-color: #e7e7e7;
+    border-color: black black #e7e7e7;
 }
 
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-	border-color: black black #f5f5f5;
+	border-color: black black #e7e7e7;
 	isolation: isolate;
 }
 
@@ -31,6 +36,7 @@ body
 }
 
 /* start nagivation */
+
 .navbar-default
 	{
 		background: #fff;
@@ -40,6 +46,7 @@ body
 	}
 .navbar-default .navbar-brand
 	{
+		color: #29a9ee;
 		font-weight: 500;
 		font-size: 30px;
 		line-height: 40px;
