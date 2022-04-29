@@ -66,7 +66,7 @@ class PollAnswersController < ApplicationController
   # DELETE /poll_answers/1 or /poll_answers/1.json
   def destroy
     @poll = Poll.find(@poll_answer.poll_id)
-    if (@api_key && @api_key.edit_key) || session[:user_id]
+    if (@api_key && @api_key.edit_key && @api_key.accepted) || session[:user_id]
       @poll_answer.destroy
     end
 

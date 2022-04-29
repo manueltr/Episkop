@@ -18,6 +18,12 @@ class PollQuestionsController < ApplicationController
 
   def results
     respond_to do |format|
+      if @api_key && !@api_key.edit_key
+        format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json =>  {status: "This key has not been accepted"}, status: :unauthorized }
+      end
+
       format.json {render :results}
     end 
   end
@@ -134,7 +140,7 @@ class PollQuestionsController < ApplicationController
     end
 
     respond_to do |format|
-      if @api_key && @api_key.edit_key
+      if @api_key && @api_key.edit_key && @api_key.accepted
         format.json { render :json => {status: "Successfully deleted question" } }
       elsif @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not a delete key"}, status: :unauthorized }
