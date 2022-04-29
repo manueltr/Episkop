@@ -21,7 +21,8 @@ RSpec.feature "PollAnswers", type: :feature do
             @poll_answer = PollAnswer.create(:poll_id => @poll.id, :poll_question_id => @pollq.id, :content => "howdy")
             visit poll_path(@poll)
             expect(page).to have_content("howdy")
-            expect(page.html).to have_css(".delete_answer_icon")
+            href = page.evaluate_script("$('a.link_class').attr('href');")
+            expect(page.html).to have_css('.delete_answer_icon[data-*="'+@poll_answer.id.to_s+'"]')
             find(:css, ".delete_answer_icon").click
             visit poll_path(@poll)
             expect(page).to have_no_content("howdy")

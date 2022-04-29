@@ -23,9 +23,13 @@ RSpec.feature "PollQuestions", type: :feature do
       visit poll_path(@poll)
       find(:css,"#new_question_btn").click
       page.should have_content("Question type")
-      page.should have_content("Question Content")
-      end
-
+      page.should have_content("Content")
+      select('Yes No', :from => 'Question type')
+      fill_in('Fwejafoj', with: 'new question')
+      click_button("Create Poll question")
+      page.should have_content("new question")
+      expect(page).to have_current_path(poll_path(@poll))
+    end
   end
 
   describe "When I am on the show poll question page" do
