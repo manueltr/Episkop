@@ -28,7 +28,7 @@
     <%if @permission %>
         <%= render partial: "polls/edit_view" %>
     <%else%>
-        <%= render partial: "polls/form_view", form_closed: @form_closed%>
+        <%= render partial: "polls/form_view", locals: {form_closed: @form_closed, resubmit_closed: @resubmit_closed}%>
     <%end%>
 
 </div>

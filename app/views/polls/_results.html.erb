@@ -22,14 +22,15 @@
         else
           poll_question = nil
         end %>
-        <%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, poll_graph: poll_graph, votes: @poll.poll_votes.length, question_titles: question_titles}%>
+        <%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, poll_graph: poll_graph, votes: @poll.poll_votes.length, question_titles: question_titles, is_users: @is_users}%>
 
     <% end %>
   </div>
 
   
-
+  <%if @is_users%>
   <button id="add_graph_btn" class="btn btn-dark mt-3 mb-5" data-bs-toggle="modal" data-bs-target="#addGraphModal">Add a graph</button>
+  <%end%>
 
   <div class="modal" id="addGraphModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">

@@ -86,7 +86,7 @@
                 <table class="table table-striped">
                     <tbody>
                     <% @user.poll_votes.select(:poll_id).distinct(:poll_id).each do |poll_vote| %>
-                        <%= render partial: "polls/helpers/participated_table_row", locals: {poll_vote: poll_vote}%>
+                        <%= render partial: "polls/helpers/participated_table_row", locals: {poll_vote: poll_vote, user: @user}%>
                     <% end %>
                     </tbody>
                 </table>

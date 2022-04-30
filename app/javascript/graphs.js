@@ -623,7 +623,6 @@ function load_graphs() {
                                                             <thead>
                                                               <tr>
                                                                 <th scope="col">#</th>
-                                                                <th scope="col">Respondent</th>
                                                                 <th scope="col">Response</th>
                                                               </tr>
                                                           </thead>
@@ -635,7 +634,6 @@ function load_graphs() {
           for(let i=0; i < data.length; i++) {
             table_row = `<tr>
                           <th scope="row">`+ i +`</th>
-                          <td></td>
                           <td>`+data[i]+`</td>
                         </tr>`
   

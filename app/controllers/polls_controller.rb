@@ -23,6 +23,9 @@ class PollsController < ApplicationController
 
     # check whether the form is closed
     @form_closed = @poll.is_closed?
+    @has_voted = PollVote.where(user_id: @user.id, poll_id: @poll.id).count
+    @resubmit_closed = (!@poll.resubmits && @has_voted != 0 && @poll.user_id != @user.id)
+
 
   end
 
@@ -56,6 +59,8 @@ class PollsController < ApplicationController
 
     #check if poll is closed
     @form_closed = @poll.is_closed?
+    @has_voted = PollVote.where(user_id: @user.id, poll_id: @poll.id).count
+    @resubmit_closed = (!@poll.resubmits && @has_voted != 0 && @poll.user_id != @user.id)
 
     respond_to  do |format|       
       format.html {render "main"}
@@ -165,7 +170,7 @@ class PollsController < ApplicationController
   def results
 
     @poll = Poll.find_by(invite_token: params[:invite_token])
-
+    @is_users = @poll.user_id == @user.id
 
     @results_closed = (!@poll.show_results && (@poll.user_id != @user.id))
     @poll_graphs = @poll.poll_graphs

@@ -13,7 +13,6 @@ class Poll < ApplicationRecord
 
     #validations
     validates :title, :summary, presence: true
-    validates :ends_at, presence: true, if: :publish?
 
     #callbacks
     before_save :is_closed?
@@ -21,6 +20,9 @@ class Poll < ApplicationRecord
     after_initialize do
         if self.new_record?
           # values will be available for new record forms.
+          if self.publish == nil
+            self.publish = true
+          end
           if self.anonymous == nil
             self.anonymous = false
           end
@@ -40,10 +42,9 @@ class Poll < ApplicationRecord
     end
 
     def is_closed?
-        puts(self.ends_at)
-        puts(Time.now.getutc)
-        self.opened = (self.publish && self.ends_at > Time.now.getutc)
-        return (!self.publish || self.ends_at < Time.now.getutc)
+
+        self.opened = (self.publish && (self.ends_at == nil || self.ends_at > Time.now.getutc))
+        return (!self.publish || (self.ends_at != nil && self.ends_at < Time.now.getutc))
     end
 
     def is_anonymous?
