@@ -1,0 +1,3 @@
+<%- headers = ['Question Type', 'Data'] -%>
+<%= CSV.generate_line headers %>
+<%= CSV.generate_line([poll_question.question_type, poll_question.created_at]) -%>
