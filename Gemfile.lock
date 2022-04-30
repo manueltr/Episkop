@@ -346,6 +346,8 @@ GEM
     sys-uname (1.2.2)
       ffi (~> 1.1)
     thor (1.2.1)
+    time_difference (0.5.0)
+      activesupport
     timeout (0.2.0)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
@@ -402,6 +404,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails
+  time_difference
   turbo-rails
   tzinfo-data
   web-console

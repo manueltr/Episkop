@@ -1,5 +1,8 @@
 class Poll < ApplicationRecord
 
+    require "time"
+
+
     #associations
     belongs_to :user
     has_many :poll_questions, dependent: :destroy
@@ -13,17 +16,24 @@ class Poll < ApplicationRecord
     validates :ends_at, presence: true, if: :publish?
 
     #callbacks
-    before_save :is_open
+    before_save :is_closed?
 
 
     def publish?
         self.publish
     end
 
-    def is_open
-        if self.publish
-            self.opened = self.ends_at > Time.now.getutc
-        end
+    def is_closed?
+        self.opened = (self.publish && self.ends_at > Time.now.getutc)
+        return (!self.publish || self.ends_at < Time.now.getutc)
+    end
+
+    def is_anonymous?
+        return true
+    end
+
+    def results_closed?
+        return false
     end
 
 end

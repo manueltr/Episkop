@@ -83,20 +83,13 @@
                             </div>
                         </nav>        
                 </div>
-                <% @user.poll_votes.select(:poll_id).distinct(:poll_id).each do |poll_vote| %>
-                
-                    <p>
-                        <strong>Title:</strong>
-                        <%= poll_vote.poll.title %>
-                    </p>
-
-                    <p>
-                        <strong>Summary:</strong>
-                        <%= poll_vote.poll.summary %>
-                    </p>
-                    <%= link_to "Go to poll form", form_url(poll_vote.poll.invite_token) %>
-                    </p>
-                <% end %>
+                <table class="table table-striped">
+                    <tbody>
+                    <% @user.poll_votes.select(:poll_id).distinct(:poll_id).each do |poll_vote| %>
+                        <%= render partial: "polls/helpers/participated_table_row", locals: {poll_vote: poll_vote}%>
+                    <% end %>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

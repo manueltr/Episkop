@@ -1,3 +1,5 @@
+// Entry point for the build script in your package.json
+
 // D3 charts
 import * as d3 from "d3";
 function sleep(ms) {
@@ -471,40 +473,6 @@ $(document).on('turbo:load', function() {
       });   
   });
 
-
-  // $(document).on('click', "#add_graph_btn" , function() {
-
-  //   const form = document.querySelector('#addGraphForm');
-  //   const checkboxes = form.querySelectorAll('input[type=checkbox]');
-  //   const checkboxLength = checkboxes.length;
-  //   const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
-
-  //   function init() {
-  //       if (firstCheckbox) {
-  //           for (let i = 0; i < checkboxLength; i++) {
-  //               checkboxes[i].addEventListener('change', checkValidity);
-  //               $(checkboxes[i]).off('change');
-  //           }
-
-  //           checkValidity();
-  //       }
-  //   }
-
-  //   function isChecked() {
-  //       for (let i = 0; i < checkboxLength; i++) {
-  //           if (checkboxes[i].checked) return true;
-  //       }
-
-  //       return false;
-  //   }
-
-  //   function checkValidity() {
-  //       const errorMessage = !isChecked() ? 'At least one checkbox must be selected.' : '';
-  //       firstCheckbox.setCustomValidity(errorMessage);
-  //   }
-
-  //   init();
-  // });
   
 });
 

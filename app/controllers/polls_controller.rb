@@ -1,8 +1,8 @@
 class PollsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_user
-  before_action :set_poll, only: %i[ show edit update destroy settings]
-  before_action :check_user, only: %i[ edit update destroy ]
+  before_action :set_poll, only: %i[ main show edit update destroy settings]
+  before_action :check_user, only: %i[ edit update destroy show ]
 
   layout "poll"
 
@@ -17,8 +17,12 @@ class PollsController < ApplicationController
 
   # GET /polls/:invite_token/form
   def form
+
     @poll = Poll.find_by(invite_token: params[:invite_token])
     @poll_questions = @poll.poll_questions
+
+    # check whether the form is closed
+    @form_closed = @poll.is_closed?
 
   end
 
@@ -32,15 +36,27 @@ class PollsController < ApplicationController
     @poll_questions = @poll.poll_questions
     @permission = has_edit_permission()
 
-    respond_to  do |format|
-            
-        format.html {render "main"}
+    respond_to  do |format|    
         if @api_key && @api_key.extract_key
           format.json { render :show, status: :ok }
         else
           format.json { render :json => {status: "Not an extract key"}, status: :unauthorized }
         end
-        format.js
+    end
+  end
+
+  
+  # GET /polls/:invite_token/main
+  def main
+    @poll_questions = @poll.poll_questions
+    @permission = has_edit_permission()
+
+    #check if poll is closed
+    @form_closed = @poll.is_closed?
+
+    respond_to  do |format|       
+      format.html {render "main"}
+      format.js {render "edit_view"}
     end
   end
 
@@ -99,7 +115,7 @@ class PollsController < ApplicationController
           if @api_key
             format.json { render :show, status: :ok, location: @poll }
           else 
-            format.html { redirect_to poll_url(@poll)}
+            format.html { redirect_to poll_main_page_url(@poll.invite_token)}
           end
         else
           format.html { render :edit, status: :unprocessable_entity }

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :poll_questions
   end
   get '/polls/:invite_token/settings', to: 'polls#settings', as: 'poll_settings'
+  get '/polls/:invite_token/main', to: 'polls#main', as: 'poll_main_page'
   
   #Directories
   resources :directories, only: [:show, :create, :destroy, :update]

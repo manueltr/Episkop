@@ -9,20 +9,20 @@ RSpec.feature "PollQuestions", type: :feature do
   describe "When I go to the poll show" do
     it "should show me all the questions associated with that poll" do
       PollQuestion.create(:poll_id => @poll.id, :question_type => "Input", :content => "Testing show of questions")
-      visit poll_path(@poll)
+      visit poll_main_page_url(@poll.invite_token)
       page.should have_content("Testing show of questions")
     end
 
     it "should allow me to click on show this question" do
       poll_question = PollQuestion.create(:poll_id => @poll.id, :question_type => "Input", :content => "Testing show of questions")
-      visit poll_path(@poll)
+      visit poll_main_page_url(@poll.invite_token)
       click_link("Show this poll question")
       page.should have_content("Testing show of questions")
       expect(page).to have_current_path(poll_question_path(poll_question))
     end
 
     it "should allow me to create a new question" do
-      visit poll_path(@poll)
+      visit poll_main_page_url(@poll.invite_token)
       click_button("Add a question")
       select('Yes No', :from => 'Question type')
       fill_in('Question Content', with: 'new question')
@@ -30,7 +30,7 @@ RSpec.feature "PollQuestions", type: :feature do
       page.should have_content("new question")
       page.should have_content("Yes")
       page.should have_content("No")
-      expect(page).to have_current_path(poll_path(@poll))
+      expect(page).to have_current_path(poll_main_page_url(@poll.invite_token))
     end
   end
 
@@ -40,7 +40,7 @@ RSpec.feature "PollQuestions", type: :feature do
       visit poll_question_path(poll_question)
       click_button("Destroy this poll question")
       page.should have_no_content('Testing show of questions')
-      page.should have_current_path(poll_path(@poll))
+      page.should have_current_path(poll_main_page_url(@poll.invite_token))
     end
 
     it "should allow me to edit a question and redirect me to the poll show page once submitted" do
@@ -50,7 +50,7 @@ RSpec.feature "PollQuestions", type: :feature do
       fill_in('Content', with: "Rspec poll_question updated")
       click_button("Update Poll question")
       page.should have_content("Rspec poll_question updated")
-      page.should have_current_path(poll_path(@poll))
+      page.should have_current_path(poll_main_page_url(@poll.invite_token))
     end
 
 

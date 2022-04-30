@@ -38,7 +38,7 @@ class PollAnswersController < ApplicationController
         if @api_key
           format.json { render :show, status: :created, location: @poll_answer }
         else
-          format.html { redirect_to poll_path(@poll), notice: "Poll answer was successfully created." }
+          format.html { redirect_to poll_main_page_url(@poll.invite_token), notice: "Poll answer was successfully created." }
         end
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -73,7 +73,7 @@ class PollAnswersController < ApplicationController
       elsif @api_key && !@api_key.delete_key
         format.json { render :json => {status: "Not a delete key"}, status: :unauthorized }
       else
-        format.html { redirect_to poll_path(@poll), notice: "Poll answer was successfully destroyed." }
+        format.html { redirect_to , notice: "Poll answer was successfully destroyed." }
         format.json { head :no_content }
       end  
     end

@@ -36,3 +36,22 @@ i.fa-pencil {
 }
 
 /* ------------------ */
+
+
+/* participated poll sections */
+
+.participated-poll-row:hover  p {
+    color: #229de0
+}
+
+.participated-poll-row i {
+    display: inline-flex;
+    margin-left: 6px;
+}
+
+.participated-poll-row {
+    cursor: pointer;
+}
+
+
+/* ------------------ */

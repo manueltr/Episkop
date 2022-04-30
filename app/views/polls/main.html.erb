@@ -11,7 +11,7 @@
             <a class="nav-link" aria-current="page" data-remote="true" href="<%=poll_settings_url(@poll.invite_token)%>">Settings</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" data-remote="true" href="<%=poll_path(@poll.id)%>">Edit</a>
+            <a class="nav-link active" aria-current="page" data-remote="true" href="<%=poll_main_page_url(@poll.invite_token)%>">Edit</a>
         </li>
     <% end %>
     <li class="nav-item">
@@ -26,9 +26,9 @@
 <div id="main_view">
 
     <%if @permission %>
-        <%= render partial: "polls/show" %>
+        <%= render partial: "polls/edit_view" %>
     <%else%>
-        <%= render partial: "polls/form_view"%>
+        <%= render partial: "polls/form_view", form_closed: @form_closed%>
     <%end%>
 
 </div>
