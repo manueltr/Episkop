@@ -11,7 +11,7 @@
 
           <div class="invite-box" data-controller="invite">
             <h5 class="mb-1">Invite Link:</h5>
-            <input class="poll-url input" id="cb-link-field" type="text" value="<%= form_url(poll.invite_token) %>" data-target="invite.url" data-group-token="<%= poll.invite_token %>" style="width: 40%;"/>
+            <input class="poll-url input" id="cb-link-field" type="text" value="<%= poll_main_page_url(poll.invite_token) %>" data-target="invite.url" data-group-token="<%= poll.invite_token %>" style="width: 40%;"/>
             <div class="card-body__btns mt-2">
 
               <%# add body to copy link %>

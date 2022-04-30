@@ -1,34 +1,40 @@
-<div class="container">
-  <p style="color: green"><%= notice %></p>
-</div>
-
-<div class="container mb-5">
-  <div class="card">
-    <div class="card-header" style="background: #212529;"></div>
-    <div class="card-body">
-        <h1 class="card-title"><%= @poll.title %></h5>
-        <p class="card-text"><%= @poll.summary %></p>
-    </div>
-  </div>
-</div>
-
-<form method="post" action="<%=poll_submit_path(@poll.invite_token)%>">
-<div class="container">
-    <% @poll_questions.each do |poll_question| %>
-        <div class="card mt-3">
-            <div class="card-body">
-                    <div id="poll_questions">
-                        <%= render "poll_questions/poll_question_form", :poll_question => poll_question %><br>
-                    </div>
-            </div> 
+<% if form_closed %>
+<%= render partial: 'polls/helpers/form_closed', locals: {resubmit: false} %>
+<% elsif resubmit_closed %>
+<%= render partial: 'polls/helpers/form_closed', locals: {resubmit: true} %>
+<% else %>
+<div class="form-container">
+    <div class="container mt-3 mb-5">
+    <div class="card">
+        <div class="card-header" style="background: #212529;"></div>
+        <div class="card-body">
+            <h1 class="card-title"><%= @poll.title %></h5>
+            <p class="card-text"><%= @poll.summary %></p>
+            <div id="form-view-anon-indicator"><%=show_anonymous_icon(@poll)%></div>
         </div>
-    <% end %>
-</div>
-<br>
+    </div>
+    </div>
+
+    <form method="post" action="<%=poll_submit_path(@poll.invite_token)%>">
     <div class="container">
-        <div class="form-group">
-                    <%= puts poll_submit_path(@poll.invite_token)%>
-                    <%= button_to "submit", poll_submit_path(@poll.invite_token), method: :post, class: "btn btn-dark"%>
-        </div>
+        <% @poll_questions.each do |poll_question| %>
+            <div class="card mt-3">
+                <div class="card-body">
+                        <div id="poll_questions">
+                            <%= render "poll_questions/poll_question_form", :poll_question => poll_question %><br>
+                        </div>
+                </div> 
+            </div>
+        <% end %>
     </div>
-</form>
+    <br>
+        <div class="container">
+            <div class="form-group">
+                        <%= puts poll_submit_path(@poll.invite_token)%>
+                        <%= button_to "submit", poll_submit_path(@poll.invite_token), method: :post, class: "btn btn-dark"%>
+            </div>
+        </div>
+    </form>
+</div>
+
+<% end %>

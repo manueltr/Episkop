@@ -77,7 +77,7 @@ class PollAnswersController < ApplicationController
       elsif @api_key && !@api_key.accepted
         format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
       else
-        format.html { redirect_to , notice: "Poll answer was successfully destroyed." }
+        format.html { redirect_to poll_main_page_url(@poll.invite_token), notice: "Poll answer was successfully destroyed." }
         format.json { head :no_content }
       end  
     end

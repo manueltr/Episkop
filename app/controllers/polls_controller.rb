@@ -22,7 +22,7 @@ class PollsController < ApplicationController
     @poll_questions = @poll.poll_questions
 
     # check whether the form is closed
-    @form_closed = @poll.is_closed?
+    @form_closed = @poll.is_closed? &&  (@poll.user_id != @user.id)
     @has_voted = PollVote.where(user_id: @user.id, poll_id: @poll.id).count
     @resubmit_closed = (!@poll.resubmits && @has_voted != 0 && @poll.user_id != @user.id)
 
@@ -58,7 +58,7 @@ class PollsController < ApplicationController
     @permission = has_edit_permission()
 
     #check if poll is closed
-    @form_closed = @poll.is_closed?
+    @form_closed = @poll.is_closed? && (@poll.user_id != @user.id)
     @has_voted = PollVote.where(user_id: @user.id, poll_id: @poll.id).count
     @resubmit_closed = (!@poll.resubmits && @has_voted != 0 && @poll.user_id != @user.id)
 

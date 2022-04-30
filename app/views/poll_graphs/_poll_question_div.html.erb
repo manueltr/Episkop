@@ -1,7 +1,7 @@
 <% if poll_question != nil %>
 
     <div class="card mt-3">
-        <div class="d-flex card-header justify-content-between"><i></i><i class="grabbable fa-solid fa-grip-lines"></i><%=delete_button(is_users)%></div>
+        <div class="d-flex card-header justify-content-between"><i></i><i class="grabbable fa-solid fa-grip-lines"></i><%=delete_button(is_users,poll_graph.id)%></div>
         <div class="card-body">
             <p class="card-title" style="font-size: 20px;"><%=poll_question.content%></p>
                 <div class="d-flex poll_question_results justify-content-center" 
@@ -20,7 +20,7 @@
 <% else %>
 
     <div class="card mt-3">
-        <div class="d-flex card-header justify-content-between"><i></i><i class="grabbable fa-solid fa-grip-lines"></i><%=delete_button(is_users)%></div>
+        <div class="d-flex card-header justify-content-between"><i></i><i class="grabbable fa-solid fa-grip-lines"></i><%=delete_button(is_users, poll_graph.id)%></div>
         <div class="card-body">
             <div class="card-title" style="font-size: 20px;">
                 <div class = "row"><p style="margin-bottom: 0px"><%=poll_graph.graph_type%>,</p></div>

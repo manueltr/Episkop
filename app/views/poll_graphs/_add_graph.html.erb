@@ -8,5 +8,5 @@
 else
     poll_question = nil
 end %>
-<%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, poll_graph: @graph, votes: @poll.poll_votes.length, question_titles: question_titles}%>
+<%= render partial: "poll_graphs/poll_question_div", locals: {poll_question: poll_question, poll_graph: @graph, votes: @poll.poll_votes.length, question_titles: question_titles, is_users: true}%>
 <div id="ready"></div>
