@@ -100,7 +100,6 @@ $(document).on('turbo:load', function() {
             let directory_id = $("#directory-rename").attr("data-id")
             let directory_name = $("#directory-rename").attr("data-name")
 
-            console.log(directory_id);
             $(`#directory_${directory_id}`).find('.col').hide()
             $(`#directory_${directory_id}`).append(
                 `<div class="col" id="directory-rename-form" >
