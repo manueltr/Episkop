@@ -9,6 +9,7 @@
         <div class="card-body">
             <h1 class="card-title"><%= @poll.title %></h5>
             <p class="card-text"><%= @poll.summary %></p>
+            <div id="form-view-anon-indicator"><%=show_anonymous_icon(@poll)%></div>
         </div>
     </div>
     </div>

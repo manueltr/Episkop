@@ -165,6 +165,9 @@ class PollsController < ApplicationController
   def results
 
     @poll = Poll.find_by(invite_token: params[:invite_token])
+
+
+    @results_closed = (!@poll.show_results && (@poll.user_id != @user.id))
     @poll_graphs = @poll.poll_graphs
     @poll_questions = @poll.poll_questions
     
@@ -228,6 +231,6 @@ class PollsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def poll_params
-      params.require(:poll).permit(:title, :summary, :opened, :publish, :ends_at, :directory_id)
+      params.require(:poll).permit(:title, :summary, :opened, :publish, :ends_at, :directory_id, :anonymous, :show_results, :resubmits)
     end
 end

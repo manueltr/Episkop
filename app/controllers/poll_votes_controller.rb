@@ -10,6 +10,7 @@ class PollVotesController < ApplicationController
     
     #handle the creation for vote_answers here!
     @poll = Poll.find_by(:invite_token => params[:invite_token])
+    
     params.each do |question, answer|
 
       if question.match('question_')
@@ -30,6 +31,9 @@ class PollVotesController < ApplicationController
           @poll_vote.poll_answer_id = answer.scan(/\d+/)[0]
           @poll_vote.response = nil
         end
+
+        # mark vote as anonymous if the poll is currently set to anonymous
+        @poll_vote.anonymous = @poll.anonymous
 
         @poll_vote.save
       else

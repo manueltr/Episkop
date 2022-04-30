@@ -38,7 +38,7 @@ i.fa-pencil {
 /* ------------------ */
 
 
-/* participated poll sections */
+/* participated poll section */
 
 .participated-poll-row:hover  p {
     color: #229de0
@@ -53,5 +53,23 @@ i.fa-pencil {
     cursor: pointer;
 }
 
+/* ------------------ */
+
+
+/* form view section */
+
+#form-view-anon-indicator {
+    display: inline-flex;
+}
+
+#form-view-anon-indicator i {
+
+}
+
+#form-view-anon-indicator p {
+    margin-left: 4px;
+    margin-bottom: 0px;
+}
 
 /* ------------------ */
+

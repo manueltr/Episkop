@@ -1,5 +1,4 @@
 // Entry point for the build script in your package.json
-
 // D3 charts
 import * as d3 from "d3";
 function sleep(ms) {
@@ -473,6 +472,40 @@ $(document).on('turbo:load', function() {
       });   
   });
 
+
+  // $(document).on('click', "#add_graph_btn" , function() {
+
+  //   const form = document.querySelector('#addGraphForm');
+  //   const checkboxes = form.querySelectorAll('input[type=checkbox]');
+  //   const checkboxLength = checkboxes.length;
+  //   const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
+
+  //   function init() {
+  //       if (firstCheckbox) {
+  //           for (let i = 0; i < checkboxLength; i++) {
+  //               checkboxes[i].addEventListener('change', checkValidity);
+  //               $(checkboxes[i]).off('change');
+  //           }
+
+  //           checkValidity();
+  //       }
+  //   }
+
+  //   function isChecked() {
+  //       for (let i = 0; i < checkboxLength; i++) {
+  //           if (checkboxes[i].checked) return true;
+  //       }
+
+  //       return false;
+  //   }
+
+  //   function checkValidity() {
+  //       const errorMessage = !isChecked() ? 'At least one checkbox must be selected.' : '';
+  //       firstCheckbox.setCustomValidity(errorMessage);
+  //   }
+
+  //   init();
+  // });
   
 });
 
@@ -532,7 +565,13 @@ function load_graphs() {
     $.getJSON(data_api, params, function (data) {
 
       let domain = ""
-      $(".poll_question_results").eq(params.graph_index).children('svg, table').remove();
+      $(".poll_question_results").eq(params.graph_index).children('svg, table, .card-text').remove();
+
+      if(data["vote_count"] == 0) {
+        $(".poll_question_results").eq(params.graph_index).prepend('<p class="card-text">No responses</p>');
+      }
+      else{
+      
       switch(params.graph_type) {
 
         case "Pie chart":
@@ -640,6 +679,7 @@ function load_graphs() {
         default:
           console.log("Chart not supported")
       }
+    }
     });
   });
 }

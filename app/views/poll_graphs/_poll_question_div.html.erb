@@ -1,55 +1,35 @@
 <% if poll_question != nil %>
 
-    <%if votes != 0%>   
-        <div class="card mt-3">
-            <div class="d-flex card-header justify-content-between"><i></i><i class="grabbable fa-solid fa-grip-lines"></i><i data-delete="<%=graphs_delete_url(poll_graph.id)%>" class="graph-delete fa-solid fa-xmark"></i></div>
-            <div class="card-body">
-                <p class="card-title" style="font-size: 20px;"><%=poll_question.content%></p>
-                    <div class="d-flex poll_question_results justify-content-center" 
-                    id="<%=poll_graph.id%>" 
-                    data-path="<%= poll_question_results_url(poll_question.id)%>" 
-                    data-graph-type="<%=poll_graph.graph_type%>"
-                    <%if poll_question.question_type == "Input"%>style="height: 300px; overflow: scroll;"<%end%>>
-                    </div>
-            </div>
+    <div class="card mt-3">
+        <div class="d-flex card-header justify-content-between"><i></i><i class="grabbable fa-solid fa-grip-lines"></i><i data-delete="<%=graphs_delete_url(poll_graph.id)%>" class="graph-delete fa-solid fa-xmark"></i></div>
+        <div class="card-body">
+            <p class="card-title" style="font-size: 20px;"><%=poll_question.content%></p>
+                <div class="d-flex poll_question_results justify-content-center" 
+                id="<%=poll_graph.id%>" 
+                data-path="<%= poll_question_results_url(poll_question.id)%>" 
+                data-graph-type="<%=poll_graph.graph_type%>"
+                <%if poll_question.question_type == "Input"%>style="height: 300px; overflow: scroll;"<%end%>>
+                </div>
         </div>
+    </div>
 
-    <%else%>
-        <div class="card mt-3">
-            <div class="d-flex card-header justify-content-end"><i data-delete="<%=graphs_delete_url(poll_graph.id)%>" class="graph-delete fa-solid fa-xmark"></i></div>
-            <div class="card-body">
-                <p class="card-title" style="font-size: 20px;"><%=poll_question.content%></p>
-                <p class="card-text">No responses</p>
-            </div>
-        </div>
-    <% end %>
 <% else %>
-    <%if votes != 0%>   
-        <div class="card mt-3">
-            <div class="d-flex card-header justify-content-end"><i data-delete="<%=graphs_delete_url(poll_graph.id)%>" class="graph-delete fa-solid fa-xmark"></i></div>
-            <div class="card-body">
-                <div class="card-title" style="font-size: 20px;">
-                    <div class = "row"><p style="margin-bottom: 0px"><%=poll_graph.graph_type%>,</p></div>
-                    <div class = "row" style="font-size: 12px;"><p>questions: <%=question_titles%></p></div>
-                </div>
-                    <div class="d-flex poll_question_results justify-content-center" 
-                    id="<%=poll_graph.id%>" 
-                    data-path="<%= yes_no_graph_results_url(poll_graph.questions, poll_graph.poll.id, graph_type: poll_graph.graph_type)%>" 
-                    data-graph-type="<%=poll_graph.graph_type%>"
-                    >
-                </div>
-                <div class="d-flex justify-content-center" style="font-size: 12px">Step forth, step back graph where each No is -1 and each Yes is +1</div>
-            </div>
-        </div>
 
-    <%else%>
-        <div class="card mt-3">
-            <div class="d-flex card-header justify-content-end"><i data-delete="<%=graphs_delete_url(poll_graph.id)%>" class="graph-delete fa-solid fa-xmark"></i></div>
-            <div class="card-body">
-                <p class="card-title" style="font-size: 20px;"><%=poll_graph.graph_type%></p>
-                <p class="card-text">No responses</p>
+    <div class="card mt-3">
+        <div class="d-flex card-header justify-content-between"><i></i><i class="grabbable fa-solid fa-grip-lines"></i><i data-delete="<%=graphs_delete_url(poll_graph.id)%>" class="graph-delete fa-solid fa-xmark"></i></div>
+        <div class="card-body">
+            <div class="card-title" style="font-size: 20px;">
+                <div class = "row"><p style="margin-bottom: 0px"><%=poll_graph.graph_type%>,</p></div>
+                <div class = "row" style="font-size: 12px;"><p>questions: <%=question_titles%></p></div>
             </div>
+                <div class="d-flex poll_question_results justify-content-center" 
+                id="<%=poll_graph.id%>" 
+                data-path="<%= yes_no_graph_results_url(poll_graph.questions, poll_graph.poll.id, graph_type: poll_graph.graph_type)%>" 
+                data-graph-type="<%=poll_graph.graph_type%>"
+                >
+            </div>
+            <div class="d-flex justify-content-center" style="font-size: 12px">Step forth, step back graph where each No is -1 and each Yes is +1</div>
         </div>
-    <% end %>
+    </div>
 
 <% end %>

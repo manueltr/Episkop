@@ -1,10 +1,13 @@
+<% if results_closed %>
+<%= render partial: 'polls/helpers/results_closed'%>
+<% else %>
 <div class="container">
 
   <div class="card mt-3 mb-5">
         <div class="card-header" style="background: #212529;"></div>
         <div class="card-body">
             <h1 class="card-title">Responses</h1>
-            <p class="card-text">Number of responses: <%= @poll.poll_votes.distinct.pluck(:user_id).length %></p>
+            <p class="card-text">Number of respondents: <%= @poll.poll_votes.distinct.pluck(:user_id).length %></p>
         </div>
   </div>
 
@@ -52,3 +55,5 @@
 </div>
 
 <div id="ready"></div>
+
+<%end%>

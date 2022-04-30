@@ -21,6 +21,7 @@ class PollQuestionsController < ApplicationController
   end
 
   def results
+    
     respond_to do |format|
       if @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
