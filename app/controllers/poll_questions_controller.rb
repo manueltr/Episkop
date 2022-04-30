@@ -23,7 +23,15 @@ class PollQuestionsController < ApplicationController
   def results
     respond_to do |format|
       format.json {render :results}
-    end 
+    end
+  end
+
+  def write_json
+    results = :results
+    respond_to do |format|
+      send_data results.to_json, type: :json, disposition: "attachment", filename: "result.json"
+    end
+
   end
 
   # GET /poll_questions/yes_no_graph

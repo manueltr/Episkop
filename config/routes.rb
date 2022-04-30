@@ -48,5 +48,8 @@ Rails.application.routes.draw do
   get '/polls_api', to: 'api#index', as: 'polls_api_index'
   get '/polls_api_simple', to: 'api#index_non_db', as: 'polls_api_non_db'
   get '/settings', to: 'application#settings', as: 'settings'
+
+  #Download JSON/CSV
+  get '/poll_questions/:id/results', to: 'poll_questions#write_json', as: 'download_json_results'
   
 end
