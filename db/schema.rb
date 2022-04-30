@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_16_165823) do
+ActiveRecord::Schema.define(version: 2022_04_30_040707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2022_04_16_165823) do
     t.bigint "poll_answer_id"
     t.boolean "submitted"
     t.text "response"
+    t.boolean "anonymous"
     t.index ["poll_answer_id"], name: "index_poll_votes_on_poll_answer_id"
     t.index ["poll_id"], name: "index_poll_votes_on_poll_id"
     t.index ["poll_question_id"], name: "index_poll_votes_on_poll_question_id"
@@ -93,6 +94,9 @@ ActiveRecord::Schema.define(version: 2022_04_16_165823) do
     t.boolean "publish"
     t.string "invite_token"
     t.bigint "directory_id"
+    t.boolean "anonymous"
+    t.boolean "show_results"
+    t.boolean "resubmits"
     t.index ["directory_id"], name: "index_polls_on_directory_id"
     t.index ["invite_token"], name: "index_polls_on_invite_token", unique: true
     t.index ["user_id"], name: "index_polls_on_user_id"

@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
+
+  root 'application#welcome'
+
+  #API keys
   resources :api_keys
-  
+
+  #Poll answers
   resources :poll_answers
 
+  #Polls 
   resources :polls, shallow: true do
     resources :poll_questions
   end
+  get '/polls/:invite_token/settings', to: 'polls#settings', as: 'poll_settings'
+  get '/polls/:invite_token/main', to: 'polls#main', as: 'poll_main_page'
   
-  resources :directories, only: [:show, :create]
+  #Directories
+  resources :directories, only: [:show, :create, :destroy, :update]
    
-  # email invitations
+  #email invitations
   get '/pollsinvite/sendinvite', to: 'polls#send_email_invite', as: 'send_email_invite'
 
   #Authentication
@@ -27,6 +36,7 @@ Rails.application.routes.draw do
   get '/polls/:invite_token/results', to: 'polls#results', as: 'results'
   post '/polls/:invite_token/submit', to: 'poll_votes#submit', as: 'poll_submit'
   get '/polls/:invite_token/qr_code', to: 'poll_votes#qr', as: 'form_qr'
+
   #PollQuestionResults
   get '/poll_questions/:id/results', to: 'poll_questions#results', as: 'poll_question_results'
   get '/poll_questions/:questions/:poll_id/yes_no/results', to: 'poll_questions#yesNo', as: 'yes_no_graph_results'
@@ -35,29 +45,9 @@ Rails.application.routes.draw do
   post '/poll_graphs/:id', to: 'poll_graphs#create', as: 'graphs_create'
   delete '/poll_graphs/:id', to: 'poll_graphs#destroy', as: 'graphs_delete'
   
-
-
   # API KEY routes
   get '/polls_api', to: 'api#index', as: 'polls_api_index'
   get '/polls_api_simple', to: 'api#index_non_db', as: 'polls_api_non_db'
-
   get '/settings', to: 'application#settings', as: 'settings'
-
-
-  # API Usage routes
-  # create
-  # delete
-  # extract
-  # edit
-
-
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  root 'application#welcome'
-  # Defines the root path route ("/")
-  #root "articles#index"
-
-
-
   
 end

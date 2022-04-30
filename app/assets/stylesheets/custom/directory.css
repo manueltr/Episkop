@@ -43,3 +43,7 @@
 #directory-back:hover {
     cursor: pointer;
 }
+
+#confirm_dir_name {
+    font-weight: bold;
+}

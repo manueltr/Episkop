@@ -26,3 +26,46 @@ i.fa-pencil {
     display: none;
 }
 
+
+/* poll settings page */
+
+#settings-delete-poll {
+    border-top: solid;
+    border-width:1spx;
+    border-color: black;
+}
+
+/* ------------------ */
+
+
+/* participated poll section */
+
+.participated-poll-row:hover  p {
+    color: #229de0
+}
+
+.participated-poll-row i {
+    display: inline-flex;
+    margin-left: 6px;
+}
+
+.participated-poll-row {
+    cursor: pointer;
+}
+
+/* ------------------ */
+
+
+/* form view section */
+
+#form-view-anon-indicator {
+    display: inline-flex;
+}
+
+#form-view-anon-indicator p {
+    margin-left: 4px;
+    margin-bottom: 0px;
+}
+
+/* ------------------ */
+

@@ -1,3 +1,4 @@
+// Entry point for the build script in your package.json
 // D3 charts
 import * as d3 from "d3";
 function sleep(ms) {
@@ -564,7 +565,13 @@ function load_graphs() {
     $.getJSON(data_api, params, function (data) {
 
       let domain = ""
-      $(".poll_question_results").eq(params.graph_index).children('svg, table').remove();
+      $(".poll_question_results").eq(params.graph_index).children('svg, table, .card-text').remove();
+
+      if(data["vote_count"] == 0) {
+        $(".poll_question_results").eq(params.graph_index).prepend('<p class="card-text">No responses</p>');
+      }
+      else{
+      
       switch(params.graph_type) {
 
         case "Pie chart":
@@ -616,7 +623,6 @@ function load_graphs() {
                                                             <thead>
                                                               <tr>
                                                                 <th scope="col">#</th>
-                                                                <th scope="col">Respondent</th>
                                                                 <th scope="col">Response</th>
                                                               </tr>
                                                           </thead>
@@ -628,7 +634,6 @@ function load_graphs() {
           for(let i=0; i < data.length; i++) {
             table_row = `<tr>
                           <th scope="row">`+ i +`</th>
-                          <td></td>
                           <td>`+data[i]+`</td>
                         </tr>`
   
@@ -672,6 +677,7 @@ function load_graphs() {
         default:
           console.log("Chart not supported")
       }
+    }
     });
   });
 }

@@ -1,5 +1,6 @@
 
 json.question_type poll_question.question_type
+json.vote_count poll_question.poll_votes.count
 
 if poll_question.question_type == "Input"
     json.data poll_question.get_graph_data
