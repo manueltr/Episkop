@@ -1,6 +1,8 @@
 require "rqrcode"
 
 class PollVotesController < ApplicationController
+  protect_from_forgery with: :null_session
+  before_action :check_api
   layout "poll"
 
   # POST /polls/:invite_token/submit?form_params
@@ -8,6 +10,7 @@ class PollVotesController < ApplicationController
     
     #handle the creation for vote_answers here!
     @poll = Poll.find_by(:invite_token => params[:invite_token])
+    
     params.each do |question, answer|
 
       if question.match('question_')
@@ -28,6 +31,9 @@ class PollVotesController < ApplicationController
           @poll_vote.poll_answer_id = answer.scan(/\d+/)[0]
           @poll_vote.response = nil
         end
+
+        # mark vote as anonymous if the poll is currently set to anonymous
+        @poll_vote.anonymous = @poll.anonymous
 
         @poll_vote.save
       else
@@ -53,5 +59,16 @@ class PollVotesController < ApplicationController
       standalone: true,
       use_path: true
     )  
+  end
+
+  def check_api
+    @api_key = nil
+    api_key = request.headers["ApiKey"]
+    @user = nil
+    if api_key
+      @api_key = ApiKey.where(api_token: api_key)[0]
+      user_id = @api_key.user_id
+      @user = User.find(user_id)
+    end
   end
 end

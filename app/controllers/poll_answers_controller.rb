@@ -34,11 +34,13 @@ class PollAnswersController < ApplicationController
     respond_to do |format|
       if @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
       elsif @poll_answer.save
         if @api_key
           format.json { render :show, status: :created, location: @poll_answer }
         else
-          format.html { redirect_to poll_path(@poll), notice: "Poll answer was successfully created." }
+          format.html { redirect_to poll_main_page_url(@poll.invite_token), notice: "Poll answer was successfully created." }
         end
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -63,17 +65,19 @@ class PollAnswersController < ApplicationController
   # DELETE /poll_answers/1 or /poll_answers/1.json
   def destroy
     @poll = Poll.find(@poll_answer.poll_id)
-    if (@api_key && @api_key.delete_key) || session[:user_id]
+    if (@api_key && @api_key.edit_key && @api_key.accepted) || session[:user_id]
       @poll_answer.destroy
     end
 
     respond_to do |format|
-      if @api_key && @api_key.delete_key
+      if @api_key && @api_key.edit_key && @api_key.accepted
         format.json { render :json => {status: "Successfully deleted answer" } }
-      elsif @api_key && !@api_key.delete_key
+      elsif @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not a delete key"}, status: :unauthorized }
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
       else
-        format.html { redirect_to poll_path(@poll), notice: "Poll answer was successfully destroyed." }
+        format.html { redirect_to , notice: "Poll answer was successfully destroyed." }
         format.json { head :no_content }
       end  
     end

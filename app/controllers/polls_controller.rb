@@ -1,8 +1,8 @@
 class PollsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_user
-  before_action :set_poll, only: %i[ show edit update destroy settings]
-  before_action :check_user, only: %i[ edit update destroy ]
+  before_action :set_poll, only: %i[ main show edit update destroy settings]
+  before_action :check_user, only: %i[ edit update destroy show ]
 
   layout "poll"
 
@@ -17,8 +17,15 @@ class PollsController < ApplicationController
 
   # GET /polls/:invite_token/form
   def form
+
     @poll = Poll.find_by(invite_token: params[:invite_token])
     @poll_questions = @poll.poll_questions
+
+    # check whether the form is closed
+    @form_closed = @poll.is_closed?
+    @has_voted = PollVote.where(user_id: @user.id, poll_id: @poll.id).count
+    @resubmit_closed = (!@poll.resubmits && @has_voted != 0 && @poll.user_id != @user.id)
+
 
   end
 
@@ -33,14 +40,31 @@ class PollsController < ApplicationController
     @permission = has_edit_permission()
 
     respond_to  do |format|
-            
-        format.html {render "main"}
-        if @api_key && @api_key.extract_key
+             
+        if @api_key && @api_key.extract_key && @api_key.accepted
           format.json { render :show, status: :ok }
+        elsif @api_key && !@api_key.accepted
+          format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
         else
           format.json { render :json => {status: "Not an extract key"}, status: :unauthorized }
         end
-        format.js
+    end
+  end
+
+  
+  # GET /polls/:invite_token/main
+  def main
+    @poll_questions = @poll.poll_questions
+    @permission = has_edit_permission()
+
+    #check if poll is closed
+    @form_closed = @poll.is_closed?
+    @has_voted = PollVote.where(user_id: @user.id, poll_id: @poll.id).count
+    @resubmit_closed = (!@poll.resubmits && @has_voted != 0 && @poll.user_id != @user.id)
+
+    respond_to  do |format|       
+      format.html {render "main"}
+      format.js {render "edit_view"}
     end
   end
 
@@ -77,6 +101,8 @@ class PollsController < ApplicationController
     respond_to do |format|
       if !session[:user_id] && @api_key && !@api_key.create_key
         format.json { render :json => {status: "Not a create key"}, status: :unauthorized }
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
       elsif @poll.save
         flash[:notice] = "Poll was successfully created."
         format.html { redirect_to "/homepage" }
@@ -94,12 +120,14 @@ class PollsController < ApplicationController
     respond_to do |format|
       if !session[:user_id] && @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
       else
         if @poll.update(poll_params)
           if @api_key
             format.json { render :show, status: :ok, location: @poll }
           else 
-            format.html { redirect_to poll_url(@poll)}
+            format.html { redirect_to poll_main_page_url(@poll.invite_token)}
           end
         else
           format.html { render :edit, status: :unprocessable_entity }
@@ -142,6 +170,9 @@ class PollsController < ApplicationController
   def results
 
     @poll = Poll.find_by(invite_token: params[:invite_token])
+    @is_users = @poll.user_id == @user.id
+
+    @results_closed = (!@poll.show_results && (@poll.user_id != @user.id))
     @poll_graphs = @poll.poll_graphs
     @poll_questions = @poll.poll_questions
     
@@ -205,6 +236,6 @@ class PollsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def poll_params
-      params.require(:poll).permit(:title, :summary, :opened, :publish, :ends_at, :directory_id)
+      params.require(:poll).permit(:title, :summary, :opened, :publish, :ends_at, :directory_id, :anonymous, :show_results, :resubmits)
     end
 end

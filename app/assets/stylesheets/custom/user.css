@@ -4,7 +4,7 @@ html {
 
 body
 	{	
-		background-color: #e7e7e7;
+		background-color: #ededed;
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 300;
 		height: 100%;
@@ -16,18 +16,19 @@ body
 }
 
 .dashboard-header {
-	color: #229de0;
+	color: rgb(40, 169, 238);
+	font-weight: 500;
 }
 
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
     color: #495057;
-    background-color: #e7e7e7;
-    border-color: black black #e7e7e7;
+    background-color: #ededed;
+    border-color: black black #ededed;
 }
 
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-	border-color: black black #e7e7e7;
+	border-color: black black #ededed;
 	isolation: isolate;
 }
 
@@ -191,4 +192,14 @@ body
 .question-del:hover{
 	cursor:pointer;
 	color:black;
+}
+
+#results_svg, #form_svg {
+	height: 200px;
+	width: 200px;
+}
+
+.invalid-access{
+	margin-top: 8px;
+	font-size: 30px;
 }

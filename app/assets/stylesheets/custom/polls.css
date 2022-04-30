@@ -36,3 +36,36 @@ i.fa-pencil {
 }
 
 /* ------------------ */
+
+
+/* participated poll section */
+
+.participated-poll-row:hover  p {
+    color: #229de0
+}
+
+.participated-poll-row i {
+    display: inline-flex;
+    margin-left: 6px;
+}
+
+.participated-poll-row {
+    cursor: pointer;
+}
+
+/* ------------------ */
+
+
+/* form view section */
+
+#form-view-anon-indicator {
+    display: inline-flex;
+}
+
+#form-view-anon-indicator p {
+    margin-left: 4px;
+    margin-bottom: 0px;
+}
+
+/* ------------------ */
+

@@ -1,2 +1,2 @@
 $("#main_view").html("");
-$("#main_view").html("<%= escape_javascript(render partial: "polls/results") %>");
+$("#main_view").html("<%= escape_javascript(render partial: "polls/results", locals: {results_closed: @results_closed}) %>");
