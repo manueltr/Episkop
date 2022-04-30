@@ -36,9 +36,12 @@ class PollsController < ApplicationController
     @poll_questions = @poll.poll_questions
     @permission = has_edit_permission()
 
-    respond_to  do |format|    
-        if @api_key && @api_key.extract_key
+    respond_to  do |format|
+             
+        if @api_key && @api_key.extract_key && @api_key.accepted
           format.json { render :show, status: :ok }
+        elsif @api_key && !@api_key.accepted
+          format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
         else
           format.json { render :json => {status: "Not an extract key"}, status: :unauthorized }
         end
@@ -93,6 +96,8 @@ class PollsController < ApplicationController
     respond_to do |format|
       if !session[:user_id] && @api_key && !@api_key.create_key
         format.json { render :json => {status: "Not a create key"}, status: :unauthorized }
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
       elsif @poll.save
         flash[:notice] = "Poll was successfully created."
         format.html { redirect_to "/homepage" }
@@ -110,6 +115,8 @@ class PollsController < ApplicationController
     respond_to do |format|
       if !session[:user_id] && @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
       else
         if @poll.update(poll_params)
           if @api_key
