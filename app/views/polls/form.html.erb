@@ -1,6 +1,6 @@
-<% if form_closed %>
+<% if @form_closed %>
 <%= render partial: 'polls/helpers/form_closed', locals: {resubmit: false} %>
-<% elsif resubmit_closed %>
+<% elsif @resubmit_closed %>
 <%= render partial: 'polls/helpers/form_closed', locals: {resubmit: true} %>
 <% else %>
 <div class="form-container">
