@@ -1,9 +1,9 @@
-<%- headers = ['User', 'Response'] -%>
+<%- headers = ['User', 'Answer Choice'] -%>
 <%= CSV.generate_line headers %>
 <%poll_question.poll_votes.each do |poll_vote| %>
     <%if poll_vote.anonymous%>
         <%= CSV.generate_line(["Anonymous", poll_vote.response]) -%>
     <%else%>
-        <%= CSV.generate_line([User.find(poll_vote.user_id).email, poll_vote.response]) -%>
+        <%= CSV.generate_line([User.find(poll_vote.user_id).email, PollAnswer.find(poll_vote.poll_answer_id).content]) -%>
     <%end%>
 <%end%>

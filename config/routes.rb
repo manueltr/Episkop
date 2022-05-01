@@ -53,4 +53,5 @@ Rails.application.routes.draw do
   #Download JSON/CSV
   get '/poll_questions/:id/results/json', to: 'poll_questions#write_json', as: 'download_json_results'
   get '/poll_questions/:id/results/csv', to: 'poll_questions#write_csv', as: 'download_csv_results', defaults: {format: :csv}
+  
 end

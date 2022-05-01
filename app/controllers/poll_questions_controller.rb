@@ -41,13 +41,18 @@ class PollQuestionsController < ApplicationController
   end
 
   def write_csv
+    @graph_type = params[:graph_type]
     
     respond_to do |format|
       format.html{ render(:text => "not implemented") }
       format.csv do
         response.headers['Content-Type'] = 'text/csv'
         response.headers['Content-Dispostiion'] = "attachment; filename=results.csv"
-        render template: "polls/input", locals: {poll_question: @poll_question}
+        if(@graph_type == 'Table')
+          render template: "polls/input", locals: {poll_question: @poll_question}
+        else
+          render template: "polls/multiple", locals: {poll_question: @poll_question}
+        end
       end
     end
   end
