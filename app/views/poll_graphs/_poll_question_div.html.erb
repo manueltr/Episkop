@@ -12,6 +12,7 @@
                 </div>
         </div>
         <div class = "card-body">
+            <p class='card-title' style='font-size: 20px;'>Download Results:</p>
             <%if is_users%>
             <a href='<%=download_json_results_path(poll_question.id)%>.json' id="download_json_results" class = "btn btn-dark mt-3 mb-5"><i class = "fa-solid fa-file-code"></i></a>
             <a href='<%=download_csv_results_path(poll_question.id)%>.csv?graph_type=<%=poll_graph.graph_type%>' id="download_csv_results" class = "btn btn-dark mt-3 mb-5"><i class = "fa-solid fa-file-csv"></i></a>

@@ -15,7 +15,7 @@
     <% if @user.admin %>
     <div id="api_requests" class="col">
         <h2 class="mt-4"> Pending Requests </h2>
-        <p> This is where admins will see api key requests </p>
+        <p> This is where admins will see API key requests </p>
         <hr>
         
             <p> User Status: Admin</p>
@@ -56,7 +56,7 @@
             </div>
 
             <div id="request_key" class="container">
-                <a class="new_key_btn" href="<%= new_api_key_path %>" data-remote="true">Request an API Key</a>
+                <a class="btn btn-dark btn-sm new_key_btn" href="<%= new_api_key_path %>" data-remote="true">Request an API Key</a>
             </div>
         </div>
 
