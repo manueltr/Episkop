@@ -43,8 +43,10 @@ class Poll < ApplicationRecord
 
     def is_closed?
 
-        self.opened = (self.publish && (self.ends_at == nil || self.ends_at > Time.now.getutc))
-        return (!self.publish || (self.ends_at != nil && self.ends_at < Time.now.getutc))
+      # time difference only in central time zone later implementation (support differenet time zones -- needs implementation)
+      self.opened = (self.publish && (self.ends_at == nil || self.ends_at.time > Time.now.in_time_zone("Central Time (US & Canada)").time))
+      return (!self.publish || (self.ends_at != nil && self.ends_at.time < Time.now.in_time_zone("Central Time (US & Canada)").time))
+
     end
 
     def is_anonymous?
