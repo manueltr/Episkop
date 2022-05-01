@@ -34,7 +34,7 @@ class PollQuestionsController < ApplicationController
   end
 
   def write_json
-    json_data = render_to_string(template: 'poll_questions/results', locals: {poll_question: @poll_question})
+    json_data = JSON.parse(render_to_string(template: 'poll_questions/results', locals: {poll_question: @poll_question}))
     respond_to do |format|
       format.json {send_data json_data.to_json, poll_question: @poll_question, type: :json, disposition: "attachment", filename: "result.json"}
     end
