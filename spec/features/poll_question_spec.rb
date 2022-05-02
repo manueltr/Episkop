@@ -26,7 +26,7 @@ RSpec.feature "PollQuestions", type: :feature do
       click_button("Add a question")
       select('Yes No', :from => 'Question type')
       fill_in('Question Content', with: 'new question')
-      click_button("Create Poll question")
+      click_button("Create Poll Question")
       page.should have_content("new question")
       page.should have_content("Yes")
       page.should have_content("No")

@@ -11,7 +11,7 @@
   <div class = "card mt-3">
     <div class= "card-body">
       <div>
-        <%= form.label :question_type, style: "display: block" , class:"form-label"%>
+        <%= form.label :question_type, "Question Type", style: "display: block" , class:"form-label"%>
         <%= form.select(:question_type, options_for_select(["Multiple Choice", "Yes No", "Input"]), {},{class:"form-select"} )%>
 
       </div>
