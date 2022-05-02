@@ -1,1 +1,1 @@
-json.array! @polls, partial: "polls/poll", as: :poll
+json.array! @polls, partial: "polls/index_polls", polls: @polls

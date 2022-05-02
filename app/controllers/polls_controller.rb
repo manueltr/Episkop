@@ -31,7 +31,7 @@ class PollsController < ApplicationController
 
   # GET /polls or /polls.json
   def index
-    @polls = Poll.all
+    @polls = Poll.where(user_id: @user.id)
   end
 
   # GET /polls/1 or /polls/1.json
