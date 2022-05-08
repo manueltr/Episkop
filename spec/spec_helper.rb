@@ -21,8 +21,8 @@ require 'capybara/poltergeist'
 RSpec.configure do |config|
 
   WebMock.allow_net_connect!
+  
   Capybara.javascript_driver = :poltergeist
-
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

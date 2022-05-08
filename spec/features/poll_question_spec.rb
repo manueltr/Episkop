@@ -13,19 +13,13 @@ RSpec.feature "PollQuestions", type: :feature do
       page.should have_content("Testing show of questions")
     end
 
-    it "should show me all the questions" do
-      poll_question = PollQuestion.create(:poll_id => @poll.id, :question_type => "Input", :content => "Testing show of questions")
-      visit poll_main_page_url(@poll.invite_token)
-      page.should have_content("Testing show of questions")
-    end
-
     it "should allow me to create add a new question form" do
       visit poll_main_page_url(@poll.invite_token)
       find(:css,"#new_question_btn").click
-      page.should have_content("Question type")
-      page.should have_content("Content")
-      select('Yes No', :from => 'Question type')
-      fill_in('Fwejafoj', with: 'new question')
+      page.should have_content("Question Type")
+      page.should have_content("Question content")
+      select('Yes No', :from => 'Question Type')
+      fill_in('Question content', with: 'new question', match: first)
       click_button("Create Poll question")
       page.should have_content("new question")
       expect(page).to have_current_path(visit poll_main_page_url(@poll.invite_token))
