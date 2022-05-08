@@ -1,10 +1,10 @@
 class PollQuestionsController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :set_poll_question, only: %i[ results show edit update destroy ]
+  before_action :set_poll_question, only: %i[ results show edit update destroy write_json write_csv]
   before_action :set_poll
   before_action :check_api
   before_action :check_user, only: %i[ show edit update destroy ]
-
+  require 'csv'
   layout "poll"
   protect_from_forgery except: %i[ new create ]
 
@@ -31,7 +31,31 @@ class PollQuestionsController < ApplicationController
       end
 
       format.json {render :results}
-    end 
+    end
+  end
+
+  def write_json
+    json_data = JSON.parse(render_to_string(template: 'poll_questions/results', locals: {poll_question: @poll_question}))
+    respond_to do |format|
+      format.json {send_data json_data.to_json, poll_question: @poll_question, type: :json, disposition: "attachment", filename: "result.json"}
+    end
+  end
+
+  def write_csv
+    @graph_type = params[:graph_type]
+    
+    respond_to do |format|
+      format.html{ render(:text => "not implemented") }
+      format.csv do
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Dispostiion'] = "attachment; filename=results.csv"
+        if(@graph_type == 'Table')
+          render template: "polls/input", locals: {poll_question: @poll_question}
+        else
+          render template: "polls/multiple", locals: {poll_question: @poll_question}
+        end
+      end
+    end
   end
 
   # GET /poll_questions/yes_no_graph

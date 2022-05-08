@@ -1,8 +1,8 @@
 
 <% if form_closed %>
-<%= render partial: 'polls/helpers/form_closed', resubmit: false%>
+<%= render partial: 'polls/helpers/form_closed', locals: {resubmit: false} %>
 <% elsif resubmit_closed %>
-<%= render partial: 'polls/helpers/form_closed', resubmit: true%>
+<%= render partial: 'polls/helpers/form_closed', locals: {resubmit: true} %>
 <% else %>
 <div class="form-container">
     <div class="container mt-3 mb-5">
@@ -32,7 +32,7 @@
         <div class="container">
             <div class="form-group">
                         <%= puts poll_submit_path(@poll.invite_token)%>
-                        <%= button_to "submit", poll_submit_path(@poll.invite_token), method: :post, class: "btn btn-dark"%>
+                        <%= button_to "Submit", poll_submit_path(@poll.invite_token), method: :post, class: "btn btn-dark"%>
             </div>
         </div>
     </form>

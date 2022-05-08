@@ -5,14 +5,14 @@
         <div class="card mt-3">
             <div class="card-header" style="background: #212529;"></div>
             <div class="card-body">
-                <h4 class="card-title">Update poll information</h4>
+                <h4 class="card-title">Update Poll Information</h4>
                 <%=render partial: "form", locals:{poll: @poll}%>   
             </div>
         </div>
     </div>
 
     <div id="settings-delete-poll" class="mt-4 pt-4">
-        <button data-url="<%=logged_in_url()%>" data-poll="<%=@poll.id%>" id="delete-poll-btn" class="btn btn-danger">Delete poll</button>
+        <button data-url="<%=logged_in_url()%>" data-poll="<%=@poll.id%>" id="delete-poll-btn" class="btn btn-danger">Delete Poll</button>
     </div>
 
 </div>

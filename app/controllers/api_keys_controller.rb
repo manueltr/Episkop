@@ -48,7 +48,7 @@ class ApiKeysController < ApplicationController
   def update
     respond_to do |format|
       if @api_key.update(api_key_params)
-        format.html { redirect_to settings_path, notice: "Api key was successfully updated." }
+        format.html { redirect_to settings_path, notice: "API key was successfully updated." }
         format.json { render :show, status: :ok, location: @api_key }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -62,7 +62,7 @@ class ApiKeysController < ApplicationController
     @api_key.destroy
 
     respond_to do |format|
-      format.html { redirect_to settings_path, notice: "Api key was successfully destroyed." }
+      format.html { redirect_to settings_path, notice: "API key was successfully destroyed." }
       format.json { head :no_content }
     end
   end

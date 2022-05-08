@@ -6,24 +6,24 @@
 
 
 
-    <a class="btn btn-dark btn-sm card-link" data-bs-toggle="collapse" data-bs-target="#my_api_request_<%= api_key.api_token %>" role="button" aria-expanded="false" aria-controls="my_api_request_<%= api_key.api_token %>">Show this Request</a>
+    <a class="btn btn-dark btn-sm card-link" data-bs-toggle="collapse" data-bs-target="#my_api_request_<%= api_key.api_token %>" role="button" aria-expanded="false" aria-controls="my_api_request_<%= api_key.api_token %>">Show This Request</a>
     <div id="my_api_request_<%= api_key.api_token %>" class="collapse">
     <hr>
     <%= render api_key %>
     <p>
-      <%= button_to "Destroy this api key", api_key, method: :delete %>
+      <%= button_to "Destroy This API Key", api_key, method: :delete, class: 'btn btn-dark btn-sm' %>
     </p>
     <hr>
     </div>
 
     <% else %>
 
-    <a class="btn btn-dark btn-sm card-link" data-bs-toggle="collapse" data-bs-target="#my_api_request_<%= api_key.api_token %>" role="button" aria-expanded="false" aria-controls="my_api_request_<%= api_key.api_token %>">Show this Key</a>
+    <a class="btn btn-dark btn-sm card-link" data-bs-toggle="collapse" data-bs-target="#my_api_request_<%= api_key.api_token %>" role="button" aria-expanded="false" aria-controls="my_api_request_<%= api_key.api_token %>">Show This Key</a>
     <div id="my_api_request_<%= api_key.api_token %>" class="collapse">
     <hr>
     <%= render api_key %>
     <p>
-      <%= button_to "Destroy this api key", api_key, method: :delete %>
+      <%= button_to "Destroy This API Key", api_key, method: :delete, class: 'btn btn-dark btn-sm' %>
     </p>
     <hr>
     </div>
