@@ -69,3 +69,16 @@ i.fa-pencil {
 
 /* ------------------ */
 
+
+/* poll download div */
+
+#poll_download p {
+    margin: 0px;
+}
+
+#poll_download a {
+    margin: 0px;
+}
+
+
+
