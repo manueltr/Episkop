@@ -16,7 +16,7 @@ class PollQuestion < ApplicationRecord
 
 
     def multiple_choice_answers
-        if self.question_type == "Yes No"
+        if (self.question_type == "Yes No") && (self.poll_answers.count == 0)
             @question_answer = self.poll_answers.build(poll_id: self.poll_id)
             @question_answer.content = "Yes"
             @question_answer.save
