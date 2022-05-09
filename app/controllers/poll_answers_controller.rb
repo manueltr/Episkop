@@ -31,8 +31,12 @@ class PollAnswersController < ApplicationController
 
     @poll = Poll.find(@poll_answer.poll_id)
 
+    @permission = has_edit_permission()
+
     respond_to do |format|
-      if @api_key && !@api_key.edit_key
+      if !@permission
+        format.json { render :json => {status: "You do not own the data you are trying to access"}, status: :unauthorized }
+      elsif @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
       elsif @api_key && !@api_key.accepted
         format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
@@ -65,12 +69,15 @@ class PollAnswersController < ApplicationController
   # DELETE /poll_answers/1 or /poll_answers/1.json
   def destroy
     @poll = Poll.find(@poll_answer.poll_id)
-    if (@api_key && @api_key.edit_key && @api_key.accepted) || session[:user_id]
+    @permission = has_edit_permission()
+    if (@api_key && @api_key.edit_key && @api_key.accepted && @permission) || session[:user_id]
       @poll_answer.destroy
     end
 
     respond_to do |format|
-      if @api_key && @api_key.edit_key && @api_key.accepted
+      if !@permission
+        format.json { render :json => {status: "You do not own the data you are trying to access"}, status: :unauthorized }
+      elsif @api_key && @api_key.edit_key && @api_key.accepted
         format.json { render :json => {status: "Successfully deleted answer" } }
       elsif @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not a delete key"}, status: :unauthorized }
@@ -96,6 +103,13 @@ class PollAnswersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def poll_answer_params
       params.require(:poll_answer).permit(:content)
+    end
+
+    def has_edit_permission
+      if @api_key
+        return @poll.user_id == @api_key.user_id
+      end
+      return @poll.user_id == session[:user_id]
     end
 
     def check_api

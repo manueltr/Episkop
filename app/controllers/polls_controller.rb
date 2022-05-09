@@ -32,6 +32,15 @@ class PollsController < ApplicationController
   # GET /polls or /polls.json
   def index
     @polls = Poll.where(user_id: @user.id)
+    respond_to  do |format|
+      if @api_key && @api_key.extract_key && @api_key.accepted
+        format.json
+      elsif @api_key && !@api_key.accepted
+        format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
+      else
+        format.json { render :json => {status: "Not an extract key"}, status: :unauthorized }
+      end
+    end
   end
 
   # GET /polls/1 or /polls/1.json
@@ -40,7 +49,10 @@ class PollsController < ApplicationController
     @permission = has_edit_permission()
 
     respond_to  do |format|
-             
+        if !@permission
+          format.json { render :json => {status: "You do not own the data you are trying to access"}, status: :unauthorized }
+        end
+
         if @api_key && @api_key.extract_key && @api_key.accepted
           format.json { render :show, status: :ok }
         elsif @api_key && !@api_key.accepted
@@ -96,9 +108,13 @@ class PollsController < ApplicationController
     elsif !params[:directory_id]
       @poll.directory_id = @user.directories.where(name: "root")[0].id
     end
-
+    @permission = has_edit_permission()
 
     respond_to do |format|
+      if !@permission
+        format.json { render :json => {status: "You do not own the data you are trying to access"}, status: :unauthorized }
+      end
+
       if !session[:user_id] && @api_key && !@api_key.create_key
         format.json { render :json => {status: "Not a create key"}, status: :unauthorized }
       elsif @api_key && !@api_key.accepted
@@ -117,8 +133,12 @@ class PollsController < ApplicationController
 
   # PATCH/PUT /polls/1 or /polls/1.json
   def update
+    @permission = has_edit_permission()
+
     respond_to do |format|
-      if !session[:user_id] && @api_key && !@api_key.edit_key
+      if !@permission
+        format.json { render :json => {status: "You do not own the data you are trying to access"}, status: :unauthorized }
+      elsif !session[:user_id] && @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
       elsif @api_key && !@api_key.accepted
         format.json { render :json => {status: "This key has not been accepted"}, status: :unauthorized }
@@ -140,11 +160,17 @@ class PollsController < ApplicationController
   # DELETE /polls/1 or /polls/1.json
   def destroy
 
-    respond_to do |format|
+    @permission = has_edit_permission()
+    puts(@permission)
+    puts(@permission)
+    puts(@permission)
 
+    respond_to do |format|
       # response for api key
       if @api_key
-       if !@api_key.delete_key
+       if !@permission
+        format.json { render :json => {status: "You do not own the data you are trying to access"}, status: :unauthorized }
+       elsif !@api_key.delete_key
         format.json { render :json => {status: "Not a delete key"}, status: :unauthorized }
        else
         @poll.destroy
@@ -230,6 +256,9 @@ class PollsController < ApplicationController
 
 
     def has_edit_permission
+      if @api_key
+        return @poll.user_id == @api_key.user_id
+      end
       return @poll.user_id == session[:user_id]
     end
 
