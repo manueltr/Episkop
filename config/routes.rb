@@ -14,9 +14,12 @@ Rails.application.routes.draw do
   end
   get '/polls/:invite_token/settings', to: 'polls#settings', as: 'poll_settings'
   get '/polls/:invite_token/main', to: 'polls#main', as: 'poll_main_page'
+  get '/polls/:invite_token/json', to: 'polls#write_json', as: 'poll_download_json'
   
   #Directories
   resources :directories, only: [:show, :create, :destroy, :update]
+  put '/directory/drop_poll', to: 'directories#drop_poll'
+  put '/directory/drop_directory', to: 'directories#drop_directory'
    
   #email invitations
   get '/pollsinvite/sendinvite', to: 'polls#send_email_invite', as: 'send_email_invite'

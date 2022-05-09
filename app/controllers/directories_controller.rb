@@ -18,7 +18,6 @@ class DirectoriesController < ApplicationController
         end
     end
 
-    
     def show
         @directory = @user.directories.find(params[:id])
         @children = @directory.children
@@ -55,8 +54,49 @@ class DirectoriesController < ApplicationController
                 format.json {render json: {type: "error"}, status: :unprocessable_entity}
             end
         end
-      end
+    end
 
+    def drop_poll
+
+        if params[:directory_id] == "parent"
+            @directory = @user.directories.where(id: session[:directory])[0]
+            @directory = @directory.parent
+        else
+            @directory = @user.directories.find(params[:directory_id]);
+        end
+
+        @poll = Poll.find_by(invite_token: params[:poll_token]);
+
+        respond_to do |format|
+            if @poll.update(directory_id: @directory.id)
+                format.json {render json: {status: "Success, inserted poll into directory", type: "success"}}
+            else
+                format.json {render json: {type: "error"}}
+            end
+        end
+
+    end
+
+    def drop_directory
+
+        if params[:directory_id] == "parent"
+            @directory = @user.directories.where(id: session[:directory])[0]
+            @directory = @directory.parent
+        else
+            @directory = @user.directories.find(params[:directory_id]);
+        end
+
+        @drop_directory = @user.directories.find(params[:drop_id])
+
+        respond_to do |format|
+            if @drop_directory.update(parent_id: @directory.id)
+                format.json {render json: {status: "Success, inserted poll into directory", type: "success"}}
+            else
+                format.json {render json: {type: "error"}}
+            end
+        end
+        
+    end
 
     private
     # Use callbacks to share common setup or constraints between actions.

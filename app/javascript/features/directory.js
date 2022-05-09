@@ -224,4 +224,132 @@ $(document).on('turbo:load', function() {
         }
     });
 
+
+    /*  ---------------------  */
+
+
+    // Directory drag and drop functionality
+    $("#directory").on('dragstart', ".poll", function(e) {
+        console.log("started dragging");
+        $(this).addClass('dragging');
+    });
+
+    $("#directory").on('dragend', ".poll", function(e) {
+        console.log("ended dragging");
+        $(this).removeClass('dragging');
+    });
+
+
+    $("#directory").on('dragstart', ".directory", function(e) {
+        console.log("started dragging");
+        $(this).addClass('dragging');
+    });
+
+    $("#directory").on('dragend', ".directory", function(e) {
+        console.log("ended dragging");
+        $(this).removeClass('dragging');
+    });
+
+    // $("#directory").on('dragenter', ".directory", function(e) {
+    //     if(!$(this).hasClass('dragging')) {
+    //         this.style.background = "#a1cde6";
+    //     }
+    // });
+
+    // $("#directory").on('dragleave', ".directory", function(e) {
+    //     if(!$(this).hasClass('dragging') && $(this).hasClass("directory")) {
+    //         this.style.background = "";
+    //     }
+    // });
+
+
+    $("#directory").on('dragover', ".directory", function(e) {
+        e.preventDefault();
+    })
+
+    $("#directory").on('drop', ".directory", function(e) {
+        this.style.background = "";
+        
+        if($(".dragging").attr("data-id") != $(this).attr("data-id")) {
+            if($(".dragging").hasClass("poll")) {
+                let poll_token = $(".dragging").attr("id").split("_")[1];
+                console.log(poll_token);
+                let directory_id = $(this).attr("data-id");
+                console.log(directory_id);
+
+                let poll = $(".dragging")
+
+                $.ajax({
+                    type: "PUT",
+                    url: `/directory/drop_poll.json?directory_id=${directory_id}&poll_token=${poll_token}`,
+                    error: (err) => {
+                        console.log(err);
+                    },
+                    success: (res) => {
+                        poll.remove();
+                    }
+                });
+            }
+            else {
+
+                let drop_id = $(".dragging").attr("data-id");
+                let directory = $(".dragging");
+
+                $.ajax({
+                    type: "PUT",
+                    url: `/directory/drop_directory.json?directory_id=${$(this).attr("data-id")}&drop_id=${drop_id}`,
+                    error: (err) => {
+                        console.log(err);
+                    },
+                    success: (res) => {
+                        directory.remove();
+                    }
+                });
+
+            }
+        }
+
+    });
+
+    $("#directory").on('dragover', "#directory-back", function(e) {
+        e.preventDefault();
+    })
+
+    $("#directory").on('drop', "#directory-back", function(e) {
+        
+
+        if($(".dragging").hasClass("poll")) {
+            let poll_token = $(".dragging").attr("id").split("_")[1];
+            let poll = $(".dragging");
+
+            $.ajax({
+                type: "PUT",
+                url: `/directory/drop_poll.json?directory_id=parent&poll_token=${poll_token}`,
+                error: (err) => {
+                    console.log(err);
+                },
+                success: (res) => {
+                    poll.remove();
+                }
+            });
+        }
+        else {
+
+            let drop_id = $(".dragging").attr("data-id");
+            let directory = $(".dragging");
+
+            $.ajax({
+                type: "PUT",
+                url: `/directory/drop_directory.json?directory_id=parent&drop_id=${drop_id}`,
+                error: (err) => {
+                    console.log(err);
+                },
+                success: (res) => {
+                    directory.remove();
+                }
+            });
+        }
+
+    });
+
 });

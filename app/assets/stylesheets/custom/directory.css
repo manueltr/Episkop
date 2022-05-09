@@ -3,7 +3,6 @@
 }
 .directory:hover {
     background-color: #28a7e9;
-
 }
 
 .directory > div {
@@ -47,3 +46,9 @@
 #confirm_dir_name {
     font-weight: bold;
 }
+
+
+.dragging {
+    opacity: .5;
+}
+

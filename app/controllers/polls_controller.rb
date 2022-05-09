@@ -1,8 +1,8 @@
 class PollsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_user
-  before_action :set_poll, only: %i[ main show edit update destroy settings]
-  before_action :check_user, only: %i[ edit update destroy show ]
+  before_action :set_poll, only: %i[ main show edit update destroy settings write_json]
+  before_action :check_user, only: %i[ edit update destroy show check_user]
 
   layout "poll"
 
@@ -208,6 +208,13 @@ class PollsController < ApplicationController
       format.js
     end
 
+  end
+
+  def write_json
+    json_data = JSON.parse(render_to_string(template: 'polls/json/results', locals: {poll: @poll}))
+    respond_to do |format|
+      format.json {send_data json_data.to_json, type: :json, disposition: "attachment", filename: "poll_results.json"}
+    end
   end
 
   private

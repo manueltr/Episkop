@@ -8,6 +8,12 @@
         <div class="card-body">
             <h1 class="card-title">Responses</h1>
             <p class="card-text">Number of respondents: <%= @poll.poll_votes.distinct.pluck(:user_id).length %></p>
+            <%if @is_users%>
+            <div id="poll_download">
+              <p>Download Results: </p>
+              <a href='<%=poll_download_json_path(@poll.invite_token)%>.json' id="download_json_results" class = "btn btn-dark"><i class = "fa-solid fa-file-code"></i></a>
+            </div>
+            <%end%>
         </div>
   </div>
 

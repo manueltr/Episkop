@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
       end
 
       if user_id == nil && api_key == nil
+        binding.pry
         session[:store_location] = request.fullpath
         redirect_to "/auth/google_oauth2"
       end
