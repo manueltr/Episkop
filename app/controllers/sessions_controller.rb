@@ -41,6 +41,7 @@ class SessionsController < ApplicationController
         @path = session[:store_location]
         session[:store_location] = nil
         redirect_to @path
+        binding.pry
       else
         redirect_to logged_in_path
       end

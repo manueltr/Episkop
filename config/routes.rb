@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   
   #Directories
   resources :directories, only: [:show, :create, :destroy, :update]
+  put '/directory/drop_poll', to: 'directories#drop_poll'
+  put '/directory/drop_directory', to: 'directories#drop_directory'
    
   #email invitations
   get '/pollsinvite/sendinvite', to: 'polls#send_email_invite', as: 'send_email_invite'
