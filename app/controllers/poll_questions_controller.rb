@@ -26,12 +26,7 @@ class PollQuestionsController < ApplicationController
   end
 
   def results
-    
-    @permission = has_edit_permission()
     respond_to do |format|
-      if !@permission
-        format.json { render :json => {status: "You do not own the data you are trying to access"}, status: :unauthorized }
-      end
       if @api_key && !@api_key.edit_key
         format.json { render :json => {status: "Not an edit key"}, status: :unauthorized }
       elsif @api_key && !@api_key.accepted
