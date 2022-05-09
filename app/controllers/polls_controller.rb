@@ -161,9 +161,6 @@ class PollsController < ApplicationController
   def destroy
 
     @permission = has_edit_permission()
-    puts(@permission)
-    puts(@permission)
-    puts(@permission)
 
     respond_to do |format|
       # response for api key
@@ -181,8 +178,8 @@ class PollsController < ApplicationController
         
         #check if poll has question in it
         poll_question_count = @poll.poll_questions.count
-  
-        if poll_question_count && (params[:delete] != "true")
+        
+        if (poll_question_count!=0 && (params[:delete] != "true"))
           format.json { render json: {status: "Poll is not empty", type:"warning"}}
         else 
           @poll.destroy
